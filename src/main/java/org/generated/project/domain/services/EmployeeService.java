@@ -1,5 +1,7 @@
 package org.generated.project.domain.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.generated.project.application.LoginData;
@@ -13,6 +15,13 @@ public interface EmployeeService {
 	
 	public Optional<Employee> getservice(EmployeeId id);
 	
-	String employeeService(Employee emp);
+	public String employeeService(Employee emp);
+
+	public ArrayList<Employee> getEmployeeDetails();
+	
+
+	//public Optional<Employee> getservice(EmployeeId id, String dasid);
+	
+	
 
 }

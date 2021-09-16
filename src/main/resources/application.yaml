@@ -38,9 +38,9 @@ jdbc:
   datasources:
     myDatasource:
       provider: org.seedstack.jdbc.internal.datasource.HikariDataSourceProvider
-      url: jdbc:postgresql://localhost:5432/postgres
+      url: jdbc:postgresql://localhost:5432/postgres1
       user: postgres
-      password: password
+      password: admin
       
       
 jpa:

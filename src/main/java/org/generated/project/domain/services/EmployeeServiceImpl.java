@@ -1,6 +1,7 @@
 package org.generated.project.domain.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -29,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Inject
 	@Jpa
 	private Repository<Employee,EmployeeId> emprepo;
-	
+
 	@Logging
     private Logger logger;
 	
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@JpaUnit("myUnit")
 	public String employeeService(Employee emp) {
 	   
-	        logger.info("EmployeeServiceImpl  ::  employeeService() : param : { "+emp.getUsername(),","+emp.getDoj()+","+emp.getEmail()+","+emp.getId()+","+emp.getJobRole()+","+emp.getGender()+","+emp.getPassword()+","+emp.getProjectId()+","+emp.getProjectName()+"}");
+	        logger.info("EmployeeServiceImpl  ::  employeeService() : param : { "+emp.getName(),","+emp.getEmail()+","+emp.getDasid()+","+emp.getGcmLevel()+","+emp.getMobile()+","+emp.getRm()+","+emp.getJobRole()+","+emp.getId()+","+emp.getPassword()+","+emp.getProjectName()+"}");
 	        
 	    
 	    
@@ -46,8 +47,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			
 			Optional<Employee> login = getservice(emp.getId());
 			if(!login.isPresent()) {
+				try {
 				emprepo.add(emp);
 				status= "success";
+				}
+				catch(Exception e) {
+					return "fail";
+				}
 			}
 			else {
 				status="alreadyExists";
@@ -97,7 +103,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //    }
     public boolean loginService(LoginData data) {
     	
-    	logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" +data.getUsername()+","+data.getPassword()+"}");
+    	logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" +data.getDasid()+","+data.getPassword()+"}");
         
     	boolean resolve =false;
        	
@@ -131,32 +137,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return login;
 	}
-    
+
+    @Override
     @Transactional
 	@JpaUnit("myUnit")
-	public String applyAdditional(Employee employeeObject) {
-		
-		logger.info("AdditionalDataServiceImpl :: applyAdditional()  param { "+employeeObject.getDob(),", "+employeeObject.getAddress()+" ,"+employeeObject.getExperience()+","+employeeObject.getWorkLocation()+","+employeeObject.getEmergencyContact()+","+employeeObject.getSkillsAccquired());	
-		
-		try {
-			
-			Optional<Employee> obj = loginRepository.get(employeeObject.getId());
-			
-			Employee emp =obj.get();
-			emp.setAddress(employeeObject.getAddress());
-			emp.setEmergencyContact(employeeObject.getEmergencyContact());
-			emp.setExperience(employeeObject.getExperience());
-			emp.setDob(employeeObject.getDob());
-			emp.setWorkLocation(employeeObject.getWorkLocation());
-			emp.setSkillsAccquired(employeeObject.getSkillsAccquired());
-			emprepo.update(emp);
-			logger.info("AdditionalDataServiceImpl :: applyAdditional()  After saving data : return object  ");		
-			return "success";
-		}catch(Exception ex) {
-			
-			return "failure";
-		}
-}
+	public ArrayList<Employee> getEmployeeDetails() {
+    	logger.info("EmployeeServiceImpl :: getEmployeeDetails():");
+    	ArrayList<Employee> EmployeeDetails = personRepository.getEmployeeDetails();
+		return EmployeeDetails;
+	}
+    
+    
     
     
     

@@ -5,32 +5,41 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.seedstack.business.domain.BaseAggregateRoot;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
-@NamedQuery(name="getEmployee", query ="select username, password From Employee where username=:username and password=:password ")
+
+@NamedQueries(value = { 
+@NamedQuery(name="getEmployee", query ="select dasid, password From Employee where dasid=:dasid and password=:password ") ,
+@NamedQuery(name="getEmployeeDetails", query ="select id,dasid,name,mobile,email,gcmLevel,projectName,jobRole,rm From Employee") })
+
 public class Employee extends BaseAggregateRoot<EmployeeId> {
 	
 	
 	@EmbeddedId
 	private EmployeeId id;
-	private String username;
+	@Column(unique=true)
+	private String dasid;
+	private String name;
+	private String gcmLevel;
+	private String mobile;
 	private String email;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
-	public  Date doj;
-	private String password;
-	
-	private String projectId;
+	private String rm;
+	private String password;	
 	private String projectName;
 	private String jobRole;
-	private String gender;
+	
 	
 	@OneToMany(mappedBy="employee")
 	private Collection<LeaveData> leaveData = new ArrayList<>();
@@ -40,67 +49,51 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Employee(EmployeeId id, String username, String email, Date doj, String password, String projectId,
-			String projectname, String jobrole, String gender) {
+	public Employee(EmployeeId id,String dasid, String name,String gcmLevel,
+			String mobile ,String email, String rm,String password, String projectName,String jobRole) {
 		super();
 		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.doj = doj;
+		this.dasid = dasid;
+		this.name = name;
+		this.gcmLevel = gcmLevel;
+		this.mobile = mobile;
+		this.email = email;	
+		this.rm = rm;
 		this.password = password;
-		this.projectId = projectId;
 		this.projectName = projectName;
 		this.jobRole = jobRole;
-		this.gender = gender;
-	}
-	public EmployeeId getId() {
-		return id;
-	}
-	public void setId(EmployeeId id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Date getDoj() {
-		return doj;
-	}
-	public void setDoj(Date doj) {
-		this.doj = doj;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getProjectId() {
-		return projectId;
-	}
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
+		
 	}
 	
-	public String getGender() {
-		return gender;
+	public String getDasid() {
+		return dasid;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setDasid(String dasid) {
+		this.dasid = dasid;
 	}
-	public String getProjectName() {
-		return projectName;
+	public String getName() {
+		return name;
 	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getGcmLevel() {
+		return gcmLevel;
+	}
+	public void setGcmLevel(String gcmLevel) {
+		this.gcmLevel = gcmLevel;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public String getRm() {
+		return rm;
+	}
+	public void setRm(String rm) {
+		this.rm = rm;
 	}
 	public String getJobRole() {
 		return jobRole;
@@ -108,6 +101,33 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	public void setJobRole(String jobRole) {
 		this.jobRole = jobRole;
 	}
-
+	public EmployeeId getId() {
+		return id;
+	}
+	public void setId(EmployeeId id) {
+		this.id = id;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getProjectName() {
+		return projectName;
+	}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+	
 	
 }

@@ -64,15 +64,16 @@ public class EmployeeServiceImplIT {
 EmployeeId id = new EmployeeId("a9089");
         
         employee = new Employee();
-        employee.setUsername("200");
+        employee.setName("shruti");
         employee.setId(id);
-        employee.setDoj(new Date());
-        employee.setEmail("subasri@gmail.com");
+        employee.setDasid("A815665");
+        employee.setGcmLevel("1");
+        employee.setEmail("shruti@gmail.com");
         employee.setJobRole("Associate Consultant");
         employee.setPassword("string");
-        employee.setProjectId("p123");
+        employee.setMobile("8878654534");
         employee.setProjectName("PSA");
-        employee.setGender("female");
+        employee.setRm("RM");
         
         employeeservice.employeeService(employee);
         
@@ -86,7 +87,7 @@ EmployeeId id = new EmployeeId("a9089");
     public void testLogin() throws Exception {
         
         LoginData login = new LoginData();
-        login.setUsername("200");
+        login.setDasid("200");
         login.setPassword("string");
         
         Response response = given().
@@ -110,7 +111,7 @@ EmployeeId id = new EmployeeId("a9089");
     public void testLoginFail() throws Exception {
         
         LoginData login1 = new LoginData();
-        login1.setUsername("demo1");
+        login1.setDasid("demo1");
         login1.setPassword("pass1");
         
         Response response = given().
@@ -140,15 +141,17 @@ EmployeeId id = new EmployeeId("a9089");
         EmployeeId id = new EmployeeId("a1239089");
         
         Employee  register = new Employee();
-        register.setUsername("Suba");
+        register.setName("shru");
         register.setId(id);
-        register.setDoj(new Date());
-        register.setEmail("subasri@gmail.com");
+        register.setDasid("A814558");
+        register.setEmail("shru@gmail.com");
         register.setJobRole("Associate Consultant");
-        register.setPassword("subasri#3");
-        register.setProjectId("p123");
+        register.setPassword("shru#3");
+        register.setGcmLevel("2");
+        register.setMobile("7878898945");
+        register.setRm("AG");
         register.setProjectName("PSA");
-        register.setGender("female");
+       
         
         
         

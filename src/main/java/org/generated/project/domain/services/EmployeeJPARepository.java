@@ -28,7 +28,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		     ArrayList<Employee> obj = null;
 				try {
 					Query query = entityManager.createNamedQuery("getEmployee");
-					query.setParameter("username", empObj.getUsername());
+					query.setParameter("dasid", empObj.getDasid());
 					query.setParameter("password", empObj.getPassword());
 					obj= (ArrayList)query.getResultList();
 					//obj= (ArrayList)query.getSingleResult();
@@ -36,6 +36,30 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
  
 				} catch (Exception ex) {
 					logger.info("Exception occured in getEmployee"+empObj);
+					obj = null;
+
+				}
+				
+					return obj;
+				
+			
+						
+	     }
+	  
+	  public ArrayList<Employee> getEmployeeDetails() {
+		  
+	         EntityManager entityManager = getEntityManager();
+	      	 			 			 		
+	         
+		     ArrayList<Employee> obj = null;
+				try {
+					Query query = entityManager.createNamedQuery("getEmployeeDetails");
+					obj= (ArrayList)query.getResultList();
+					//obj= (ArrayList)query.getSingleResult();
+					
+ 
+				} catch (Exception ex) {
+					
 					obj = null;
 
 				}

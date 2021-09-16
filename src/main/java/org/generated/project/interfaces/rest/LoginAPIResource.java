@@ -35,12 +35,12 @@ public class LoginAPIResource {
 		HashMap<String, String> response = new HashMap<String, String>();
 		
 
-		boolean flag =ValidateParam.isNull(data.getUsername());
+		boolean flag =ValidateParam.isNull(data.getDasid());
 		boolean flag1 =ValidateParam.isNull(data.getPassword());
 		
 		if(flag) {
 		response.put("statusCode", "500");
-		response.put("statusMsg", "Please enter required Username");
+		response.put("statusMsg", "Please enter required Dasid");
 		}
 		else if(flag1) {
 			response.put("statusCode", "500");
