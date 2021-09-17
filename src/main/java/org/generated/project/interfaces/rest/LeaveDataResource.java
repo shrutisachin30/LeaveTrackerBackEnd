@@ -1,4 +1,4 @@
-package org.generated.project.interfaces.rest;
+ package org.generated.project.interfaces.rest;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
@@ -24,8 +25,10 @@ import org.generated.project.domain.services.LeaveDataService;
 
 import com.google.inject.servlet.RequestParameters;
 
-import java.util.stream.Collectors;
+import io.swagger.annotations.Api;
 
+import java.util.stream.Collectors;
+@Api("leave")
 @Path("psa")
 public class LeaveDataResource {
 
@@ -75,7 +78,8 @@ public class LeaveDataResource {
 	  List<Object> listData = leaveDataService.retriveLeaveData(id);
 	  
 	  HashMap<String, String> response = new HashMap<String, String>();
-	  if(listData!=null && listData.size()>=0) {
+	  System.out.println(listData);
+			  if(listData!=null && listData.size()>=0) {
 		  
 			response.put("statusCode", "201");
 			
@@ -85,6 +89,7 @@ public class LeaveDataResource {
 			for(int i=0; i<listData.size();i++) {
 				Object[] objArray =(Object[]) listData.get(i);
 				obj.put("typeOfLeave",objArray[2].toString());
+				obj.put("status",objArray[3].toString());
 				 Date startDate = null;
 				 Date endDate = null;
 				try {
@@ -115,5 +120,15 @@ public class LeaveDataResource {
 		return response;
 	  
 	  }
+	  
+	  
+	  @POST
+      @Path("CancelLeave/{id}")
+      public Response cancelLeave(@PathParam("id") int id) {
+       
+         
+           String response= leaveDataService.cancelLeave(id);
+           return Response.status(201).entity(response).build();
+      }
 
 }

@@ -19,7 +19,7 @@ import com.google.inject.servlet.RequestParameters;
 
 import io.swagger.annotations.Api;
 
-@Api("Employee Tracker Application")
+@Api("Login")
 @Path("psa")
 public class LoginAPIResource {
 	@Inject

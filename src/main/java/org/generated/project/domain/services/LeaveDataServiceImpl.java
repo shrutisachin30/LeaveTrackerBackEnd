@@ -52,4 +52,13 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	}
 	
+	@Override
+    @Transactional
+    @JpaUnit("myUnit")
+    public String cancelLeave(int leaveDataId) {
+
+          String str =  leaveDataRepository.cancelLeave(leaveDataId);
+
+        return  str;
+    }
 }

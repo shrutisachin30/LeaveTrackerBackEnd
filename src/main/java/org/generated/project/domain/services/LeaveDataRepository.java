@@ -51,7 +51,7 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData,LeaveDataId
 					Employee em =new Employee();
 					EmployeeId emObj =new EmployeeId(id.toString());
 					em.setId(emObj);	
-					query.setParameter("employeeId", em);
+					query.setParameter("employeeId", emObj);
 					obj = query.getResultList();
 				} catch (Exception ex) {
 					
@@ -62,7 +62,22 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData,LeaveDataId
 						
 	     }
 	  
-	 
+	  public String cancelLeave(int leaveDataId) {
+
+          EntityManager entityManager = getEntityManager();
+          Query query = entityManager.createNamedQuery("cancelLeave");
+          query.setParameter("id",leaveDataId);
+          query.setParameter("status", "cancelled");
+          int row = query.executeUpdate();
+
+          if(row > 0)
+              return "updated successfully";
+          else
+              return "Not updated";
+
+
+
+      }
 	
    
 	     
