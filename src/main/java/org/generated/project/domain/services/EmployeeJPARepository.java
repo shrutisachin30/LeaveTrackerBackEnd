@@ -2,6 +2,7 @@ package org.generated.project.domain.services;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -46,14 +47,15 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 						
 	     }
 	  
-	  public ArrayList<Employee> getEmployeeDetails() {
+	  public List<Object> getEmployeeDetails() {
 		  
 	         EntityManager entityManager = getEntityManager();
 	      	 			 			 		
 	         
-		     ArrayList<Employee> obj = null;
+		     List<Object> obj = null;
 				try {
 					Query query = entityManager.createNamedQuery("getEmployeeDetails");
+					
 					obj= (ArrayList)query.getResultList();
 					//obj= (ArrayList)query.getSingleResult();
 					
