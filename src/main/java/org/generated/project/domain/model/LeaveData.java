@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
  
 @Entity
-@NamedQueries(value = { @NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave, ld.status From LeaveData ld where ld.dasid=:dasid "
+@NamedQueries(value = { @NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave, ld.status From LeaveData ld where ld.employee.dasId=:dasId "
         + "order by ld.startDate ASC ") ,
         @NamedQuery(name = "cancelLeave", query = "update LeaveData ld set ld.status=:status where ld.leaveDataId=:id")
         })
@@ -41,8 +41,8 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
 
     @ManyToOne
-    @JoinColumn(name = "dasid",referencedColumnName= "dasid")
-    private String dasid;
+    @JoinColumn(name = "dasId")
+    private Employee employee;
 
  
 
@@ -78,11 +78,11 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
  
 
-    public LeaveData(String dasid, int leaveDataId, Date startDate, Date endDate, String typeOfLeave,String status) {
+    public LeaveData(Employee employee, int leaveDataId, Date startDate, Date endDate, String typeOfLeave,String status) {
 
  
 
-        this.dasid = dasid;
+        this.employee = employee;
         this.leaveDataId = leaveDataId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -97,7 +97,7 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
     @Override
     public String toString() {
-        return "Employee [dasid= " + dasid + ", startDate= " + startDate + ", endDate= " + endDate
+        return "Employee [dasId= " + employee.getDasId() + ", startDate= " + startDate + ", endDate= " + endDate
                 + ", typeOfLeave= " + typeOfLeave + ",Status="+ status +"]";
     }
 
@@ -143,20 +143,6 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
         this.typeOfLeave = typeOfLeave;
     }
 
- 
-
-    public String getEmployee() {
-        return dasid;
-    }
-
- 
-
-    public void setEmployee(String dasid) {
-        this.dasid = dasid;
-    }
-
- 
-
     public int getLeaveDataId() {
         return leaveDataId;
     }
@@ -177,6 +163,18 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
  

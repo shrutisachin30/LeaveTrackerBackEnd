@@ -42,16 +42,13 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData,LeaveDataId
 			 
 	     }
 	  
-	  public List<Object>  getLeaveData(Long id) {
+	  public List<Object>  getLeaveData(String id) {
 	         EntityManager entityManager = getEntityManager();
 	         
 		     List<Object> obj = null;
 				try {
 					Query query = entityManager.createNamedQuery("getEmployeeLeave");
-					Employee em =new Employee();
-					EmployeeId emObj =new EmployeeId(id.toString());
-					em.setId(emObj);	
-					query.setParameter("employeeId", emObj);
+					query.setParameter("dasId", id);
 					obj = query.getResultList();
 				} catch (Exception ex) {
 					

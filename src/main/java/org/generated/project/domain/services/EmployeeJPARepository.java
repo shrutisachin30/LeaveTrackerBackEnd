@@ -29,7 +29,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		     ArrayList<Employee> obj = null;
 				try {
 					Query query = entityManager.createNamedQuery("getEmployee");
-					query.setParameter("dasid", empObj.getDasid());
+					query.setParameter("dasId", empObj.getDasId());
 					query.setParameter("password", empObj.getPassword());
 					obj= (ArrayList)query.getResultList();
 					//obj= (ArrayList)query.getSingleResult();

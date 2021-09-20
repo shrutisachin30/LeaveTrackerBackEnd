@@ -39,8 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String employeeService(Employee emp) {
 
 		logger.info("EmployeeServiceImpl  ::  employeeService() : param : { " + emp.getName(),
-				"," + emp.getEmail() + "," + emp.getDasid() + "," + emp.getGcmLevel() + "," + emp.getMobile() + ","
-						+ emp.getRm() + "," + emp.getJobRole() + "," + emp.getId() + "," + emp.getPassword() + ","
+				"," + emp.getEmail() + "," + emp.getDasId() + "," + emp.getGcmLevel() + "," + emp.getMobile() + ","
+						+ emp.getReportingManager() + "," + emp.getJobRole() + "," + emp.getId() + "," + emp.getPassword() + ","
 						+ emp.getProjectName() + "}");
 
 		String status = "";
@@ -99,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //    }
 	public boolean loginService(LoginData data) {
 
-		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasid() + "," + data.getPassword()
+		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasId() + "," + data.getPassword()
 				+ "}");
 
 		boolean resolve = false;

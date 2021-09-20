@@ -7,16 +7,17 @@ import org.seedstack.seed.validation.NotBlank;
 public class LoginData {
 	
 	
-	private String dasid;
+	private String dasId;
 	private String password;
 
-	public String getDasid() {
-		return dasid;
+	
+
+	public String getDasId() {
+		return dasId;
 	}
 
-	
-	public void setDasid(String dasid) {
-		this.dasid = dasid;
+	public void setDasId(String dasId) {
+		this.dasId = dasId;
 	}
 
 	public String getPassword() {

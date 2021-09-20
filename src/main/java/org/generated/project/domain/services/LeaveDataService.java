@@ -11,7 +11,7 @@ public interface LeaveDataService {
 		
 	public String applyLeave(LeaveData leaveDataObject);
 	
-	public List<Object> retriveLeaveData(Long employeeId);
+	public List<Object> retriveLeaveData(String employeeId);
 	
 	public String cancelLeave(int leaveDataId);
 

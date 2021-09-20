@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 
 @NamedQueries(value = { 
-@NamedQuery(name="getEmployee", query ="select dasid, password From Employee where dasid=:dasid and password=:password ") ,
-@NamedQuery(name="getEmployeeDetails", query ="select id,dasid,name,mobile,email,gcmLevel,projectName,jobRole,rm From Employee") })
+@NamedQuery(name="getEmployee", query ="select dasId, password From Employee where dasId=:dasId and password=:password ") ,
+@NamedQuery(name="getEmployeeDetails", query ="select id,dasId,name,mobile,email,gcmLevel,projectName,jobRole,reportingManager From Employee") })
 
 public class Employee extends BaseAggregateRoot<EmployeeId> {
 	
@@ -30,15 +30,16 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	@EmbeddedId
 	private EmployeeId id;
 	@Column(unique=true)
-	private String dasid;
+	private String dasId;
 	private String name;
 	private String gcmLevel;
 	private String mobile;
 	private String email;
-	private String rm;
+	private String reportingManager;
 	private String password;	
 	private String projectName;
 	private String jobRole;
+	
 	
 	
 	@OneToMany(mappedBy="employee")
@@ -49,27 +50,27 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Employee(EmployeeId id,String dasid, String name,String gcmLevel,
-			String mobile ,String email, String rm,String password, String projectName,String jobRole) {
+	public Employee(EmployeeId id,String dasId, String name,String gcmLevel,
+			String mobile ,String email, String reportingManager,String password, String projectName,String jobRole) {
 		super();
 		this.id = id;
-		this.dasid = dasid;
+		this.dasId = dasId;
 		this.name = name;
 		this.gcmLevel = gcmLevel;
 		this.mobile = mobile;
 		this.email = email;	
-		this.rm = rm;
+		this.reportingManager = reportingManager;
 		this.password = password;
 		this.projectName = projectName;
 		this.jobRole = jobRole;
 		
 	}
 	
-	public String getDasid() {
-		return dasid;
+	public String getDasId() {
+		return dasId;
 	}
-	public void setDasid(String dasid) {
-		this.dasid = dasid;
+	public void setDasId(String dasId) {
+		this.dasId = dasId;
 	}
 	public String getName() {
 		return name;
@@ -89,12 +90,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public String getRm() {
-		return rm;
-	}
-	public void setRm(String rm) {
-		this.rm = rm;
-	}
+	
 	public String getJobRole() {
 		return jobRole;
 	}
@@ -127,6 +123,18 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	}
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+	public String getReportingManager() {
+		return reportingManager;
+	}
+	public void setReportingManager(String reportingManager) {
+		this.reportingManager = reportingManager;
+	}
+	public Collection<LeaveData> getLeaveData() {
+		return leaveData;
+	}
+	public void setLeaveData(Collection<LeaveData> leaveData) {
+		this.leaveData = leaveData;
 	}
 	
 	

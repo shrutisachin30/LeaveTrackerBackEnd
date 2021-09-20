@@ -35,7 +35,7 @@ public class LoginAPIResource {
 		HashMap<String, String> response = new HashMap<String, String>();
 		
 
-		boolean flag =ValidateParam.isNull(data.getDasid());
+		boolean flag =ValidateParam.isNull(data.getDasId());
 		boolean flag1 =ValidateParam.isNull(data.getPassword());
 		
 		if(flag) {

@@ -71,7 +71,7 @@ public class LeaveDataResource {
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  @Produces(MediaType.APPLICATION_JSON)
 	  @Path("retrieveLeaveData/{id}")
-	  public HashMap retrieveLeaveData(@PathParam("id") Long id) {
+	  public HashMap retrieveLeaveData(@PathParam("id") String id) {
 		  
 		  HashMap<String,String> obj= new HashMap();
 	  

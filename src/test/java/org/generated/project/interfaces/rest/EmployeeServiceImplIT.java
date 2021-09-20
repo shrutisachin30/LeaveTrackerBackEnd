@@ -66,14 +66,14 @@ EmployeeId id = new EmployeeId("a9089");
         employee = new Employee();
         employee.setName("shruti");
         employee.setId(id);
-        employee.setDasid("A815665");
+        employee.setDasId("A815665");
         employee.setGcmLevel("1");
         employee.setEmail("shruti@gmail.com");
         employee.setJobRole("Associate Consultant");
         employee.setPassword("string");
         employee.setMobile("8878654534");
         employee.setProjectName("PSA");
-        employee.setRm("RM");
+        employee.setReportingManager("RM");
         
         employeeservice.employeeService(employee);
         
@@ -87,7 +87,7 @@ EmployeeId id = new EmployeeId("a9089");
     public void testLogin() throws Exception {
         
         LoginData login = new LoginData();
-        login.setDasid("200");
+        login.setDasId("200");
         login.setPassword("string");
         
         Response response = given().
@@ -111,7 +111,7 @@ EmployeeId id = new EmployeeId("a9089");
     public void testLoginFail() throws Exception {
         
         LoginData login1 = new LoginData();
-        login1.setDasid("demo1");
+        login1.setDasId("demo1");
         login1.setPassword("pass1");
         
         Response response = given().
@@ -143,13 +143,13 @@ EmployeeId id = new EmployeeId("a9089");
         Employee  register = new Employee();
         register.setName("shru");
         register.setId(id);
-        register.setDasid("A814558");
+        register.setDasId("A814558");
         register.setEmail("shru@gmail.com");
         register.setJobRole("Associate Consultant");
         register.setPassword("shru#3");
         register.setGcmLevel("2");
         register.setMobile("7878898945");
-        register.setRm("AG");
+        register.setReportingManager("AG");
         register.setProjectName("PSA");
        
         
