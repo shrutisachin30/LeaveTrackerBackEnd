@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
  
 @Entity
-@NamedQueries(value = { @NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave From LeaveData ld where ld.employee.id=:employeeId "
+@NamedQueries(value = { @NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave, ld.status From LeaveData ld where ld.dasid=:dasid "
         + "order by ld.startDate ASC ") ,
         @NamedQuery(name = "cancelLeave", query = "update LeaveData ld set ld.status=:status where ld.leaveDataId=:id")
         })
@@ -41,8 +41,8 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
 
     @ManyToOne
-    @JoinColumn(name = "employeeId",referencedColumnName= "employeeid")
-    private Employee employee;
+    @JoinColumn(name = "dasid",referencedColumnName= "dasid")
+    private String dasid;
 
  
 
@@ -78,11 +78,11 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
  
 
-    public LeaveData(Employee employee, int leaveDataId, Date startDate, Date endDate, String typeOfLeave,String status) {
+    public LeaveData(String dasid, int leaveDataId, Date startDate, Date endDate, String typeOfLeave,String status) {
 
  
 
-        this.employee = employee;
+        this.dasid = dasid;
         this.leaveDataId = leaveDataId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -97,7 +97,7 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
     @Override
     public String toString() {
-        return "Employee [employeeId= " + employee + ", startDate= " + startDate + ", endDate= " + endDate
+        return "Employee [dasid= " + dasid + ", startDate= " + startDate + ", endDate= " + endDate
                 + ", typeOfLeave= " + typeOfLeave + ",Status="+ status +"]";
     }
 
@@ -145,14 +145,14 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
  
 
-    public Employee getEmployee() {
-        return employee;
+    public String getEmployee() {
+        return dasid;
     }
 
  
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployee(String dasid) {
+        this.dasid = dasid;
     }
 
  
