@@ -31,14 +31,38 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		EntityManager entityManager = getEntityManager();
 
 		try {
-
+			List<Object> obj=checkLeaveData(leaveObj);
+			
+			if(obj!=null && obj.size()==0) {
 			entityManager.persist(leaveObj);
 			return "Success";
+			
+			}else {
+				return "Already Exist";
+			}
 		} catch (Exception ex) {
 
 			logger.info("Exception occured in saveEmployeeLeave" + leaveObj);
 			return ex.getMessage();
 		}
+
+	}
+	
+	public List<Object> checkLeaveData(LeaveData leaveObj) {
+		EntityManager entityManager = getEntityManager();
+
+		List<Object> obj = null;
+		try {
+			Query query = entityManager.createNamedQuery("checkLeaveData");
+			query.setParameter("dasId", leaveObj.getEmployee().getId());
+			query.setParameter("startDate", leaveObj.getStartDate());
+			query.setParameter("endDate", leaveObj.getEndDate());
+			obj = query.getResultList();
+		} catch (Exception ex) {
+
+		}
+
+		return obj;
 
 	}
 

@@ -46,8 +46,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		String status = "";
 		try {
 
-			Optional<Employee> login = getservice(emp.getId());
-			if (!login.isPresent()) {
+			ArrayList<Employee> list = checkIfEmployeeExist(emp);
+			if (list != null && list.size()== 0) {
+				
 				try {
 					emprepo.add(emp);
 					status = "success";
@@ -128,6 +129,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public ArrayList<Employee> verifyEmployeeDetails(LoginData empObj) {
 		logger.info("EmployeeServiceImpl :: verifyEmployeeDetails():");
 		ArrayList<Employee> login = personRepository.getEmployee(empObj);
+
+		return login;
+	}
+	
+	@Transactional
+	@JpaUnit("myUnit")
+	public ArrayList<Employee> checkIfEmployeeExist(Employee empObj) {
+		logger.info("EmployeeServiceImpl :: checkIfEmployeeExist():");
+		ArrayList<Employee> login = personRepository.checkIfEmployeeExist(empObj);
 
 		return login;
 	}

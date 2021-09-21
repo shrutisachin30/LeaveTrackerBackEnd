@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedQueries(value = { 
 @NamedQuery(name="getEmployee", query ="select id, password From Employee where id=:dasId and password=:password ") ,
 @NamedQuery(name="getEmployeeDetails", query ="select id,employeeId,name,mobile,email,gcmLevel,projectName,jobRole,reportingManager From Employee") })
-
+@NamedQuery(name="checkIfEmployeeExist", query =" From Employee where id=:dasId or employeeId=:employeeId ") 
 public class Employee extends BaseAggregateRoot<EmployeeId> {
 	
 	

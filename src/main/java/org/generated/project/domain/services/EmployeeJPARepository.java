@@ -73,7 +73,31 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 	     }
 	  
 	 
-	
+	  public ArrayList<Employee> checkIfEmployeeExist(Employee empObj) {
+		  logger.info("Inside checkIfEmployeeExist"+empObj);
+	         EntityManager entityManager = getEntityManager();
+	      	 			 			 		
+	         
+		     ArrayList<Employee> obj = null;
+				try {
+					Query query = entityManager.createNamedQuery("checkIfEmployeeExist");
+					query.setParameter("dasId",empObj.getId() );
+					query.setParameter("employeeId", empObj.getEmployeeId());
+					obj= (ArrayList)query.getResultList();
+					//obj= (ArrayList)query.getSingleResult();
+					
+ 
+				} catch (Exception ex) {
+					logger.info("Exception occured in getEmployee"+empObj);
+					obj = null;
+
+				}
+				
+					return obj;
+				
+			
+						
+	     }
    
 	     
 }

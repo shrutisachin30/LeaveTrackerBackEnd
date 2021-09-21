@@ -52,7 +52,15 @@ public class LeaveDataResource {
 			response.put("statusMsg", "Leave Applied Successfully");
 			response.put("statusCode", "201");
 			
-		}else {
+		}else if(str.equalsIgnoreCase("Already Exist")){
+			response.put("statusMsg", "Cannot apply leave on same dates, Select different dates");
+			response.put("statusCode", "201");	
+			
+			
+			
+		}
+		
+		else {
 			response.put("statusMsg", "Technical Error");
 			response.put("statusCode", "500");	
 			
