@@ -53,7 +53,7 @@ public class RegisterAPIResource {
 		 boolean flag1 =ValidateParam.isNull(emp.getEmail());
 		 boolean flag2 =ValidateParam.isNull(emp.getPassword());
 		 boolean flag3 =ValidateParam.isNull(emp.getProjectName());
-		 boolean flag4 =ValidateParam.isNull(emp.getDasId());
+		 boolean flag4 =ValidateParam.isNull(emp.getEmployeeId());
 		 boolean flag5 =ValidateParam.isNull(emp.getGcmLevel());
 		 boolean flag6 =ValidateParam.isNull(emp.getJobRole());
 		 boolean flag7 =ValidateParam.isNull(emp.getMobile());

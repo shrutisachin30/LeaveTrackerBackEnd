@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String employeeService(Employee emp) {
 
 		logger.info("EmployeeServiceImpl  ::  employeeService() : param : { " + emp.getName(),
-				"," + emp.getEmail() + "," + emp.getDasId() + "," + emp.getGcmLevel() + "," + emp.getMobile() + ","
+				"," + emp.getEmail() + "," + emp.getEmployeeId() + "," + emp.getGcmLevel() + "," + emp.getMobile() + ","
 						+ emp.getReportingManager() + "," + emp.getJobRole() + "," + emp.getId() + "," + emp.getPassword() + ","
 						+ emp.getProjectName() + "}");
 
@@ -148,8 +148,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Object[] objArray = (Object[]) employeeDetails.get(i);
 			employeeDetail = new HashMap<String, String>();
 			EmployeeId id = (EmployeeId) objArray[0];
-			employeeDetail.put("employeeId", id.getEmployeeId());
-			employeeDetail.put("dasId", objArray[1].toString());
+			employeeDetail.put("dasId", id.getDasId());
+			employeeDetail.put("employeeId", objArray[1].toString());
 			employeeDetail.put("name", objArray[2].toString());
 			employeeDetail.put("mobile", objArray[3].toString());
 			employeeDetail.put("emailId", objArray[4].toString());

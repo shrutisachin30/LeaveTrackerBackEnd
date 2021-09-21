@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 
 @NamedQueries(value = { 
-@NamedQuery(name="getEmployee", query ="select dasId, password From Employee where dasId=:dasId and password=:password ") ,
-@NamedQuery(name="getEmployeeDetails", query ="select id,dasId,name,mobile,email,gcmLevel,projectName,jobRole,reportingManager From Employee") })
+@NamedQuery(name="getEmployee", query ="select id, password From Employee where id=:dasId and password=:password ") ,
+@NamedQuery(name="getEmployeeDetails", query ="select id,employeeId,name,mobile,email,gcmLevel,projectName,jobRole,reportingManager From Employee") })
 
 public class Employee extends BaseAggregateRoot<EmployeeId> {
 	
@@ -30,7 +30,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	@EmbeddedId
 	private EmployeeId id;
 	@Column(unique=true)
-	private String dasId;
+	private String employeeId;
 	private String name;
 	private String gcmLevel;
 	private String mobile;
@@ -50,11 +50,11 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Employee(EmployeeId id,String dasId, String name,String gcmLevel,
+	public Employee(EmployeeId id,String employeeId, String name,String gcmLevel,
 			String mobile ,String email, String reportingManager,String password, String projectName,String jobRole) {
 		super();
 		this.id = id;
-		this.dasId = dasId;
+		this.employeeId = employeeId;
 		this.name = name;
 		this.gcmLevel = gcmLevel;
 		this.mobile = mobile;
@@ -66,12 +66,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		
 	}
 	
-	public String getDasId() {
-		return dasId;
-	}
-	public void setDasId(String dasId) {
-		this.dasId = dasId;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -97,12 +92,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	public void setJobRole(String jobRole) {
 		this.jobRole = jobRole;
 	}
-	public EmployeeId getId() {
-		return id;
-	}
-	public void setId(EmployeeId id) {
-		this.id = id;
-	}
+	
 	
 	public String getEmail() {
 		return email;
@@ -135,6 +125,18 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	}
 	public void setLeaveData(Collection<LeaveData> leaveData) {
 		this.leaveData = leaveData;
+	}
+	public String getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+	public EmployeeId getId() {
+		return id;
+	}
+	public void setId(EmployeeId id) {
+		this.id = id;
 	}
 	
 	

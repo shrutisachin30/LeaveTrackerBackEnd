@@ -61,12 +61,12 @@ public class EmployeeServiceImplIT {
     @Before 
     public void initializeRepository() {
         
-EmployeeId id = new EmployeeId("a9089");
+EmployeeId id = new EmployeeId("A815665");
         
         employee = new Employee();
         employee.setName("shruti");
         employee.setId(id);
-        employee.setDasId("A815665");
+        employee.setEmployeeId("a9089");
         employee.setGcmLevel("1");
         employee.setEmail("shruti@gmail.com");
         employee.setJobRole("Associate Consultant");
@@ -138,12 +138,12 @@ EmployeeId id = new EmployeeId("a9089");
     
     @Test
     public void testRegister() throws Exception {
-        EmployeeId id = new EmployeeId("a1239089");
+        EmployeeId id = new EmployeeId("A814558");
         
         Employee  register = new Employee();
         register.setName("shru");
         register.setId(id);
-        register.setDasId("A814558");
+        register.setEmployeeId("a1239089");
         register.setEmail("shru@gmail.com");
         register.setJobRole("Associate Consultant");
         register.setPassword("shru#3");
@@ -152,9 +152,6 @@ EmployeeId id = new EmployeeId("a9089");
         register.setReportingManager("AG");
         register.setProjectName("PSA");
        
-        
-        
-        
         
         Response response = given().
                 contentType(MediaType.APPLICATION_JSON)
