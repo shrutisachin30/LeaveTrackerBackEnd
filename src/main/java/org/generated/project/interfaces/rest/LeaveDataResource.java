@@ -150,15 +150,5 @@ public class LeaveDataResource {
 	  
 	  }
 	  
-	  
-	  
-//	  @POST
-//      @Path("CancelLeave/{id}")
-//      public Response cancelLeave(@PathParam("id") int id) {
-//       
-//         
-//           String response= leaveDataService.cancelLeave(id);
-//           return Response.status(201).entity(response).build();
-//      }
 
 }
