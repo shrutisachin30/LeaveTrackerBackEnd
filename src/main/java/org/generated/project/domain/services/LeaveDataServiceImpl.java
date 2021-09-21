@@ -1,5 +1,6 @@
 package org.generated.project.domain.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,13 +53,25 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	}
 	
-	@Override
-    @Transactional
-    @JpaUnit("myUnit")
-    public String cancelLeave(int leaveDataId) {
+//	@Override
+//    @Transactional
+//    @JpaUnit("myUnit")
+//    public String cancelLeave(int leaveDataId) {
+//
+//          String str =  leaveDataRepository.cancelLeave(leaveDataId);
+//
+//        return  str;
+//    }
+	
+	
 
-          String str =  leaveDataRepository.cancelLeave(leaveDataId);
+	@Transactional
+	@JpaUnit("myUnit")
+	public String cancelLeave(LeaveData leaveDataObject) {
+		
+		
+		String str = leaveDataRepository.cancelLeave(leaveDataObject);
 
-        return  str;
-    }
+        return str;
+	}
 }

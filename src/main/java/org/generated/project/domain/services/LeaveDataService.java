@@ -1,5 +1,6 @@
 package org.generated.project.domain.services;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.generated.project.domain.model.LeaveData;
@@ -13,6 +14,6 @@ public interface LeaveDataService {
 	
 	public List<Object> retriveLeaveData(String employeeId);
 	
-	public String cancelLeave(int leaveDataId);
+	public String cancelLeave(LeaveData leaveDataObject);
 
 }

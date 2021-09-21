@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @NamedQueries(value = { @NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave, ld.status From LeaveData ld where ld.employee.id=:dasId "
         + "order by ld.startDate ASC ") ,
-        @NamedQuery(name = "cancelLeave", query = "update LeaveData ld set ld.status=:status where ld.leaveDataId=:id")
+        @NamedQuery(name = "cancelLeave", query = "update LeaveData ld set ld.status=:status where ld.startDate=:startDate and ld.endDate=:endDate and ld.employee.id=:dasId ")
         })
 
 public class LeaveData extends BaseAggregateRoot<LeaveDataId> {

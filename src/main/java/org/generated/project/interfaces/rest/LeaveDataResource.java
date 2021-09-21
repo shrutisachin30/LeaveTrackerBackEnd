@@ -122,14 +122,43 @@ public class LeaveDataResource {
 	  }
 	  
 	  
+	  @POST	  
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  @Path("cancelLeave") 
+	  public HashMap cancelLeave(@RequestParameters LeaveData leaveDataObject) {
+	  System.out.println(leaveDataObject);
+	  String str = leaveDataService.cancelLeave(leaveDataObject);
 	  
-	  @POST
-      @Path("CancelLeave/{id}")
-      public Response cancelLeave(@PathParam("id") int id) {
-       
-         
-           String response= leaveDataService.cancelLeave(id);
-           return Response.status(201).entity(response).build();
-      }
+	  HashMap<String, String> response = new HashMap<String, String>();
+		
+		if(str.equalsIgnoreCase("success")) {
+			
+			response.put("statusMsg", "Leave Cancelled");
+			response.put("statusCode", "201");
+			
+		}else {
+			response.put("statusMsg", "Technical Error");
+			response.put("statusCode", "500");	
+			
+			
+			
+		}
+		
+		return response;
+	  
+	  
+	  }
+	  
+	  
+	  
+//	  @POST
+//      @Path("CancelLeave/{id}")
+//      public Response cancelLeave(@PathParam("id") int id) {
+//       
+//         
+//           String response= leaveDataService.cancelLeave(id);
+//           return Response.status(201).entity(response).build();
+//      }
 
 }

@@ -12,6 +12,7 @@ public interface LeaveBaseRepository extends Repository<LeaveData, LeaveDataId> 
 	     
 	     String  getLeaveData(Long id);
 	     
+	
 	     
 	     
 	   

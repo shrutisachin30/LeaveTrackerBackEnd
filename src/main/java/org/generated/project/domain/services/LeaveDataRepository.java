@@ -1,5 +1,7 @@
 package org.generated.project.domain.services;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -59,22 +61,51 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData,LeaveDataId
 						
 	     }
 	  
-	  public String cancelLeave(int leaveDataId) {
-
-          EntityManager entityManager = getEntityManager();
-          Query query = entityManager.createNamedQuery("cancelLeave");
-          query.setParameter("id",leaveDataId);
-          query.setParameter("status", "cancelled");
-          int row = query.executeUpdate();
-
+//	  public String cancelLeave(int leaveDataId) {
+//
+//          EntityManager entityManager = getEntityManager();
+//          Query query = entityManager.createNamedQuery("cancelLeave");
+//          query.setParameter("id",leaveDataId);
+//          query.setParameter("status", "cancelled");
+//          int row = query.executeUpdate();
+//
+//          if(row > 0)
+//              return "updated successfully";
+//          else
+//              return "Not updated";
+//
+//
+//
+//      }
+//	  
+	  
+	  
+ public String  cancelLeave(LeaveData leaveObj) {
+	 String dasId = leaveObj.getEmployee().getId().getDasId();
+	Date startDate = leaveObj.getStartDate();
+	 Date endDate = leaveObj.getEndDate();
+		  
+		
+	         EntityManager entityManager = getEntityManager();
+	         Query query = entityManager.createNamedQuery("cancelLeave");
+     query.setParameter("dasId",dasId);
+       query.setParameter("startDate",startDate);
+       query.setParameter("endDate",endDate);
+       
+	         
+	          query.setParameter("status", "cancelled");
+	          int row = query.executeUpdate();
+	
           if(row > 0)
-              return "updated successfully";
-          else
-              return "Not updated";
-
-
-
-      }
+	              return "updated successfully";
+	          else
+	              return "Not updated";
+	
+	      	
+	        
+			 
+	     }
+	  
 	
    
 	     
