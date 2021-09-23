@@ -19,9 +19,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.generated.project.application.CancelLeave;
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
 import org.generated.project.domain.services.LeaveDataService;
+import org.json.JSONObject;
 
 import com.google.inject.servlet.RequestParameters;
 
@@ -75,26 +77,26 @@ public class LeaveDataResource {
 	  
 	  
 	  
-	  @GET	  
+	  
+	    @GET	  
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  @Produces(MediaType.APPLICATION_JSON)
 	  @Path("retrieveLeaveData/{id}")
-	  public HashMap retrieveLeaveData(@PathParam("id") String id) {
+	  public Response retrieveLeaveData(@PathParam("id") String id) {
 		  
-		  HashMap<String,String> obj= new HashMap();
-	  
+		
+		  ArrayList list =new ArrayList<>();
 	  List<Object> listData = leaveDataService.retriveLeaveData(id);
 	  
-	  HashMap<String, String> response = new HashMap<String, String>();
+	
 	  System.out.println(listData);
 			  if(listData!=null && listData.size()>=0) {
 		  
-			response.put("statusCode", "201");
-			
-			ArrayList list =new ArrayList<>();
+		
 			
 			
 			for(int i=0; i<listData.size();i++) {
+				 JSONObject obj=new JSONObject();
 				Object[] objArray =(Object[]) listData.get(i);
 				obj.put("typeOfLeave",objArray[2].toString());
 				obj.put("status",objArray[3].toString());
@@ -116,25 +118,25 @@ public class LeaveDataResource {
 				
 			}
 			
-			response.put("Leave Data for Employee : ",list.toString());
+			
 			
 		}else {
 			
-			response.put("statusCode", "201");			
-			response.put("statusMsg", "No Data Present");
+			return Response.status(200).entity("No Data Present").build();
 			
 		}
 		
-		return response;
+		return Response.status(200).entity(list.toString()).build();
 	  
 	  }
 	  
+	   
 	  
 	  @POST	  
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  @Produces(MediaType.APPLICATION_JSON)
 	  @Path("cancelLeave") 
-	  public HashMap cancelLeave(@RequestParameters LeaveData leaveDataObject) {
+	  public HashMap cancelLeave(@RequestParameters CancelLeave leaveDataObject) {
 	  System.out.println(leaveDataObject);
 	  String str = leaveDataService.cancelLeave(leaveDataObject);
 	  

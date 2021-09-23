@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.generated.project.application.CancelLeave;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
 import org.generated.project.domain.model.LeaveData;
@@ -100,11 +101,13 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 //      }
 //	  
 
-	public String cancelLeave(LeaveData leaveObj) {
-		String dasId = leaveObj.getEmployee().getId().getDasId();
-		Date startDate = leaveObj.getStartDate();
-		Date endDate = leaveObj.getEndDate();
+	public String cancelLeave(CancelLeave leaveObj) {
+		String dasId = leaveObj.getDasid();
+		Date startDate = leaveObj.getStartdate();
+		Date endDate = leaveObj.getEnddate();
 
+		System.out.println(startDate);
+		System.out.println(endDate);
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("cancelLeave");
 		query.setParameter("dasId", dasId);
@@ -127,5 +130,6 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		else
 			return "error";
 	}
+
 
 }
