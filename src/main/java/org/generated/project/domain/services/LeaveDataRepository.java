@@ -58,6 +58,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 			query.setParameter("dasId", leaveObj.getEmployee().getId());
 			query.setParameter("startDate", leaveObj.getStartDate());
 			query.setParameter("endDate", leaveObj.getEndDate());
+			query.setParameter("updatedBy", leaveObj.getUpdatedBy());
+			query.setParameter("updatedOn", leaveObj.getUpdatedOn());
 			obj = query.getResultList();
 		} catch (Exception ex) {
 
@@ -105,15 +107,20 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		String dasId = leaveObj.getDasid();
 		Date startDate = leaveObj.getStartdate();
 		Date endDate = leaveObj.getEnddate();
-
+		String updatedBy = leaveObj.getUpdatedBy(); 
+		Date updatedOn = leaveObj.getUpdatedOn();
+		
 		System.out.println(startDate);
 		System.out.println(endDate);
+		
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("cancelLeave");
 		query.setParameter("dasId", dasId);
 		query.setParameter("startDate", startDate);
 		query.setParameter("endDate", endDate);
-
+		query.setParameter("updatedBy", updatedBy);
+		query.setParameter("updatedOn", updatedOn);
+		
 		query.setParameter("status", "cancelled");
 		
 		int row =0;

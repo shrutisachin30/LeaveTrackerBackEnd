@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		logger.info("EmployeeServiceImpl  ::  employeeService() : param : { " + emp.getName(),
 				"," + emp.getEmail() + "," + emp.getEmployeeId() + "," + emp.getGcmLevel() + "," + emp.getMobile() + ","
 						+ emp.getReportingManager() + "," + emp.getJobRole() + "," + emp.getId() + "," + emp.getPassword() + ","
-						+ emp.getProjectName() + "}");
+						+ emp.getProjectName() +emp.getDomain() +"}");
 
 		String status = "";
 		try {
@@ -167,7 +167,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employeeDetail.put("projectName", objArray[6].toString());
 			employeeDetail.put("jobRole", objArray[7].toString());
 			employeeDetail.put("reportingManager", objArray[8].toString());
-
+			employeeDetail.put("domain", objArray[9].toString());
 			response.add(employeeDetail);
 
 		}

@@ -37,7 +37,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 	@JpaUnit("myUnit")
 	public String applyLeave(LeaveData leaveDataObject) {
 		
-		logger.info("LeaveDataServiceImpl :: applyLeave()  param { "+leaveDataObject.getTypeOfLeave(),", "+leaveDataObject.getStartDate()+" ,"+leaveDataObject.getEndDate());	
+		logger.info("LeaveDataServiceImpl :: applyLeave()  param { "+leaveDataObject.getTypeOfLeave(),", "+leaveDataObject.getStartDate()+" ,"+leaveDataObject.getEndDate()+","+leaveDataObject.getUpdatedOn()+","+leaveDataObject.getUpdatedBy());	
 		String str = leaveDataRepository.saveEmployeeLeave(leaveDataObject);
 
 		logger.info("LeaveDataServiceImpl :: applyLeave()  After saving data : return object  "+str);		 

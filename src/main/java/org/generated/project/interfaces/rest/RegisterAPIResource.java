@@ -58,6 +58,7 @@ public class RegisterAPIResource {
 		 boolean flag6 =ValidateParam.isNull(emp.getJobRole());
 		 boolean flag7 =ValidateParam.isNull(emp.getMobile());
 		 boolean flag8 =ValidateParam.isNull(emp.getReportingManager());
+		 boolean flag9 =ValidateParam.isNull(emp.getDomain());
 		 //boolean flag7 =ValidateParam.isNull(emp.getId());
 		 //boolean flag8 =ValidateParam.isNull(emp.getDoj());
 		 
@@ -96,7 +97,11 @@ public class RegisterAPIResource {
 				}
 		    else if(flag8)  {
 				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required Rm");
+				response.put("statusMsg", "Please enter required Reporting Manager");
+				}
+		    else if(flag9)  {
+				response.put("statusCode", "500");
+				response.put("statusMsg", "Please enter required domain");
 				}
 //		    else if(flag7)  {
 //				response.put("statusCode", "500");

@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedQueries(value = { 
 @NamedQuery(name="getEmployee", query ="select id, password From Employee where id=:dasId and password=:password ") ,
-@NamedQuery(name="getEmployeeDetails", query ="select id,employeeId,name,mobile,email,gcmLevel,projectName,jobRole,reportingManager From Employee") })
+@NamedQuery(name="getEmployeeDetails", query ="select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager From Employee" 
++ " ORDER BY name ASC ") })
 @NamedQuery(name="checkIfEmployeeExist", query =" From Employee where id=:dasId or employeeId=:employeeId ") 
 public class Employee extends BaseAggregateRoot<EmployeeId> {
 	
@@ -39,7 +40,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	private String password;	
 	private String projectName;
 	private String jobRole;
-	
+	private String domain;
 	
 	
 	@OneToMany(mappedBy="employee")
@@ -51,7 +52,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		// TODO Auto-generated constructor stub
 	}
 	public Employee(EmployeeId id,String employeeId, String name,String gcmLevel,
-			String mobile ,String email, String reportingManager,String password, String projectName,String jobRole) {
+			String mobile ,String email, String reportingManager,String password, String projectName,String jobRole,String domain) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -63,6 +64,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		this.password = password;
 		this.projectName = projectName;
 		this.jobRole = jobRole;
+		this.domain = domain;
 		
 	}
 	
@@ -137,6 +139,12 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	}
 	public void setId(EmployeeId id) {
 		this.id = id;
+	}
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 	
 	

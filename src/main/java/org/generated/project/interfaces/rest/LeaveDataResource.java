@@ -56,7 +56,7 @@ public class LeaveDataResource {
 			
 		}else if(str.equalsIgnoreCase("Already Exist")){
 			response.put("statusMsg", "Cannot apply leave on same dates, Select different dates");
-			response.put("statusCode", "201");	
+			response.put("statusCode", "500");	
 			
 			
 			
@@ -98,18 +98,25 @@ public class LeaveDataResource {
 			for(int i=0; i<listData.size();i++) {
 				 JSONObject obj=new JSONObject();
 				Object[] objArray =(Object[]) listData.get(i);
+				
 				obj.put("typeOfLeave",objArray[2].toString());
 				obj.put("status",objArray[3].toString());
+				obj.put("updatedBy", objArray[4].toString());
 				 Date startDate = null;
 				 Date endDate = null;
+				 Date updatedOn = null;
 				try {
+				
 					startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[0].toString());
 					endDate =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[1].toString());
+					updatedOn =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[2].toString());
 					DateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd");
 					String output = outputFormatter.format(startDate); 
 					obj.put("startDate",output);
 					output = outputFormatter.format(endDate); 
 					obj.put("endDate",output);
+					output = outputFormatter.format(updatedOn); 
+					obj.put("updatedOn",output);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
