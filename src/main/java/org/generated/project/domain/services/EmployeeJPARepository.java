@@ -98,6 +98,33 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			
 						
 	     }
+	  
+	  public String getEmailId(String dasId) {
+		  EntityManager entityManager = getEntityManager();
+		  String email = " ";
+		  
+		  try {
+			  System.out.println(new EmployeeId(dasId));
+				Query query = entityManager.createNamedQuery("getEmailId");
+				query.setParameter("dasId",new EmployeeId(dasId));
+				
+				email= (String) query.getSingleResult();
+				//obj= (ArrayList)query.getSingleResult();
+				
+				 System.out.println(email);
+				
+
+			} catch (Exception ex) {
+				logger.info("Exception occured in getEmail");
+				ex.printStackTrace();
+			
+				
+			}
+		  return email;
+
+		
+		  
+	  }
    
 	     
 }

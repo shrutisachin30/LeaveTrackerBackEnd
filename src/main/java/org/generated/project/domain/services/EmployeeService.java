@@ -19,6 +19,11 @@ public interface EmployeeService {
 
 	public ArrayList<Employee> getEmployeeDetails();
 	
+//	String updatePassword(UpdatePassword updatepswd);
+	
+	
+	int getRandomKey(String id);
+	
 
 	//public Optional<Employee> getservice(EmployeeId id, String dasid);
 	

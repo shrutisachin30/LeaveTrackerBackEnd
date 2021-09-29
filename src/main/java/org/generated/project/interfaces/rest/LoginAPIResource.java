@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import org.generated.project.application.LoginData;
 import org.generated.project.application.ValidateParam;
 import org.generated.project.domain.services.EmployeeService;
+import org.generated.project.infrastructure.AESUtils;
 
 import com.google.inject.servlet.RequestParameters;
 
@@ -24,6 +25,8 @@ import io.swagger.annotations.Api;
 public class LoginAPIResource {
 	@Inject
 	private EmployeeService login;
+	
+	final String secretKey = "JH4KL6XA@ByC!$";
 
 
 	@Path("loginService")
@@ -47,12 +50,14 @@ public class LoginAPIResource {
 			response.put("statusMsg", "Please enter required Password");
 			
 		}else {
+			String encryptedString = AESUtils.encrypt(data.getPassword().toString(), secretKey);
+			data.setPassword(encryptedString);
 			
 		
 				
 		boolean action = login.loginService(data);
 		
-		if(action) {
+		if(action) { 
 			response.put("statusCode", "201");
 			response.put("statusMsg", "Login Successful");
 			

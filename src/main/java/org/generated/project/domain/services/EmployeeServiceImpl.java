@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.Random;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -19,7 +16,7 @@ import org.seedstack.seed.Bind;
 import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
-//import com.sun.istack.logging.Logger;
+
 
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
@@ -40,15 +37,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		logger.info("EmployeeServiceImpl  ::  employeeService() : param : { " + emp.getName(),
 				"," + emp.getEmail() + "," + emp.getEmployeeId() + "," + emp.getGcmLevel() + "," + emp.getMobile() + ","
-						+ emp.getReportingManager() + "," + emp.getJobRole() + "," + emp.getId() + "," + emp.getPassword() + ","
-						+ emp.getProjectName() +emp.getDomain() +"}");
+						+ emp.getReportingManager() + "," + emp.getJobRole() + "," + emp.getId() + ","
+						+ emp.getPassword() + "," + emp.getProjectName() + emp.getDomain() + "}");
 
 		String status = "";
 		try {
 
 			ArrayList<Employee> list = checkIfEmployeeExist(emp);
-			if (list != null && list.size()== 0) {
-				
+			if (list != null && list.size() == 0) {
+
 				try {
 					emprepo.add(emp);
 					status = "success";
@@ -72,32 +69,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Jpa
 	private Repository<Employee, EmployeeId> loginRepository;
 
-//    @Inject
-//    private LoginRepository repo;
-//    @Transactional
-//    @JpaUnit("myUnit")
-//    public String loginService(LoginId loginId, String password) {
-//    	String resolve = "";
-//    	try
-//    	{
-//        Optional<Login> login = loginRepository.get(getSpecificationBuilder().of(Login.class)
-//                .property("username").matching(loginId).ignoringCase()
-//                .or()
-//                .property("password").matching(password).ignoringCase()
-//                .build());
-//        if(login.isPresent())
-//        resolve = "Sucess";
-//        else
-//        	resolve = "Fail";
-//    	}
-//        
-//    	catch(Exception e)
-//    	{
-//    		e.printStackTrace();
-//    		resolve = "Fail";
-//    	}
-//    	return resolve;
-//    }
 	public boolean loginService(LoginData data) {
 
 		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasId() + "," + data.getPassword()
@@ -105,7 +76,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		boolean resolve = false;
 
-		// Optional<Employee> login = getservice(new EmployeeId());
 		ArrayList<Employee> list = verifyEmployeeDetails(data);
 		if (list != null && list.size() > 0) {
 			resolve = true;
@@ -132,7 +102,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return login;
 	}
-	
+
 	@Transactional
 	@JpaUnit("myUnit")
 	public ArrayList<Employee> checkIfEmployeeExist(Employee empObj) {
@@ -174,5 +144,55 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return response;
 	}
+
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public int getRandomKey(String id) {
+		// TODO Auto-generated method stub
+		int key = 0;
+
+		try {
+			String email = personRepository.getEmailId(id);
+			System.out.println(email);
+
+			Random random = new Random();
+			while (key < 10000) {
+				key = random.nextInt(99999);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return key;
+	}
+
+//	@Override
+//	public String updatePassword(Employee updatepswd) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	@Override
+//	@Transactional
+//	@JpaUnit("myUnit")
+//	public String updatePassword(UpdatePassword updatepswd) {
+//	String result="";
+//
+//		try {
+//			Employee emp=getEmployee(new DasId(updatepswd.getDasId()));
+//			emp.setPassword(updatepswd.getPassword());
+//			updateEmployee(emp);
+//
+//			result="Updated successfully";
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//
+//			result="updation failed";
+//		}
+//		return result;
+//	}
 
 }

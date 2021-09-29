@@ -23,7 +23,9 @@ import javax.ws.rs.core.Response;
 import org.generated.project.application.ValidateParam;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
+
 import org.generated.project.domain.services.EmployeeService;
+import org.generated.project.infrastructure.AESUtils;
 
 import com.google.inject.servlet.RequestParameters;
 
@@ -37,15 +39,28 @@ public class RegisterAPIResource {
 	private EmployeeService service;
 	
 
+	final String secretKey = "JH4KL6XA@ByC!$";
+	
+
 
 	@Path("registerEmployee")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	
+	
+	
 	public HashMap<String, String> employeeservice(@Valid @RequestParameters Employee emp) {
+		
+		 String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
+
+			emp.setPassword(encryptedString);
+		 
 		 String result = service.employeeService(emp);
 		 
 		 HashMap<String, String> response = new HashMap<String, String>();
+		 
+		 
 		 
 		 //EmployeeId id = new EmployeeId(emp.getId);
 		 
@@ -180,4 +195,28 @@ List<Employee> listData;
 	return Response.status(200).entity(listData).build();
 
 }
+
+
+
+@Path("forgotPassword/{id}")
+   @GET
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response sendMail(@PathParam("id") String id) {
+   	
+	  
+   	return Response.status(200).entity((service.getRandomKey(id))).build();
+   	
+   }
+
+
+@Path("updatepswd")
+ @POST
+ @Consumes(MediaType.APPLICATION_JSON)
+ public Response updatePassword(Employee updatepswd) {
+	  
+	return Response.status(200).entity("Password Updated").build();
+	  
+}
+ 
+
 }
