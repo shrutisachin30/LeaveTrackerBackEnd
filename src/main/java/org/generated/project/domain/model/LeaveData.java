@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedQuery(name = "checkLeaveData", query = "From LeaveData ld where ((ld.startDate=:startDate or ld.endDate=:endDate) or"
 		+ " (ld.startDate between :startDate and :endDate) or"
 		+ " (ld.endDate between :startDate and :endDate)) "
-		+ "and ld.employee=:dasId ")
+		+ " and ld.employee=:dasId ")
 })
 
 public class LeaveData extends BaseAggregateRoot<LeaveDataId> {

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import org.generated.project.application.CancelLeave;
+
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
 import org.seedstack.business.domain.BaseRepository;
@@ -68,7 +68,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	@Transactional
 	@JpaUnit("myUnit")
-	public String cancelLeave(CancelLeave leaveDataObject) {
+	public String cancelLeave(LeaveData leaveDataObject) {
 		
 		
 		String str = leaveDataRepository.cancelLeave(leaveDataObject);
