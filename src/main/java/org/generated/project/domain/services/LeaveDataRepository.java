@@ -108,6 +108,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		query.setParameter("dasId", leaveObj.getEmployee().getId());
 		query.setParameter("startDate", leaveObj.getStartDate());
 		query.setParameter("endDate", leaveObj.getEndDate());
+		query.setParameter("updatedBy", leaveObj.getUpdatedBy());
+		query.setParameter("updatedOn", leaveObj.getUpdatedOn());
 		query.setParameter("status", "cancelled");
 		
 		int row =0;
