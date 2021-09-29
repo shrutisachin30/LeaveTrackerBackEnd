@@ -101,7 +101,7 @@ public class LeaveDataResource {
 				
 				obj.put("typeOfLeave",objArray[2].toString());
 				obj.put("status",objArray[3].toString());
-				obj.put("updatedBy", objArray[4].toString());
+				obj.put("updatedBy",objArray[4].toString());
 				 Date startDate = null;
 				 Date endDate = null;
 				 Date updatedOn = null;
@@ -109,14 +109,14 @@ public class LeaveDataResource {
 				
 					startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[0].toString());
 					endDate =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[1].toString());
-					updatedOn =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[2].toString());
+					updatedOn =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(objArray[5].toString());
 					DateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd");
 					String output = outputFormatter.format(startDate); 
 					obj.put("startDate",output);
-					output = outputFormatter.format(endDate); 
-					obj.put("endDate",output);
-					output = outputFormatter.format(updatedOn); 
-					obj.put("updatedOn",output);
+					String output1 = outputFormatter.format(endDate); 
+					obj.put("endDate",output1);
+					String output2 = outputFormatter.format(updatedOn); 
+					obj.put("updatedOn",output2);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
