@@ -1,11 +1,20 @@
 package org.generated.project.domain.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -17,19 +26,30 @@ import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
 
+import java.util.Properties;  
+import javax.mail.*;  
+import javax.mail.internet.*;  
+
 
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Inject
 	private EmployeeJPARepository personRepository;
-
+	
+	
 	@Inject
 	@Jpa
 	private Repository<Employee, EmployeeId> emprepo;
 
 	@Logging
 	private Logger logger;
+	
+	@Inject
+    @Named("smtpProvider")
+    private Session smtpSession;
+	
+	
 
 	@Transactional
 	@JpaUnit("myUnit")
@@ -151,6 +171,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int getRandomKey(String id) {
 		// TODO Auto-generated method stub
 		int key = 0;
+		
+		String status ="";
 
 		try {
 			String email = personRepository.getEmailId(id);
@@ -161,6 +183,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 				key = random.nextInt(99999);
 			}
 
+			status = sendToMail(email, key);
+			
+			System.out.print(status);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -195,4 +221,99 @@ public class EmployeeServiceImpl implements EmployeeService {
 //		return result;
 //	}
 
-}
+	
+	
+	@Override
+	public String sendOtpToMail(String addr, int otp) throws MessagingException {
+		
+		String status="";
+		
+		Transport transport=null;
+		
+		
+		try {
+			 Message message= new MimeMessage(smtpSession);
+			 message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
+			 message.setFrom(new InternetAddress(addr));
+			 message.setSubject("Password Reset for Leave Tracker");
+			 message.setText("Hi,  Password Reset Key: "+otp);
+			 
+			 message.setSentDate(new Date());
+			 
+
+	            transport = smtpSession.getTransport();
+	            transport.connect("smtp.gmail.com",465,"yeshvibhav@gmail.com","P@ssw0rd2809");
+	            transport.sendMessage(message, message.getAllRecipients());
+	            
+	            
+	            
+	            status="OTP Mail sent to : "+addr+" . OTP : "+otp;
+	           
+		 }
+	  
+		 catch(Exception e) {
+			 e.printStackTrace();
+			 status="Sending mail to "+addr+" failed";
+		 }
+		 if(transport!=null) {
+			 transport.close();
+		 }
+		
+		return status;
+	}
+	
+	
+	
+	
+	  
+	
+	@Override
+	public String sendToMail(String addr, int otp) throws MessagingException {
+	  
+	  String host="localhost";  
+	  final String user="yeshvibhav@gmail.com";//change accordingly  
+	  final String password="P@ssw0rd2809";//change accordingly  
+	    
+	  String to="yeshwant.prabhu@atos.net";//change accordingly  
+	  
+	   //Get the session object  
+	   Properties props = new Properties();  
+	   props.put("mail.smtp.host",host);  
+	   props.put("mail.smtp.auth", "true");  
+	   props.put("mail.smtp.starttls.enable", "true"); 
+	   props.put("mail.smtp.debug", "true"); 
+	   props.put("mail.smtp.socketFactory.port", 465); 
+	   props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory"); 
+	   props.put("mail.smtp.socketFactory.fallback", "false"); 
+	   
+	  	     
+		
+		  Session session = Session.getDefaultInstance(props, new
+		  javax.mail.Authenticator() { protected PasswordAuthentication
+		  getPasswordAuthentication() { return new
+		  PasswordAuthentication(user,password); } });
+		 
+	  
+	   //Compose the message  
+	    try {  
+	     MimeMessage message = new MimeMessage(session);  
+	     message.setFrom(new InternetAddress(user));  
+	     message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
+	     message.setSubject("OTP");  
+	     message.setText("This is simple program of sending email using JavaMail API"+otp);  
+	       
+	    //send the message  
+	     Transport.send(message);  
+	  
+	     System.out.println("message sent successfully...");  
+	   
+	     } catch (MessagingException e) {
+	    	 
+	    	 e.printStackTrace();
+	    	 
+	     }
+		return to;  
+	 }  
+	}  
+
+

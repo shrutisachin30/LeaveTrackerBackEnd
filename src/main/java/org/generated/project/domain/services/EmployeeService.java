@@ -8,6 +8,8 @@ import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
 import org.seedstack.business.Service;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 @Service
 public interface EmployeeService {
 	
@@ -26,6 +28,11 @@ public interface EmployeeService {
 	
 
 	//public Optional<Employee> getservice(EmployeeId id, String dasid);
+	
+
+	String sendOtpToMail(String addr, int otp) throws MessagingException;
+
+	String sendToMail(String addr, int otp) throws MessagingException;
 	
 	
 
