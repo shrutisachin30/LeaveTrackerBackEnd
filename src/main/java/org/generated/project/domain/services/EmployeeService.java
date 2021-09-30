@@ -29,11 +29,6 @@ public interface EmployeeService {
 
 	//public Optional<Employee> getservice(EmployeeId id, String dasid);
 	
-
-	String sendOtpToMail(String addr, int otp) throws MessagingException;
-
-	String sendToMail(String addr, int otp) throws MessagingException;
-	
 	
 
 }

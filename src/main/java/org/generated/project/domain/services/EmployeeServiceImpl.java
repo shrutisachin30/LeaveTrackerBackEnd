@@ -184,7 +184,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				key = random.nextInt(99999);
 			}
 
-			status = sendToMail(email, key);
+			//status = sendToMail(email, key);
 			
 			System.out.print(status);
 			
@@ -201,122 +201,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	@JpaUnit("myUnit")
 	public String updatePassword(Employee emp) {
-		
+
 		final String secretKey = "JH4KL6XA@ByC!$";
-	String result="";
 
 		try {
-			
-			 String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
 
-				emp.setPassword(encryptedString);
-				
-				String str = personRepository.updatePassword(emp);
-		
+			String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
 
-			result="success";
+			emp.setPassword(encryptedString);
+
+			int result = personRepository.updatePassword(emp);
+
+			if (result > 0)
+				return "success";
+			else
+				return "error";
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+
+			return "error";
+		}
+
 	}
-	
-	  catch(Exception e) { e.printStackTrace();
-	  
-	  result="updation failed"; }
-	 
-		return result;
-}
 
-	
-	
-	@Override
-	public String sendOtpToMail(String addr, int otp) throws MessagingException {
-		
-		String status="";
-		
-		Transport transport=null;
-		
-		
-		try {
-			 Message message= new MimeMessage(smtpSession);
-			 message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
-			 message.setFrom(new InternetAddress(addr));
-			 message.setSubject("Password Reset for Leave Tracker");
-			 message.setText("Hi,  Password Reset Key: "+otp);
-			 
-			 message.setSentDate(new Date());
-			 
-
-	            transport = smtpSession.getTransport();
-	            transport.connect("smtp.gmail.com",465,"yeshvibhav@gmail.com","P@ssw0rd2809");
-	            transport.sendMessage(message, message.getAllRecipients());
-	            
-	            
-	            
-	            status="OTP Mail sent to : "+addr+" . OTP : "+otp;
-	           
-		 }
-	  
-		 catch(Exception e) {
-			 e.printStackTrace();
-			 status="Sending mail to "+addr+" failed";
-		 }
-		 if(transport!=null) {
-			 transport.close();
-		 }
-		
-		return status;
-	}
-	
-	
-	
-	
-	  
-	
-	@Override
-	public String sendToMail(String addr, int otp) throws MessagingException {
-	  
-	  String host="localhost";  
-	  final String user="yeshvibhav@gmail.com";//change accordingly  
-	  final String password="P@ssw0rd2809";//change accordingly  
-	    
-	  String to="yeshwant.prabhu@atos.net";//change accordingly  
-	  
-	   //Get the session object  
-	   Properties props = new Properties();  
-	   props.put("mail.smtp.host",host);  
-	   props.put("mail.smtp.auth", "true");  
-	   props.put("mail.smtp.starttls.enable", "true"); 
-	   props.put("mail.smtp.debug", "true"); 
-	   props.put("mail.smtp.socketFactory.port", 465); 
-	   props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory"); 
-	   props.put("mail.smtp.socketFactory.fallback", "false"); 
-	   
-	  	     
-		
-		  Session session = Session.getDefaultInstance(props, new
-		  javax.mail.Authenticator() { protected PasswordAuthentication
-		  getPasswordAuthentication() { return new
-		  PasswordAuthentication(user,password); } });
-		 
-	  
-	   //Compose the message  
-	    try {  
-	     MimeMessage message = new MimeMessage(session);  
-	     message.setFrom(new InternetAddress(user));  
-	     message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
-	     message.setSubject("OTP");  
-	     message.setText("This is simple program of sending email using JavaMail API"+otp);  
-	       
-	    //send the message  
-	     Transport.send(message);  
-	  
-	     System.out.println("message sent successfully...");  
-	   
-	     } catch (MessagingException e) {
-	    	 
-	    	 e.printStackTrace();
-	    	 
-	     }
-		return to;  
-	 }  
 	}  
 
 
