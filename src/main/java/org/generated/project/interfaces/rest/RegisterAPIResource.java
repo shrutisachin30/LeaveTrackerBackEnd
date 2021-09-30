@@ -37,87 +37,72 @@ public class RegisterAPIResource {
 
 	@Inject
 	private EmployeeService service;
-	
 
 	final String secretKey = "JH4KL6XA@ByC!$";
-	
-
 
 	@Path("registerEmployee")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	
-	
-	
-	public HashMap<String, String> employeeservice(@Valid @RequestParameters Employee emp) {
-		
-		 String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
 
-			emp.setPassword(encryptedString);
-		 
-		 String result = service.employeeService(emp);
-		 
-		 HashMap<String, String> response = new HashMap<String, String>();
-		 
-		 
-		 
-		 //EmployeeId id = new EmployeeId(emp.getId);
-		 
-		 boolean flag =ValidateParam.isNull(emp.getName());
-		 boolean flag1 =ValidateParam.isNull(emp.getEmail());
-		 boolean flag2 =ValidateParam.isNull(emp.getPassword());
-		 boolean flag3 =ValidateParam.isNull(emp.getProjectName());
-		 boolean flag4 =ValidateParam.isNull(emp.getEmployeeId());
-		 boolean flag5 =ValidateParam.isNull(emp.getGcmLevel());
-		 boolean flag6 =ValidateParam.isNull(emp.getJobRole());
-		 boolean flag7 =ValidateParam.isNull(emp.getMobile());
-		 boolean flag8 =ValidateParam.isNull(emp.getReportingManager());
-		 boolean flag9 =ValidateParam.isNull(emp.getDomain());
-		 //boolean flag7 =ValidateParam.isNull(emp.getId());
-		 //boolean flag8 =ValidateParam.isNull(emp.getDoj());
-		 
-		    if(flag)  {
+	public HashMap<String, String> employeeservice(@Valid @RequestParameters Employee emp) {
+
+		String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
+
+		emp.setPassword(encryptedString);
+
+		String result = service.employeeService(emp);
+
+		HashMap<String, String> response = new HashMap<String, String>();
+
+		// EmployeeId id = new EmployeeId(emp.getId);
+
+		boolean flag = ValidateParam.isNull(emp.getName());
+		boolean flag1 = ValidateParam.isNull(emp.getEmail());
+		boolean flag2 = ValidateParam.isNull(emp.getPassword());
+		boolean flag3 = ValidateParam.isNull(emp.getProjectName());
+		boolean flag4 = ValidateParam.isNull(emp.getEmployeeId());
+		boolean flag5 = ValidateParam.isNull(emp.getGcmLevel());
+		boolean flag6 = ValidateParam.isNull(emp.getJobRole());
+		boolean flag7 = ValidateParam.isNull(emp.getMobile());
+		boolean flag8 = ValidateParam.isNull(emp.getReportingManager());
+		boolean flag9 = ValidateParam.isNull(emp.getDomain());
+		// boolean flag7 =ValidateParam.isNull(emp.getId());
+		// boolean flag8 =ValidateParam.isNull(emp.getDoj());
+
+		if (flag) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required name");
-			}
-		    else if(flag1)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required email");
-				}
-		    else if(flag2)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required password");
-				}
-		    else if(flag3)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required projectname");
-				}
-		    else if(flag4)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required Dasid");
-				}
-		    else if(flag5)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required GcmLevel");
-				}
-		    
-		    else if(flag6)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required jobrole");
-				}
-		    else if(flag7)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required Mobile");
-				}
-		    else if(flag8)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required Reporting Manager");
-				}
-		    else if(flag9)  {
-				response.put("statusCode", "500");
-				response.put("statusMsg", "Please enter required domain");
-				}
+		} else if (flag1) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required email");
+		} else if (flag2) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required password");
+		} else if (flag3) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required projectname");
+		} else if (flag4) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required Dasid");
+		} else if (flag5) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required GcmLevel");
+		}
+
+		else if (flag6) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required jobrole");
+		} else if (flag7) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required Mobile");
+		} else if (flag8) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required Reporting Manager");
+		} else if (flag9) {
+			response.put("statusCode", "500");
+			response.put("statusMsg", "Please enter required domain");
+		}
 //		    else if(flag7)  {
 //				response.put("statusCode", "500");
 //				response.put("statusMsg", "Please enter required id");
@@ -126,97 +111,86 @@ public class RegisterAPIResource {
 //				response.put("statusCode", "500");
 //				response.put("statusMsg", "Please enter required doj");
 //				}
-		    
-		    
-		   else {
-				
-				        if(result.equalsIgnoreCase("success")) {
-						response.put("statusCode", "201");
-						response.put("statusMsg", "Registration is Successful");
-						
-					}else {
-						
-						response.put("statusCode", "500");
-						
-						if(result.equalsIgnoreCase("alreadyExists")) {
-							response.put("statusMsg", "User Already Exists");
-						}else {
-							response.put("statusMsg", "Registration Not Successful");
-						}
-						
-					}
-				        
+
+		else {
+
+			if (result.equalsIgnoreCase("success")) {
+				response.put("statusCode", "201");
+				response.put("statusMsg", "Registration is Successful");
+
+			} else {
+
+				response.put("statusCode", "500");
+
+				if (result.equalsIgnoreCase("alreadyExists")) {
+					response.put("statusMsg", "User Already Exists");
+				} else {
+					response.put("statusMsg", "Registration Not Successful");
 				}
-													
+
+			}
+
+		}
+
 		return response;
 	}
-	
-	
-	
 
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getEmployeeDetails")
+	public Response getEmployeeDetails() {
 
-@GET	  
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-@Path("getEmployeeDetails")
-public Response getEmployeeDetails() {
-	  
-	  HashMap<String,String> obj= new HashMap();
+		HashMap<String, String> obj = new HashMap();
 
-List<Employee> listData;
+		List<Employee> listData;
 
-	listData = service.getEmployeeDetails();
+		listData = service.getEmployeeDetails();
 
+		return Response.status(200).entity(listData).build();
 
-//HashMap<String, String> response = new HashMap<String, String>();
-//if(listData!=null && listData.size()>=0) {
+	}
+
+	@Path("forgotPassword/{id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sendMail(@PathParam("id") String id) {
+
+		return Response.status(200).entity((service.getRandomKey(id))).build();
+
+	}
+
+//@Path("updatepswd")
+// @POST
+// @Consumes(MediaType.APPLICATION_JSON)
+// public Response updatePassword(Employee updatepswd) {
 //	  
-//		response.put("statusCode", "201");
-//		
-//		ArrayList list =new ArrayList<>();
-//		
-//		
-//		for(int i=0; i<listData.size();i++) {
-//			Employee objArray = listData.get(i);
-//			
-//			list.add(obj);
-//			
-//		}
-//		
-//		response.put("Employee Data : ",list.toString());
-//		
-//	}else {
-//		
-//		response.put("statusCode", "201");			
-//		response.put("statusMsg", "No Data Present");
-//		
-//	}
-	
-	return Response.status(200).entity(listData).build();
+//	return Response.status(200).entity("Password Updated").build();
+//	  
+//}
 
-}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("updatePassword")
+	public HashMap updatePassword(@RequestParameters Employee emp) {
+		System.out.println(emp);
+		String str = service.updatePassword(emp);
 
+		HashMap<String, String> response = new HashMap<String, String>();
 
+		if (str.equalsIgnoreCase("success")) {
 
-@Path("forgotPassword/{id}")
-   @GET
-   @Produces(MediaType.APPLICATION_JSON)
-   public Response sendMail(@PathParam("id") String id) {
-   	
-	  
-   	return Response.status(200).entity((service.getRandomKey(id))).build();
-   	
-   }
+			response.put("statusMsg", "Password updated Successfully");
+			response.put("statusCode", "201");
 
+		} else {
+			response.put("statusMsg", "Password not updated");
+			response.put("statusCode", "500");
 
-@Path("updatepswd")
- @POST
- @Consumes(MediaType.APPLICATION_JSON)
- public Response updatePassword(Employee updatepswd) {
-	  
-	return Response.status(200).entity("Password Updated").build();
-	  
-}
- 
+		}
+
+		return response;
+	}
 
 }

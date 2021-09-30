@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
+import org.generated.project.domain.model.LeaveData;
 import org.seedstack.jpa.BaseJpaRepository;
 import org.seedstack.seed.Bind;
 import com.sun.istack.logging.Logger;
@@ -125,6 +126,31 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		
 		  
 	  }
+	  
+	  public String updatePassword(Employee emp) {
+			
+			
+			EntityManager entityManager = getEntityManager();
+			Query query = entityManager.createNamedQuery("updatePassword");
+			query.setParameter("dasId", emp.getId().getDasId());
+			query.setParameter("password", emp.getPassword());
+
+			
+			int row =0;
+			
+			try {
+				row = query.executeUpdate();
+				
+			}catch(Exception ex) {
+				
+					return "error";
+			}
+			if (row > 0)
+				return "success";
+			else
+				return "error";
+		}
+
    
 	     
 }

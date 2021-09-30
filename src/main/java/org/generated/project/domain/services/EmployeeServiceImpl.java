@@ -18,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
+import org.generated.project.infrastructure.AESUtils;
 import org.seedstack.business.domain.Repository;
 import org.seedstack.jpa.Jpa;
 import org.seedstack.jpa.JpaUnit;
@@ -194,32 +195,34 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return key;
 	}
 
-//	@Override
-//	public String updatePassword(Employee updatepswd) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	
 
-//	@Override
-//	@Transactional
-//	@JpaUnit("myUnit")
-//	public String updatePassword(UpdatePassword updatepswd) {
-//	String result="";
-//
-//		try {
-//			Employee emp=getEmployee(new DasId(updatepswd.getDasId()));
-//			emp.setPassword(updatepswd.getPassword());
-//			updateEmployee(emp);
-//
-//			result="Updated successfully";
-//		}
-//		catch(Exception e) {
-//			e.printStackTrace();
-//
-//			result="updation failed";
-//		}
-//		return result;
-//	}
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public String updatePassword(Employee emp) {
+		
+		final String secretKey = "JH4KL6XA@ByC!$";
+	String result="";
+
+		try {
+			
+			 String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
+
+				emp.setPassword(encryptedString);
+				
+				String str = personRepository.updatePassword(emp);
+		
+
+			result="success";
+	}
+	
+	  catch(Exception e) { e.printStackTrace();
+	  
+	  result="updation failed"; }
+	 
+		return result;
+}
 
 	
 	
