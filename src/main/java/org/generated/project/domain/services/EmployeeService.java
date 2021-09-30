@@ -19,7 +19,7 @@ public interface EmployeeService {
 
 	public ArrayList<Employee> getEmployeeDetails();
 	
-//	String updatePassword(UpdatePassword updatepswd);
+	String updatePassword(Employee emp);
 	
 	
 	int getRandomKey(String id);

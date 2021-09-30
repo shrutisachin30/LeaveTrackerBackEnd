@@ -83,23 +83,6 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 
 	}
 
-//	  public String cancelLeave(int leaveDataId) {
-//
-//          EntityManager entityManager = getEntityManager();
-//          Query query = entityManager.createNamedQuery("cancelLeave");
-//          query.setParameter("id",leaveDataId);
-//          query.setParameter("status", "cancelled");
-//          int row = query.executeUpdate();
-//
-//          if(row > 0)
-//              return "updated successfully";
-//          else
-//              return "Not updated";
-//
-//
-//
-//      }
-//	  
 
 	public String cancelLeave(LeaveData leaveObj) {
 		

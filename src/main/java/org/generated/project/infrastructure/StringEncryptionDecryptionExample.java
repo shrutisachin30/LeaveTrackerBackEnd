@@ -3,11 +3,11 @@ package org.generated.project.infrastructure;
 public class StringEncryptionDecryptionExample {
 
 	public static void main(String[] args) {
-		 final String secretKey = "JHKLXABYZC!!!!";
+		 final String secretKey = "JH4KL6XA@ByC!$";
 	     
-		    String originalString = "Java Web Developer";
+		    String originalString = "subasri@345";
 		    String encryptedString = AESUtils.encrypt(originalString, secretKey) ;
-		    String decryptedString = AESUtils.decrypt(encryptedString, secretKey) ;
+		    String decryptedString = AESUtils.decrypt("Pi5lB99CMEHc7i3lyPpGmA==", secretKey) ;
 		     
 		    System.out.println("String Before Encryption is :");
 		    System.out.println(originalString);
