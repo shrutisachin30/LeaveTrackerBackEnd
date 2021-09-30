@@ -55,8 +55,6 @@ public class RegisterAPIResource {
 
 		HashMap<String, String> response = new HashMap<String, String>();
 
-		// EmployeeId id = new EmployeeId(emp.getId);
-
 		boolean flag = ValidateParam.isNull(emp.getName());
 		boolean flag1 = ValidateParam.isNull(emp.getEmail());
 		boolean flag2 = ValidateParam.isNull(emp.getPassword());
@@ -67,8 +65,6 @@ public class RegisterAPIResource {
 		boolean flag7 = ValidateParam.isNull(emp.getMobile());
 		boolean flag8 = ValidateParam.isNull(emp.getReportingManager());
 		boolean flag9 = ValidateParam.isNull(emp.getDomain());
-		// boolean flag7 =ValidateParam.isNull(emp.getId());
-		// boolean flag8 =ValidateParam.isNull(emp.getDoj());
 
 		if (flag) {
 			response.put("statusCode", "500");
@@ -103,14 +99,6 @@ public class RegisterAPIResource {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required domain");
 		}
-//		    else if(flag7)  {
-//				response.put("statusCode", "500");
-//				response.put("statusMsg", "Please enter required id");
-//				}
-//		    else if(flag8)  {
-//				response.put("statusCode", "500");
-//				response.put("statusMsg", "Please enter required doj");
-//				}
 
 		else {
 

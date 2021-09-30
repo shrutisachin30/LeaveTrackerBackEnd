@@ -8,12 +8,12 @@ import java.util.Optional;
 import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+//import javax.mail.Message;
+//import javax.mail.MessagingException;
+//import javax.mail.Session;
+//import javax.mail.Transport;
+//import javax.mail.internet.InternetAddress;
+//import javax.mail.internet.MimeMessage;
 
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
@@ -27,30 +27,28 @@ import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
 
-import java.util.Properties;  
-import javax.mail.*;  
-import javax.mail.internet.*;  
-
+import java.util.Properties;
+//import javax.mail.*;  
+//import javax.mail.internet.*;  
 
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Inject
 	private EmployeeJPARepository personRepository;
-	
-	
+
 	@Inject
 	@Jpa
 	private Repository<Employee, EmployeeId> emprepo;
 
 	@Logging
 	private Logger logger;
-	
-	@Inject
-    @Named("smtpProvider")
-    private Session smtpSession;
-	
-	
+
+//	@Inject
+//    @Named("smtpProvider")
+//    private Session smtpSession;
+//	
+//	
 
 	@Transactional
 	@JpaUnit("myUnit")
@@ -172,8 +170,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int getRandomKey(String id) {
 		// TODO Auto-generated method stub
 		int key = 0;
-		
-		String status ="";
+
+		String status = "";
 
 		try {
 			String email = personRepository.getEmailId(id);
@@ -184,18 +182,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 				key = random.nextInt(99999);
 			}
 
-			//status = sendToMail(email, key);
-			
 			System.out.print(status);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return key;
 	}
-
-	
 
 	@Override
 	@Transactional
@@ -227,6 +221,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-	}  
-
-
+}

@@ -6,20 +6,18 @@ import org.seedstack.business.domain.BaseValueObject;
 
 @Embeddable
 public class EmployeeId extends BaseValueObject {
- 
-	private String dasId;
 
+	private String dasId;
 
 	public EmployeeId() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public EmployeeId(String id) {
 		// TODO Auto-generated constructor stub
-		 this.dasId=id;
+		this.dasId = id;
 	}
-
 
 	public String getDasId() {
 		return dasId;
@@ -29,7 +27,4 @@ public class EmployeeId extends BaseValueObject {
 		this.dasId = dasId;
 	}
 
-	
-	
 }
-	

@@ -5,12 +5,9 @@ import javax.validation.constraints.NotEmpty;
 import org.seedstack.seed.validation.NotBlank;
 
 public class LoginData {
-	
-	
+
 	private String dasId;
 	private String password;
-
-	
 
 	public String getDasId() {
 		return dasId;
