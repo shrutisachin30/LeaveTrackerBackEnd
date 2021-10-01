@@ -31,13 +31,13 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		EntityManager entityManager = getEntityManager();
 
 		try {
-			List<Object> obj=checkLeaveData(leaveObj);
-			
-			if(obj!=null && obj.size()==0) {
-			entityManager.persist(leaveObj);
-			return "Success";
-			
-			}else {
+			List<Object> obj = checkLeaveData(leaveObj);
+
+			if (obj != null && obj.size() == 0) {
+				entityManager.persist(leaveObj);
+				return "Success";
+
+			} else {
 				return "Already Exist";
 			}
 		} catch (Exception ex) {
@@ -47,7 +47,7 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		}
 
 	}
-	
+
 	public List<Object> checkLeaveData(LeaveData leaveObj) {
 		EntityManager entityManager = getEntityManager();
 
@@ -57,7 +57,7 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 			query.setParameter("dasId", leaveObj.getEmployee().getId());
 			query.setParameter("startDate", leaveObj.getStartDate());
 			query.setParameter("endDate", leaveObj.getEndDate());
-		    //query.setParameter("status", leaveObj.getStatus());
+
 			obj = query.getResultList();
 		} catch (Exception ex) {
 
@@ -83,10 +83,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 
 	}
 
-
 	public String cancelLeave(LeaveData leaveObj) {
-		
-		
+
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("cancelLeave");
 		query.setParameter("dasId", leaveObj.getEmployee().getId());
@@ -95,21 +93,20 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		query.setParameter("updatedBy", leaveObj.getUpdatedBy());
 		query.setParameter("updatedOn", leaveObj.getUpdatedOn());
 		query.setParameter("status", "cancelled");
-		
-		int row =0;
-		
+
+		int row = 0;
+
 		try {
 			row = query.executeUpdate();
-			
-		}catch(Exception ex) {
-			
-				return "error";
+
+		} catch (Exception ex) {
+
+			return "error";
 		}
 		if (row > 0)
 			return "success";
 		else
 			return "error";
 	}
-
 
 }

@@ -25,8 +25,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager From Employee"
 				+ " ORDER BY name ASC "),
 		@NamedQuery(name = "checkIfEmployeeExist", query = " From Employee where id=:dasId or employeeId=:employeeId "),
+
 		@NamedQuery(name = "updatePassword", query = "update Employee set password=:password where id=:dasId "),
-		@NamedQuery(name = "getEmailId", query = "Select email from Employee where id=:dasId") })
+
+		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId") })
 
 public class Employee extends BaseAggregateRoot<EmployeeId> {
 

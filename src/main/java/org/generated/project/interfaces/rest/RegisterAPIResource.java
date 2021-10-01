@@ -51,8 +51,6 @@ public class RegisterAPIResource {
 
 		emp.setPassword(encryptedString);
 
-		String result = service.employeeService(emp);
-
 		HashMap<String, String> response = new HashMap<String, String>();
 
 		boolean flag = ValidateParam.isNull(emp.getName());
@@ -84,9 +82,7 @@ public class RegisterAPIResource {
 		} else if (flag5) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required GcmLevel");
-		}
-
-		else if (flag6) {
+		} else if (flag6) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required jobrole");
 		} else if (flag7) {
@@ -101,8 +97,10 @@ public class RegisterAPIResource {
 		}
 
 		else {
+			String result = service.employeeService(emp);
 
 			if (result.equalsIgnoreCase("success")) {
+
 				response.put("statusCode", "201");
 				response.put("statusMsg", "Registration is Successful");
 
@@ -142,20 +140,25 @@ public class RegisterAPIResource {
 	@Path("forgotPassword/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response sendMail(@PathParam("id") String id) {
+	public HashMap<String, String> forgotPassword(@PathParam("id") String id) {
 
-		return Response.status(200).entity((service.getRandomKey(id))).build();
+		HashMap<String, String> response = service.getRandomKey(id);
+		String otp = response.get("otp");
+
+		if (!otp.equalsIgnoreCase("0")) {
+
+			response.put("statusMsg", "success");
+			response.put("statusCode", "200");
+
+		} else {
+			response.put("statusMsg", "Fail :Data is not present");
+			response.put("statusCode", "500");
+
+		}
+
+		return response;
 
 	}
-
-//@Path("updatepswd")
-// @POST
-// @Consumes(MediaType.APPLICATION_JSON)
-// public Response updatePassword(Employee updatepswd) {
-//	  
-//	return Response.status(200).entity("Password Updated").build();
-//	  
-//}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

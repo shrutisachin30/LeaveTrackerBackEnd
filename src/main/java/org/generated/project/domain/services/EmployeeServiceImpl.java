@@ -28,8 +28,6 @@ import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
 
 import java.util.Properties;
-//import javax.mail.*;  
-//import javax.mail.internet.*;  
 
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
@@ -43,12 +41,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Logging
 	private Logger logger;
-
-//	@Inject
-//    @Named("smtpProvider")
-//    private Session smtpSession;
-//	
-//	
 
 	@Transactional
 	@JpaUnit("myUnit")
@@ -167,28 +159,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
-	public int getRandomKey(String id) {
+	public HashMap<String, String> getRandomKey(String id) {
 		// TODO Auto-generated method stub
 		int key = 0;
+		String email = "";
 
-		String status = "";
-
+		HashMap<String, String> response = new HashMap<>();
 		try {
-			String email = personRepository.getEmailId(id);
-			System.out.println(email);
+			email = personRepository.getEmailId(id);
 
 			Random random = new Random();
 			while (key < 10000) {
 				key = random.nextInt(99999);
 			}
 
-			System.out.print(status);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		response.put("id", id);
+		response.put("otp", Integer.toString(key));
 
-		return key;
+		return response;
 	}
 
 	@Override

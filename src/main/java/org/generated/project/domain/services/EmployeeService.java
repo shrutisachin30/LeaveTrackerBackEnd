@@ -1,6 +1,7 @@
 package org.generated.project.domain.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,8 +10,6 @@ import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
 import org.seedstack.business.Service;
 
-//import javax.mail.Message;
-//import javax.mail.MessagingException;
 @Service
 public interface EmployeeService {
 
@@ -24,6 +23,6 @@ public interface EmployeeService {
 
 	String updatePassword(Employee emp);
 
-	int getRandomKey(String id);
+	HashMap<String, String> getRandomKey(String id);
 
 }
