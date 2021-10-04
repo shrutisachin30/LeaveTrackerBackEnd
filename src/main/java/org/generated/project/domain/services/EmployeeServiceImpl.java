@@ -1,19 +1,12 @@
 package org.generated.project.domain.services;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+
 import javax.inject.Inject;
-import javax.inject.Named;
-//import javax.mail.Message;
-//import javax.mail.MessagingException;
-//import javax.mail.Session;
-//import javax.mail.Transport;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
 
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
@@ -27,7 +20,6 @@ import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
 
-import java.util.Properties;
 
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
@@ -41,6 +33,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Logging
 	private Logger logger;
+	
+	@Inject
+	private EmailService emailservice;
 
 	@Transactional
 	@JpaUnit("myUnit")
@@ -172,7 +167,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 			while (key < 10000) {
 				key = random.nextInt(99999);
 			}
-
+			
+			String subject=" OTP to Reset Password for Leave Tracker Application ";
+			String emailContent = "<font color=darkblue><i>Greetings!</i><br><br>";
+			emailContent += " \n\n ";
+			emailContent += "<i>Here is your OTP Key : </i><b>" + key + "</b><br><br>";
+			emailContent += " \n\n ";
+			emailContent += " <i>Wish you a nice day!</i> </font>";
+			
+	
+			String to = email;
+			String from = "souravdonkar@gmail.com";
+			this.emailservice.sendmail(subject, emailContent, to,from);
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

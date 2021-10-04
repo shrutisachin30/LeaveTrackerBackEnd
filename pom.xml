@@ -108,8 +108,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+	
+	
     <dependencies>
+    
+    <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+     
      <dependency>
             <groupId>org.seedstack.addons.swagger</groupId>
             <artifactId>swagger</artifactId>
