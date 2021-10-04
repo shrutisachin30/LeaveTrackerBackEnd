@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.generated.project.application.CancelLeave;
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
 import org.generated.project.domain.services.LeaveDataService;
@@ -124,7 +125,7 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("cancelLeave")
-	public HashMap cancelLeave(@RequestParameters LeaveData leaveDataObject) {
+	public HashMap cancelLeave(@RequestParameters CancelLeave leaveDataObject) {
 		System.out.println(leaveDataObject);
 		String str = leaveDataService.cancelLeave(leaveDataObject);
 

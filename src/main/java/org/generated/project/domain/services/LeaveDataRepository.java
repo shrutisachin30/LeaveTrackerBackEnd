@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.generated.project.application.CancelLeave;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
 import org.generated.project.domain.model.LeaveData;
@@ -83,13 +84,13 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 
 	}
 
-	public String cancelLeave(LeaveData leaveObj) {
+	public String cancelLeave(CancelLeave leaveObj) {
 
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("cancelLeave");
-		query.setParameter("dasId", leaveObj.getEmployee().getId());
-		query.setParameter("startDate", leaveObj.getStartDate());
-		query.setParameter("endDate", leaveObj.getEndDate());
+		query.setParameter("dasId", leaveObj.getDasid());
+		query.setParameter("startDate", leaveObj.getStartdate());
+		query.setParameter("endDate", leaveObj.getEnddate());
 		query.setParameter("updatedBy", leaveObj.getUpdatedBy());
 		query.setParameter("updatedOn", leaveObj.getUpdatedOn());
 		query.setParameter("status", "cancelled");
