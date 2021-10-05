@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import org.generated.project.application.ChangePasswordRequest;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -22,6 +23,8 @@ public interface EmployeeService {
 	public ArrayList<Employee> getEmployeeDetails();
 
 	String updatePassword(Employee emp);
+	
+	String changePassword(ChangePasswordRequest cprequest);
 
 	HashMap<String, String> getRandomKey(String id);
 

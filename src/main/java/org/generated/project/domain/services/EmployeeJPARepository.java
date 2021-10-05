@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.generated.project.application.ChangePasswordRequest;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -117,4 +118,25 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		}
 		return row;
 	}
+	
+	public int changePassword(ChangePasswordRequest cprequest) {
+
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("changePassword");
+		query.setParameter("dasId", new EmployeeId(cprequest.getId()));
+		query.setParameter("newpassword", cprequest.getNewpassword());
+		query.setParameter("oldpassword", cprequest.getOldpassword());
+
+		int row = 0;
+
+		try {
+			row = query.executeUpdate();
+
+		} catch (Exception ex) {
+			return -1;
+		}
+		return row;
+	}
+	
+
 }

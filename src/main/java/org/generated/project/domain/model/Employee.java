@@ -2,21 +2,13 @@ package org.generated.project.domain.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.seedstack.business.domain.BaseAggregateRoot;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 
@@ -27,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		@NamedQuery(name = "checkIfEmployeeExist", query = " From Employee where id=:dasId or employeeId=:employeeId "),
 
 		@NamedQuery(name = "updatePassword", query = "update Employee set password=:password where id=:dasId "),
+		
+		@NamedQuery(name = "changePassword", query = "update Employee set password=:newpassword where id=:dasId and password =:oldpassword "),
 
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId") })
 

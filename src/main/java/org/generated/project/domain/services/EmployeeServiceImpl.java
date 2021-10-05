@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import org.generated.project.application.ChangePasswordRequest;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -218,6 +219,35 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return "error";
 		}
 
+	}
+
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public String changePassword(ChangePasswordRequest cprequest) {
+		final String secretKey = "JH4KL6XA@ByC!$";
+
+		try {
+
+			String encryptedoldpassword = AESUtils.encrypt(cprequest.getOldpassword().toString(), secretKey);
+			String encryptednewpassword = AESUtils.encrypt(cprequest.getNewpassword().toString(), secretKey);
+			cprequest.setOldpassword(encryptedoldpassword);
+			cprequest.setNewpassword(encryptednewpassword);
+
+			int result = personRepository.changePassword(cprequest);
+
+			if (result > 0)
+				return "success";
+			else
+				return "error";
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+
+			return "error";
+		}
 	}
 
 }

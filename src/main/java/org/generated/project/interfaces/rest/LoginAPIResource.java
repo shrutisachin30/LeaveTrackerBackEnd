@@ -11,8 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.generated.project.application.ChangePasswordRequest;
 import org.generated.project.application.LoginData;
 import org.generated.project.application.ValidateParam;
+import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.services.EmployeeService;
 import org.generated.project.infrastructure.AESUtils;
 
@@ -25,7 +27,10 @@ import io.swagger.annotations.Api;
 public class LoginAPIResource {
 	@Inject
 	private EmployeeService login;
-
+	
+	@Inject
+	private EmployeeService service;
+	
 	final String secretKey = "JH4KL6XA@ByC!$";
 
 	@Path("loginService")
@@ -61,6 +66,31 @@ public class LoginAPIResource {
 				response.put("statusMsg", "Username or Password is incorrect");
 			}
 		}
+		return response;
+	}
+	
+	@Path("changePassword")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public HashMap changePassword(@RequestParameters ChangePasswordRequest cpRequest) {
+		System.out.println(cpRequest);
+		
+		String str = service.changePassword(cpRequest);
+
+		HashMap<String, String> response = new HashMap<String, String>();
+
+		if (str.equalsIgnoreCase("success")) {
+
+			response.put("statusMsg", "Password changed successfully");
+			response.put("statusCode", "201");
+
+		} else {
+			response.put("statusMsg", "Incorrect Old Password!!");
+			response.put("statusCode", "500");
+
+		}
+
 		return response;
 	}
 
