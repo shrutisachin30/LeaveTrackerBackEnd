@@ -63,6 +63,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		return obj;
 
 	}
+	
 
 	public ArrayList<Employee> checkIfEmployeeExist(Employee empObj) {
 		logger.info("Inside checkIfEmployeeExist" + empObj);
@@ -136,6 +137,17 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return -1;
 		}
 		return row;
+	}
+	
+	Employee getEmpDetails(EmployeeId employeeId) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("getEmployeeDetails");
+		return null;
+	}
+
+	public String updateEmployeeDetails(Employee emp) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

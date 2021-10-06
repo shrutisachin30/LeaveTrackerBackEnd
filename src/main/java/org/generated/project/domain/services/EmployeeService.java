@@ -25,7 +25,14 @@ public interface EmployeeService {
 	String updatePassword(Employee emp);
 	
 	String changePassword(ChangePasswordRequest cprequest);
-
+	
+	String updateEmployee(Employee emp);
+	
 	HashMap<String, String> getRandomKey(String id);
+
+	Employee getEmpDetails(EmployeeId employeeId);
+
+
+	
 
 }

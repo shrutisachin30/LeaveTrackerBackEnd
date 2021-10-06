@@ -39,7 +39,8 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	private String projectName;
 	private String jobRole;
 	private String domain;
-
+	
+	
 	@OneToMany(mappedBy = "employee")
 	private Collection<LeaveData> leaveData = new ArrayList<>();
 

@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 import org.generated.project.application.ChangePasswordRequest;
 import org.generated.project.application.LoginData;
@@ -248,6 +249,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 			return "error";
 		}
+	}
+
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public String updateEmployee(Employee emp) {
+		  String result = "";
+		  try{
+			  personRepository.addOrUpdate(emp);
+			  result = "Employee Updated Successfuly";
+		  }catch(Exception ex) {
+			  result = "Updating Employee Failed";
+		  }
+		  return result;
+	}
+
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public Employee getEmpDetails(EmployeeId employeeId) {
+		System.out.print(employeeId);
+		Optional<Employee> object = personRepository.get(employeeId);
+		System.out.print(object.get());
+		return object.get();
 	}
 
 }
