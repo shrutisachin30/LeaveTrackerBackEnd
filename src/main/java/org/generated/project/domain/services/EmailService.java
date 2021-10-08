@@ -15,7 +15,7 @@ import org.seedstack.seed.Bind;
 public class EmailService {
 public static void main(String[] args) {
 	
-	String from = "souravdonkar@gmail.com";
+	String from = "leavetracker.atos@gmail.com";
 		
 	}
 
@@ -34,7 +34,7 @@ public static void main(String[] args) {
 		Session session=Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {				
-				return new PasswordAuthentication("souravdonkar@gmail.com", "Sourav@123");
+				return new PasswordAuthentication("leavetracker.atos@gmail.com", "Atos#123");
 			}	
 		});
 		

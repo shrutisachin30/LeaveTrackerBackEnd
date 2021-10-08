@@ -173,13 +173,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			String subject=" OTP to Reset Password for Leave Tracker Application ";
 			String emailContent = "<font color=darkblue><i>Greetings!</i><br><br>";
 			emailContent += " \n\n ";
-			emailContent += "<i>Here is your OTP Key : </i><b>" + key + "</b><br><br>";
+			emailContent += "<i>Here is your OTP : </i><b>" + key + "</b><br><br>";
 			emailContent += " \n\n ";
 			emailContent += " <i>Wish you a nice day!</i> </font>";
 			
 	
 			String to = email;
-			String from = "souravdonkar@gmail.com";
+			String from = "leavetracker.atos@gmail.com";
 			this.emailservice.sendmail(subject, emailContent, to,from);
 			
 			
