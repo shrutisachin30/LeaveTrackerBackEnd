@@ -257,9 +257,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String updateEmployee(Employee emp) {
 		  String result = "";
 		  try{
-			  personRepository.addOrUpdate(emp);
+			  personRepository.updateEmployeeDetails(emp);
 			  result = "Employee Updated Successfuly";
 		  }catch(Exception ex) {
+			  ex.printStackTrace();
 			  result = "Updating Employee Failed";
 		  }
 		  return result;

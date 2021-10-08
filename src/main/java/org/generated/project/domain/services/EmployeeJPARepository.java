@@ -146,8 +146,26 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 	}
 
 	public String updateEmployeeDetails(Employee emp) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "";
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("updateEmployee");
+		query.setParameter("employeeId", emp.getEmployeeId());
+		query.setParameter("name", emp.getName());
+		query.setParameter("mobile", emp.getMobile());
+		query.setParameter("email", emp.getEmail());
+		query.setParameter("gcmLevel", emp.getGcmLevel());
+		query.setParameter("projectName", emp.getProjectName());
+		query.setParameter("domain", emp.getDomain());
+		query.setParameter("jobRole", emp.getJobRole());
+		query.setParameter("reportingManager", emp.getReportingManager());
+		query.setParameter("dasId", emp.getId());
+		int num = query.executeUpdate();
+		if(num>0) {
+			result = "Employee Updated Successfuly";
+		}else {
+			result = "Updating Employee Failed";
+		}
+		return result;
 	}
 	
 

@@ -21,6 +21,8 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		@NamedQuery(name = "updatePassword", query = "update Employee set password=:password where id=:dasId "),
 		
 		@NamedQuery(name = "changePassword", query = "update Employee set password=:newpassword where id=:dasId and password =:oldpassword "),
+		
+		@NamedQuery(name = "updateEmployee", query = "update Employee set employeeId=:employeeId,name=:name,gcmLevel =: gcmLevel,mobile=:mobile,email=:email,projectName=:projectName,domain=:domain,jobRole=:jobRole,reportingManager=:reportingManager  where id=:dasId "),
 
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId") })
 

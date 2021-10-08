@@ -110,8 +110,8 @@ public class LoginAPIResource {
 		res.put("employeeId", emp.getEmployeeId());
 		res.put("name", emp.getName());
 		res.put("gcmLevel", emp.getGcmLevel());
-		res.put("contactNo", emp.getMobile());
-		res.put("emailId", emp.getEmail());
+		res.put("mobile", emp.getMobile());
+		res.put("email", emp.getEmail());
 		res.put("reportingManager", emp.getReportingManager());
 		res.put("projectName", emp.getProjectName());
 		res.put("domain", emp.getDomain());
@@ -126,6 +126,7 @@ public class LoginAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateEmployee(@RequestParameters Employee emp) {
+		System.out.println("Update Employee" +emp.toString());
 		return Response.status(200).entity(service.updateEmployee(emp)).build();
 	}
 }

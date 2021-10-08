@@ -32,7 +32,7 @@ public interface EmployeeService {
 
 	Employee getEmpDetails(EmployeeId employeeId);
 
-
+	
 	
 
 }
