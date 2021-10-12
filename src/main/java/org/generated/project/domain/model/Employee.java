@@ -23,6 +23,8 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		@NamedQuery(name = "changePassword", query = "update Employee set password=:newpassword where id=:dasId and password =:oldpassword "),
 		
 		@NamedQuery(name = "updateEmployee", query = "update Employee set employeeId=:employeeId,name=:name,gcmLevel =: gcmLevel,mobile=:mobile,email=:email,projectName=:projectName,domain=:domain,jobRole=:jobRole,reportingManager=:reportingManager  where id=:dasId "),
+		
+		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId "),
 
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId") })
 
@@ -41,6 +43,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	private String projectName;
 	private String jobRole;
 	private String domain;
+	private String isActive = "Yes";
 	
 	
 	@OneToMany(mappedBy = "employee")
@@ -52,7 +55,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	}
 
 	public Employee(EmployeeId id, String employeeId, String name, String gcmLevel, String mobile, String email,
-			String reportingManager, String password, String projectName, String jobRole, String domain) {
+			String reportingManager, String password, String projectName, String jobRole, String domain,String isActive) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -65,6 +68,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		this.projectName = projectName;
 		this.jobRole = jobRole;
 		this.domain = domain;
+		this.isActive = isActive;
 
 	}
 
@@ -163,5 +167,14 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
+
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
 
 }

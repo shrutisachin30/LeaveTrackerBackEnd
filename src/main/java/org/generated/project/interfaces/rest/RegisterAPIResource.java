@@ -20,6 +20,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.generated.project.application.CancelLeave;
+import org.generated.project.application.DeactivateEmployee;
 import org.generated.project.application.ValidateParam;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -182,6 +184,31 @@ public class RegisterAPIResource {
 		}
 
 		return response;
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("deactivateEmployee")
+	public HashMap deactivateEmployee(@RequestParameters DeactivateEmployee demp) {
+		System.out.println(demp);
+		String str = service.deactivateEmployee(demp);
+
+		HashMap<String, String> response = new HashMap<String, String>();
+
+		if (str.equalsIgnoreCase("success")) {
+
+			response.put("statusMsg", "Employee deactivated");
+			response.put("statusCode", "201");
+
+		} else {
+			response.put("statusMsg", "Fail :Data is not present");
+			response.put("statusCode", "500");
+
+		}
+
+		return response;
+
 	}
 
 }
