@@ -118,7 +118,12 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-     
+    
+        <dependency>
+    		<groupId>org.seedstack.addons.scheduling</groupId>
+    		<artifactId>scheduling</artifactId>
+    	</dependency>
+
      <dependency>
             <groupId>org.seedstack.addons.swagger</groupId>
             <artifactId>swagger</artifactId>
