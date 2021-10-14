@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.generated.project.application.ChangePasswordRequest;
+import org.generated.project.application.DeactivateEmployee;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -166,6 +167,27 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			result = "Updating Employee Failed";
 		}
 		return result;
+	}
+	
+	public String  deactivateEmployee(DeactivateEmployee demp) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("deactivateEmployee");
+		query.setParameter("dasId", new EmployeeId(demp.getDasid()));
+		query.setParameter("isActive", "No");
+		int row = 0;
+
+		try {
+			row = query.executeUpdate();
+
+		} catch (Exception ex) {
+
+			return "error";
+		}
+		if (row > 0)
+			return "success";
+		else
+			return "error";
+	
 	}
 	
 

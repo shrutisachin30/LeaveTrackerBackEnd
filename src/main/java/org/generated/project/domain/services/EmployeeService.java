@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.generated.project.application.ChangePasswordRequest;
+import org.generated.project.application.DeactivateEmployee;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -31,6 +32,11 @@ public interface EmployeeService {
 	HashMap<String, String> getRandomKey(String id);
 
 	Employee getEmpDetails(EmployeeId employeeId);
+	
+	public String deactivateEmployee(DeactivateEmployee demp);
+	
+	
+	
 
 	
 	

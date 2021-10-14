@@ -9,7 +9,9 @@ import java.util.Random;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+
 import org.generated.project.application.ChangePasswordRequest;
+import org.generated.project.application.DeactivateEmployee;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -277,5 +279,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public String deactivateEmployee(DeactivateEmployee demp) {
+
+		String str = personRepository.deactivateEmployee(demp);
+
+		return str;
+	}
 
 }
