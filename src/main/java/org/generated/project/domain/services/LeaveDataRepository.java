@@ -127,7 +127,7 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 	
 	public String changeStatus(String status, int leaveDataId) {
 		EntityManager entityManager = getEntityManager();
-		Query query = entityManager.createNamedQuery("changeStatus");
+		Query query = entityManager.createNamedQuery("getLeaveData");
 		query.setParameter("status", "Applied");
 		query.setParameter("leaveDataId", leaveDataId);
 		int result = 0;
