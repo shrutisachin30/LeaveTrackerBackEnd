@@ -1,22 +1,18 @@
 package org.generated.project.domain.services;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-
 import javax.inject.Inject;
 
 import org.generated.project.application.CancelLeave;
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
-import org.seedstack.business.domain.BaseRepository;
 import org.seedstack.business.domain.Repository;
-import org.seedstack.jpa.BaseJpaRepository;
-import org.seedstack.jpa.Jpa;
 import org.seedstack.jpa.JpaUnit;
 import org.seedstack.seed.Bind;
 import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
+
 import org.slf4j.Logger;
 
 @Bind
@@ -51,15 +47,42 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 		List<Object> leaveDataObj = leaveDataRepository.getLeaveData(employeeId);
 
 		return leaveDataObj;
-
 	}
+	
+	@Transactional
+	@JpaUnit("myUnit")
+	public List<Object> getLeave() {
+		logger.info("LeaveDataServiceImpl :: getLeave():");
+		List<Object> leaveDataObj = leaveDataRepository.getLeave();
+
+		return leaveDataObj;
+	}
+	
 
 	@Transactional
 	@JpaUnit("myUnit")
 	public String cancelLeave(CancelLeave leaveDataObject) {
-
+		
 		String str = leaveDataRepository.cancelLeave(leaveDataObject);
 
 		return str;
 	}
+	
+	@Transactional
+	@JpaUnit("myUnit")
+	public String changeStatus(String status, int leaveDataId) {
+		logger.info("LeaveDataServiceImpl :: changeStatus():");
+		return leaveDataRepository.changeStatus(status, leaveDataId);
+	}
+	
+
+	@Transactional
+	@JpaUnit("myUnit")
+	public String deleteData() {
+		return leaveDataRepository.deleteData();
+	}
+
+
+
+	
 }

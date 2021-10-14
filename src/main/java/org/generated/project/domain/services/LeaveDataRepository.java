@@ -1,11 +1,16 @@
 package org.generated.project.domain.services;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import org.generated.project.application.CancelLeave;
@@ -13,8 +18,10 @@ import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
+import org.jboss.logging.Param;
 import org.seedstack.jpa.BaseJpaRepository;
 import org.seedstack.seed.Bind;
+import org.seedstack.seed.transaction.Transactional;
 
 import com.sun.istack.logging.Logger;
 
@@ -109,5 +116,41 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		else
 			return "error";
 	}
+	
+	public List<Object> getLeave() {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("getLeaveData");
+		return query.getResultList();
+		
+		
+	}
+	
+	public String changeStatus(String status, int leaveDataId) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("changeStatus");
+		query.setParameter("status", "Applied");
+		query.setParameter("leaveDataId", leaveDataId);
+		int result = 0;
+		if(status.equalsIgnoreCase("Applied")) {
+			query.setParameter("status", "Availed");
+			result = query.executeUpdate();
+		}
+		return result == 1 ? "Success" : "Fail";
+	}
+	
+	
+	public String deleteData() {
+		EntityManager entityManager = getEntityManager();
+		Query query =  entityManager.createNamedQuery("deleteData");
+		query.executeUpdate();
+		return null;
+    }
+
+	
+
+	
+	
+
+
 
 }
