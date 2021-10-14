@@ -1,7 +1,9 @@
 package org.generated.project.domain.services;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,6 +140,44 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return -1;
 		}
 		return row;
+	}
+	
+	public List<Object> exportData(String domain, String startDate,String endDate) {
+
+		EntityManager entityManager = getEntityManager();
+		Date startD = null;
+		Date endD = null;
+		List<Object> obj = null;
+		try {
+
+			startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
+			endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
+			System.out.print("startD"+startD);
+		
+			System.out.print("endD"+endD);
+			
+			Query query = entityManager.createNamedQuery("exportData");
+			query.setParameter("domain",  domain);
+		    query.setParameter("startDate",startD);
+			query.setParameter("endDate",endD );
+			
+			obj = (ArrayList) query.getResultList();
+		}
+		 catch (Exception ex) {
+
+			obj = null;
+			System.out.print("EXCEPTION"+ex);
+
+		}
+
+		return obj;
+
+	}
+	
+	Employee exportDe(EmployeeId employee) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("exportData");
+		return null;
 	}
 	
 	Employee getEmpDetails(EmployeeId employeeId) {

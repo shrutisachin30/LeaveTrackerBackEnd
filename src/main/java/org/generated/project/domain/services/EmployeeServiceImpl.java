@@ -154,6 +154,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return response;
 	}
+	
+	
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public List<Object> exportData(String domain, String startDate,String endDate) {
+		logger.info("EmployeeServiceImpl :: exportData():");
+		List<Object> exportData = personRepository.exportData(domain,startDate, endDate);
+		System.out.print(" export data "+exportData);
+		ArrayList response = new ArrayList();
+
+		HashMap<String, String> exportData1 = new HashMap<String, String>();
+
+		for (int i = 0; i < exportData.size(); i++) {
+
+			Object[] objArray = (Object[]) exportData.get(i);
+			exportData1 = new HashMap<String, String>();
+			EmployeeId id = (EmployeeId) objArray[0];
+			exportData1.put("dasId", id.getDasId());
+			exportData1.put("name", objArray[1].toString());
+			exportData1.put("gcmLevel", objArray[2].toString());
+			exportData1.put("domain", objArray[3].toString());
+			exportData1.put("startDate", objArray[4].toString());
+			exportData1.put("endDate", objArray[5].toString());
+			exportData1.put("status", objArray[6].toString());
+			exportData1.put("typeOfLeave", objArray[7].toString());
+			
+			response.add(exportData1);
+
+		}
+
+		return response;
+	}
 
 	@Override
 	@Transactional
@@ -287,6 +320,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		String str = personRepository.deactivateEmployee(demp);
 
 		return str;
+	}
+
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public Employee exportDe(EmployeeId employee) {
+		System.out.print(employee);
+		Optional<Employee> object = personRepository.get(employee);
+		System.out.print(object.get());
+		return object.get();
 	}
 
 }

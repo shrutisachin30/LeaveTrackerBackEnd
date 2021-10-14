@@ -33,7 +33,11 @@ public interface EmployeeService {
 
 	Employee getEmpDetails(EmployeeId employeeId);
 	
+	Employee exportDe(EmployeeId employee);
+	
 	public String deactivateEmployee(DeactivateEmployee demp);
+
+	List<Object> exportData(String domain, String startDate,String endDate);
 	
 	
 	

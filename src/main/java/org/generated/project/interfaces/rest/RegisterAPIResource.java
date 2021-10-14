@@ -138,6 +138,31 @@ public class RegisterAPIResource {
 		return Response.status(200).entity(listData).build();
 
 	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("exportData/{domain}/{startDate}/{endDate}")
+	public Response exportData(@PathParam("domain") String domain,@PathParam("startDate") String startDate,@PathParam("endDate") String endDate) {
+		System.out.print("domain"+domain);
+		System.out.print("startDate"+startDate);
+		System.out.print("endDate"+endDate);
+		
+		HashMap<String, String> obj = new HashMap();
+
+		List<Object> listData;
+			
+		listData = service.exportData(domain, startDate, endDate);
+		
+//		obj.put("statusMsg", "success");
+//		obj.put("data", listData.toString());
+//		obj.put("statusCode", "200");
+		
+		return Response.status(200).entity(listData).build();
+		
+		//return obj;
+
+	}
 
 	@Path("forgotPassword/{id}")
 	@GET

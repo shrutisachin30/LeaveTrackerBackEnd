@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.seedstack.business.domain.BaseAggregateRoot;
 
@@ -36,9 +38,11 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 	@JoinColumn(name = "dasId")
 	private Employee employee;
 
+	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date startDate;
-
+	
+	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date endDate;
 
