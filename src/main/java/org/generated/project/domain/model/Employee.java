@@ -25,7 +25,7 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		
 		@NamedQuery(name = "updateEmployee", query = "update Employee set employeeId=:employeeId,name=:name,gcmLevel =: gcmLevel,mobile=:mobile,email=:email,projectName=:projectName,domain=:domain,jobRole=:jobRole,reportingManager=:reportingManager  where id=:dasId "),
 		
-		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId "),
+		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId and isActive=:default "),
 		
 		@NamedQuery(name = "makeAdmin", query = "update Employee set isAdmin=:isAdmin where id=:dasId "),
 

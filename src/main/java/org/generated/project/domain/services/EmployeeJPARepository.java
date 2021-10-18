@@ -214,7 +214,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		Query query = entityManager.createNamedQuery("deactivateEmployee");
 		query.setParameter("dasId", new EmployeeId(demp.getDasid()));
 		query.setParameter("isActive", (demp.getIsActive()));
-
+		query.setParameter("default", demp.getDf());
 
 		int row = 0;
 
