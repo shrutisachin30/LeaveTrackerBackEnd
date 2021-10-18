@@ -27,8 +27,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ " (ld.startDate between :startDate and :endDate) or"
 				+ " (ld.endDate between :startDate and :endDate)) " + " and ld.employee=:dasId "
 				+ " and ld.status='Applied'"),
-		@NamedQuery(name = "getLeaveData", query = "from LeaveData l where l.status ='Applied' and l.endDate < now() "),
-		@NamedQuery(name = "changeStatus", query = "update LeaveData ld set ld.status=:status where ld.leaveDataId=:leaveDataId "),
+		@NamedQuery(name = "changeStatus", query = "update LeaveData ld set ld.status=:status where ld.status ='Applied' and ld.endDate < now() - make_interval(0, 0, 0, 1) "),
 		
 		@NamedQuery(name = "deleteData", query = "delete LeaveData where startDate < now() - make_interval(1, 0, 0, 0)")
 		})
@@ -43,11 +42,12 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 	@JoinColumn(name = "dasId")
 	private Employee employee;
 
+
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date startDate;
 	
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date endDate;
 

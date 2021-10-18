@@ -26,14 +26,16 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		
 		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId "),
 
-
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId"),
 		
 		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave From Employee emp, LeaveData ld where emp.id = ld.employee.id and emp.domain=:domain and (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) "
 				+ " ORDER BY emp.name ASC ")
+
 		
 
 //		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId")
+
+
 
 })
 
