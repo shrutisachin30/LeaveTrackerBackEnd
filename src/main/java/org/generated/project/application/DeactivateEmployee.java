@@ -2,9 +2,12 @@ package org.generated.project.application;
 
 public class DeactivateEmployee {
 	private String dasid;
-	public DeactivateEmployee(String dasid){
+	private String isActive;
+	
+	public DeactivateEmployee(String dasid, String isActive){
 		super();
 		this.dasid = dasid;
+		this.isActive = isActive;
 		}
 	public DeactivateEmployee() {
 		super();
@@ -16,6 +19,12 @@ public class DeactivateEmployee {
 	}
 	public void setDasid(String dasid) {
 		this.dasid = dasid;
+	}
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 	@Override
 	public String toString() {
