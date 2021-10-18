@@ -43,11 +43,11 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 	@JoinColumn(name = "dasId")
 	private Employee employee;
 
-	@Temporal(TemporalType.DATE)
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date startDate;
 	
-	@Temporal(TemporalType.DATE)
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date endDate;
 

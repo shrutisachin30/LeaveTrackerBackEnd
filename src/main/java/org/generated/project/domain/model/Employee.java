@@ -13,8 +13,8 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 @Entity
 
 @NamedQueries(value = {
-		@NamedQuery(name = "getEmployee", query = "select id, password From Employee where id=:dasId and password=:password "),
-		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager From Employee"
+		@NamedQuery(name = "getEmployee", query = "select id, password From Employee where id=:dasId and password=:password  "),
+		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager From Employee where isActive = 'Yes'"
 				+ " ORDER BY name ASC "),
 		@NamedQuery(name = "checkIfEmployeeExist", query = " From Employee where id=:dasId or employeeId=:employeeId "),
 
@@ -30,10 +30,10 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId"),
 		
 		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave From Employee emp, LeaveData ld where emp.id = ld.employee.id and emp.domain=:domain and (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) "
-				+ " ORDER BY emp.name ASC "),
+				+ " ORDER BY emp.name ASC ")
 		
 
-		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId")
+//		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId")
 
 })
 
