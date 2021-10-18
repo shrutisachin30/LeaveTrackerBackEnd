@@ -1,5 +1,6 @@
 package org.generated.project.interfaces.rest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.generated.project.application.ChangePasswordRequest;
+import org.generated.project.application.DeactivateEmployee;
 import org.generated.project.application.LoginData;
 import org.generated.project.application.ValidateParam;
 import org.generated.project.domain.model.Employee;
@@ -57,16 +59,18 @@ public class LoginAPIResource {
 			String encryptedString = AESUtils.encrypt(data.getPassword().toString(), secretKey);
 			data.setPassword(encryptedString);
 
-			boolean action = login.loginService(data);
+			ArrayList<Object> employeelist = login.loginService(data);
 
-			if (action) {
+			if (employeelist != null && employeelist.size() > 0) {
+				Object[] emp =  (Object[]) employeelist.get(0);
 				response.put("statusCode", "201");
 				response.put("statusMsg", "Login Successful");
+				response.put("isAdmin", emp[2].toString());
 
 			} else {
 				response.put("statusCode", "500");
 				response.put("statusMsg", "Username or Password is incorrect");
-			}
+			} 
 		}
 		return response;
 	}
@@ -129,4 +133,30 @@ public class LoginAPIResource {
 		System.out.println("Update Employee" +emp.toString());
 		return Response.status(200).entity(service.updateEmployee(emp)).build();
 	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("makeAdmin")
+	public HashMap isAdmin(@RequestParameters EmployeeId id) {
+		System.out.println(id);
+		String str = service.isAdmin(id);
+
+		HashMap<String, String> response = new HashMap<String, String>();
+
+		if (str.equalsIgnoreCase("success")) {
+
+			response.put("statusMsg", "Employee is now a admin");
+			response.put("statusCode", "201");
+
+		} else {
+			response.put("statusMsg", "Fail :Data is not present");
+			response.put("statusCode", "500");
+
+		}
+
+		return response;
+
+	}
+
 }

@@ -13,8 +13,9 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 @Entity
 
 @NamedQueries(value = {
-		@NamedQuery(name = "getEmployee", query = "select id, password From Employee where id=:dasId and password=:password  "),
+		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin From Employee where id=:dasId and password=:password and isActive = 'Yes' "),
 		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager From Employee where isActive = 'Yes'"
+
 				+ " ORDER BY name ASC "),
 		@NamedQuery(name = "checkIfEmployeeExist", query = " From Employee where id=:dasId or employeeId=:employeeId "),
 
@@ -25,6 +26,8 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		@NamedQuery(name = "updateEmployee", query = "update Employee set employeeId=:employeeId,name=:name,gcmLevel =: gcmLevel,mobile=:mobile,email=:email,projectName=:projectName,domain=:domain,jobRole=:jobRole,reportingManager=:reportingManager  where id=:dasId "),
 		
 		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId "),
+		
+		@NamedQuery(name = "makeAdmin", query = "update Employee set isAdmin=:isAdmin where id=:dasId "),
 
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId"),
 		
@@ -55,6 +58,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	private String jobRole;
 	private String domain;
 	private String isActive = "Yes";
+	private String isAdmin = "No";
 	
 	
 	@OneToMany(mappedBy = "employee")
@@ -66,7 +70,7 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	}
 
 	public Employee(EmployeeId id, String employeeId, String name, String gcmLevel, String mobile, String email,
-			String reportingManager, String password, String projectName, String jobRole, String domain,String isActive) {
+			String reportingManager, String password, String projectName, String jobRole, String domain,String isActive, String isAdmin) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -80,7 +84,15 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 		this.jobRole = jobRole;
 		this.domain = domain;
 		this.isActive = isActive;
+		this.isAdmin = isAdmin;
+	}
 
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public String getName() {

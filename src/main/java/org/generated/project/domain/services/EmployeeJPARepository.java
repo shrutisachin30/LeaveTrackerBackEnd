@@ -26,11 +26,11 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 
 	private static final Logger logger = Logger.getLogger(EmployeeJPARepository.class);
 
-	public ArrayList<Employee> getEmployee(LoginData empObj) {
+	public ArrayList<Object> getEmployee(LoginData empObj) {
 		logger.info("Inside getEmployee" + empObj);
 		EntityManager entityManager = getEntityManager();
 
-		ArrayList<Employee> obj = null;
+		ArrayList<Object> obj = null;
 		try {
 			Query query = entityManager.createNamedQuery("getEmployee");
 			query.setParameter("dasId", empObj.getDasId());
@@ -214,6 +214,30 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		Query query = entityManager.createNamedQuery("deactivateEmployee");
 		query.setParameter("dasId", new EmployeeId(demp.getDasid()));
 		query.setParameter("isActive", (demp.getIsActive()));
+
+
+		int row = 0;
+
+		try {
+			row = query.executeUpdate();
+
+		} catch (Exception ex) {
+
+			return "error";
+		}
+		if (row > 0)
+			return "success";
+		else
+			return "error";
+	
+	}
+	
+	public String  isAdmin(EmployeeId id) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("makeAdmin");
+		query.setParameter("dasId", new EmployeeId(id.getDasId()));
+		query.setParameter("isAdmin", "Yes");
+
 		int row = 0;
 
 		try {
