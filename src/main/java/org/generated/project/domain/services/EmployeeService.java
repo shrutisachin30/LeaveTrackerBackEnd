@@ -15,7 +15,7 @@ import org.seedstack.business.Service;
 @Service
 public interface EmployeeService {
 
-	public boolean loginService(LoginData data);
+	public ArrayList<Object> loginService(LoginData data);
 
 	public Optional<Employee> getservice(EmployeeId id);
 
@@ -38,6 +38,8 @@ public interface EmployeeService {
 	public String deactivateEmployee(DeactivateEmployee demp);
 
 	List<Object> exportData(String domain, String startDate,String endDate);
+
+	public String isAdmin(EmployeeId id);
 	
 	
 	

@@ -79,19 +79,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Jpa
 	private Repository<Employee, EmployeeId> loginRepository;
 
-	public boolean loginService(LoginData data) {
+	public ArrayList<Object> loginService(LoginData data) {
 
 		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasId() + "," + data.getPassword()
 				+ "}");
 
-		boolean resolve = false;
+		
 
-		ArrayList<Employee> list = verifyEmployeeDetails(data);
-		if (list != null && list.size() > 0) {
-			resolve = true;
-		}
+		ArrayList<Object> list = verifyEmployeeDetails(data);
+		
 
-		return resolve;
+		return list;
 
 	}
 
@@ -106,9 +104,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Transactional
 	@JpaUnit("myUnit")
-	public ArrayList<Employee> verifyEmployeeDetails(LoginData empObj) {
+	public ArrayList<Object> verifyEmployeeDetails(LoginData empObj) {
 		logger.info("EmployeeServiceImpl :: verifyEmployeeDetails():");
-		ArrayList<Employee> login = personRepository.getEmployee(empObj);
+		ArrayList<Object> login = personRepository.getEmployee(empObj);
 
 		return login;
 	}
@@ -330,6 +328,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Optional<Employee> object = personRepository.get(employee);
 		System.out.print(object.get());
 		return object.get();
+	}
+
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public String isAdmin(EmployeeId id) {
+		String str = personRepository.isAdmin(id);
+		return str;
 	}
 
 }

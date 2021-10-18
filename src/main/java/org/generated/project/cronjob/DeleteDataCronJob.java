@@ -6,7 +6,7 @@ import org.seedstack.scheduler.SchedulingContext;
 import org.seedstack.scheduler.Task;
 import com.google.inject.Inject;
 
-@Scheduled("0/5 * * * * ?")
+@Scheduled("10 * * * * ?")
 public class DeleteDataCronJob implements Task {
 	
 	@Inject
