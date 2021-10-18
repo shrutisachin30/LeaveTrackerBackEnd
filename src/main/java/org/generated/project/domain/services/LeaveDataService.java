@@ -16,10 +16,8 @@ public interface LeaveDataService {
 
 	public String cancelLeave(CancelLeave leaveDataObject);
 	 
-	public String changeStatus(String status, int leaveDataId);
+	public String changeStatus();
 	
 	public String deleteData();
-	
-	public List<Object> getLeave();
 	
 }

@@ -16,12 +16,7 @@ public class ChangeStatusCronJob implements Task{
 
 	@Override
 	public void execute(SchedulingContext sc) throws Exception {
-		List<Object> objects = leaveDataService.getLeave();
-		objects.forEach(object -> {
-			LeaveData data = (LeaveData) object;
-			leaveDataService.changeStatus(data.getStatus(), data.getLeaveDataId());
-		});
-		
+			leaveDataService.changeStatus();
 	}
 
 }

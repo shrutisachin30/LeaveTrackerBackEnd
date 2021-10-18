@@ -49,14 +49,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 		return leaveDataObj;
 	}
 	
-	@Transactional
-	@JpaUnit("myUnit")
-	public List<Object> getLeave() {
-		logger.info("LeaveDataServiceImpl :: getLeave():");
-		List<Object> leaveDataObj = leaveDataRepository.getLeave();
-
-		return leaveDataObj;
-	}
+	
 	
 
 	@Transactional
@@ -70,9 +63,9 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 	
 	@Transactional
 	@JpaUnit("myUnit")
-	public String changeStatus(String status, int leaveDataId) {
+	public String changeStatus() {
 		logger.info("LeaveDataServiceImpl :: changeStatus():");
-		return leaveDataRepository.changeStatus(status, leaveDataId);
+		return leaveDataRepository.changeStatus();
 	}
 	
 

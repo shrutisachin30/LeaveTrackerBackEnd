@@ -117,24 +117,14 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 			return "error";
 	}
 	
-	public List<Object> getLeave() {
-		EntityManager entityManager = getEntityManager();
-		Query query = entityManager.createNamedQuery("getLeaveData");
-		return query.getResultList();
-		
-		
-	}
 	
-	public String changeStatus(String status, int leaveDataId) {
+	public String changeStatus() {
 		EntityManager entityManager = getEntityManager();
-		Query query = entityManager.createNamedQuery("getLeaveData");
-		query.setParameter("status", "Applied");
-		query.setParameter("leaveDataId", leaveDataId);
+		Query query = entityManager.createNamedQuery("changeStatus");
 		int result = 0;
-		if(status.equalsIgnoreCase("Applied")) {
-			query.setParameter("status", "Availed");
-			result = query.executeUpdate();
-		}
+		query.setParameter("status", "Availed");
+		result = query.executeUpdate();
+	
 		return result == 1 ? "Success" : "Fail";
 	}
 	
