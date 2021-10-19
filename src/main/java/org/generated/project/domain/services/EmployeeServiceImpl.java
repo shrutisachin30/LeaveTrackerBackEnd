@@ -1,5 +1,7 @@
 package org.generated.project.domain.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -166,8 +168,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		HashMap<String, String> exportData1 = new HashMap<String, String>();
 		if(exportData!=null)
 		for (int i = 0; i < exportData.size(); i++) {
-
+			
 			Object[] objArray = (Object[]) exportData.get(i);
+			//System.out.println(startDate1);
+			String Date = objArray[6].toString();
+			//System.out.println(Date);
+			String[] arr = Date.split("\\s+");
+			System.out.println(arr[0]);
+			String Date2 = objArray[7].toString();
+			String[] arr1 = Date.split("\\s+");
+			System.out.println(arr1[0]);
+			
+			//System.out.println(endDate1);
+			
 			exportData1 = new HashMap<String, String>();
 			EmployeeId id = (EmployeeId) objArray[0];
 			exportData1.put("dasId", id.getDasId());
@@ -176,8 +189,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 			exportData1.put("reportingManager", objArray[3].toString());
 			exportData1.put("gcmLevel", objArray[4].toString());
 			exportData1.put("domain", objArray[5].toString());
-			exportData1.put("startDate", objArray[6].toString());
-			exportData1.put("endDate", objArray[7].toString());
+			exportData1.put("startDate", arr[0]);
+			exportData1.put("endDate", arr1[0]);
 			exportData1.put("status", objArray[8].toString());
 			exportData1.put("typeOfLeave", objArray[9].toString());
 			

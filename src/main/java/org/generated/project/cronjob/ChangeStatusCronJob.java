@@ -16,7 +16,7 @@ public class ChangeStatusCronJob implements Task{
 
 	@Override
 	public void execute(SchedulingContext sc) throws Exception {
-			leaveDataService.changeStatus();
+			//leaveDataService.changeStatus();
 	}
 
 }
