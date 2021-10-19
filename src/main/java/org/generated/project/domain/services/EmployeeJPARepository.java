@@ -146,11 +146,12 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 
 		EntityManager entityManager = getEntityManager();
 		//int startD = null;
+		Date startD = null;
 		Date endD = null;
 		List<Object> obj = null;
 		try {
 
-			int startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").TIMEZONE_FIELD;
+		   startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
 			endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
 			System.out.print("startD"+startD);
 		

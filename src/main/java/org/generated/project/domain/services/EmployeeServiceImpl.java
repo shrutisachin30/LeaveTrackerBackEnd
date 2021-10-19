@@ -164,7 +164,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ArrayList response = new ArrayList();
 
 		HashMap<String, String> exportData1 = new HashMap<String, String>();
-
+		if(exportData!=null)
 		for (int i = 0; i < exportData.size(); i++) {
 
 			Object[] objArray = (Object[]) exportData.get(i);

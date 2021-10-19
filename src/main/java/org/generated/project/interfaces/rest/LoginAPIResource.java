@@ -66,6 +66,7 @@ public class LoginAPIResource {
 				response.put("statusCode", "201");
 				response.put("statusMsg", "Login Successful");
 				response.put("isAdmin", emp[2].toString());
+				response.put("isActive", emp[3].toString());
 
 			} else {
 				response.put("statusCode", "500");
