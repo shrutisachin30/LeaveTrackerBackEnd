@@ -227,7 +227,7 @@ public class RegisterAPIResource {
 			response.put("statusCode", "201");
 
 		} else {
-			response.put("statusMsg", "Fail :Data is not present");
+			response.put("statusMsg", str);
 			response.put("statusCode", "500");
 
 		}

@@ -151,7 +151,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		List<Object> obj = null;
 		try {
 
-		   startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
+			startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
 			endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
 			System.out.print("startD"+startD);
 		
@@ -220,10 +220,17 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		int row = 0;
 
 		try {
-			row = query.executeUpdate();
+			String status = getStatus(demp.getDasid());
+			if(!status.equals(demp.getDf())) {
+				return "Operation already performed";
+			}else {
+				row = query.executeUpdate();
+			}
+				
+			
 
 		} catch (Exception ex) {
-
+			ex.printStackTrace();
 			return "error";
 		}
 		if (row > 0)
@@ -254,6 +261,42 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return "error";
 	
 	}
+
+	public String removeAdmin(EmployeeId id) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("makeAdmin");
+		query.setParameter("dasId", new EmployeeId(id.getDasId()));
+		query.setParameter("isAdmin", "No");
+		int row = 0;
+
+		try {
+			row = query.executeUpdate();
+
+		} catch (Exception ex) {
+
+			return "error";
+		}
+		if (row > 0)
+			return "success";
+		else
+			return "error";
+
+	}
 	
+	public String getStatus(String dasId) {
+		EntityManager entityManager = getEntityManager();
+		String status = " ";
+
+		System.out.println(new EmployeeId(dasId));
+		Query query = entityManager.createNamedQuery("getStatus");
+		query.setParameter("dasId", new EmployeeId(dasId));
+
+		status = (String) query.getSingleResult();
+
+		System.out.println(status);
+
+		return status;
+
+	}
 
 }

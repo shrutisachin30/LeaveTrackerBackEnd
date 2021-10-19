@@ -31,7 +31,6 @@ public class DeactivateEmployee {
 		return isActive;
 	}
 	public void setIsActive(String isActive) {
-
 		this.isActive = isActive;
 	}
 	public String getDf() {
