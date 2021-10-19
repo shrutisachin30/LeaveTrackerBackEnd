@@ -158,5 +158,30 @@ public class LoginAPIResource {
 		return response;
 
 	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("removeAdmin")
+	public HashMap removeAdmin(@RequestParameters EmployeeId id) {
+		System.out.println(id);
+		String str = service.removeAdmin(id);
+
+		HashMap<String, String> response = new HashMap<String, String>();
+
+		if (str.equalsIgnoreCase("success")) {
+
+			response.put("statusMsg", "Employee is not a admin now");
+			response.put("statusCode", "201");
+
+		} else {
+			response.put("statusMsg", "Fail :Data is not present");
+			response.put("statusCode", "500");
+
+		}
+
+		return response;
+
+	}
 
 }

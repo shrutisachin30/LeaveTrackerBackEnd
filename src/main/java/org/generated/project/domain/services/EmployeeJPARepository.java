@@ -250,6 +250,27 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return "error";
 	
 	}
+
+	public String removeAdmin(EmployeeId id) {
+		EntityManager entityManager = getEntityManager();
+		Query query = entityManager.createNamedQuery("makeAdmin");
+		query.setParameter("dasId", new EmployeeId(id.getDasId()));
+		query.setParameter("isAdmin", "No");
+		int row = 0;
+
+		try {
+			row = query.executeUpdate();
+
+		} catch (Exception ex) {
+
+			return "error";
+		}
+		if (row > 0)
+			return "success";
+		else
+			return "error";
+
+	}
 	
 
 }

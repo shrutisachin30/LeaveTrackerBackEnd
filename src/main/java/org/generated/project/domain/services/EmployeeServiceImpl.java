@@ -337,5 +337,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		String str = personRepository.isAdmin(id);
 		return str;
 	}
+	
+	@Override
+	@Transactional
+	@JpaUnit("myUnit")
+	public String removeAdmin(EmployeeId id) {
+		String str = personRepository.removeAdmin(id);
+		return str;
+	}
 
 }

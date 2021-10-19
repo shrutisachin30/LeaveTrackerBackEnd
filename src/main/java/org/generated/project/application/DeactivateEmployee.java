@@ -24,7 +24,7 @@ public class DeactivateEmployee {
 	public String getIsActive() {
 		return isActive;
 	}
-	public void setIsActive(String isAdmin) {
+	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 	@Override

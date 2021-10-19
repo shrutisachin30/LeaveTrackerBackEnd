@@ -40,6 +40,8 @@ public interface EmployeeService {
 	List<Object> exportData(String domain, String startDate,String endDate);
 
 	public String isAdmin(EmployeeId id);
+
+	String removeAdmin(EmployeeId id);
 	
 	
 	
