@@ -8,7 +8,7 @@ import org.seedstack.scheduler.SchedulingContext;
 import org.seedstack.scheduler.Task;
 import com.google.inject.Inject;
 
-@Scheduled("10 * * * * ?")
+@Scheduled("* * 15 * * ?")
 public class ChangeStatusCronJob implements Task{
 
 	@Inject

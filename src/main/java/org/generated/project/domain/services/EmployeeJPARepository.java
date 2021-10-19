@@ -146,11 +146,12 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 
 		EntityManager entityManager = getEntityManager();
 		//int startD = null;
+		Date startD = null;
 		Date endD = null;
 		List<Object> obj = null;
 		try {
 
-			int startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").TIMEZONE_FIELD;
+		   startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
 			endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
 			System.out.print("startD"+startD);
 		
@@ -214,6 +215,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		Query query = entityManager.createNamedQuery("deactivateEmployee");
 		query.setParameter("dasId", new EmployeeId(demp.getDasid()));
 		query.setParameter("isActive", (demp.getIsActive()));
+		query.setParameter("default", demp.getDf());
+
 		int row = 0;
 
 		try {
@@ -235,6 +238,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		Query query = entityManager.createNamedQuery("makeAdmin");
 		query.setParameter("dasId", new EmployeeId(id.getDasId()));
 		query.setParameter("isAdmin", "Yes");
+
 		int row = 0;
 
 		try {

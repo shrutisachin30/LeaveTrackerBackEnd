@@ -3,10 +3,16 @@ package org.generated.project.application;
 public class DeactivateEmployee {
 	private String dasid;
 	private String isActive;
-	public DeactivateEmployee(String dasid, String isAdmin){
+    private String df;
+	
+	
+
+	public DeactivateEmployee(String dasid, String isActive,String df){
+
 		super();
 		this.dasid = dasid;
 		this.isActive = isActive;
+		this.df = df;
 		}
 	
 	public DeactivateEmployee() {
@@ -27,6 +33,14 @@ public class DeactivateEmployee {
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
+	public String getDf() {
+		return df;
+	}
+
+	public void setDf(String df) {
+		this.df = df;
+	}
+
 	@Override
 	public String toString() {
 		return "DeactivateEmployee [dasid=" + dasid + "]";

@@ -164,7 +164,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ArrayList response = new ArrayList();
 
 		HashMap<String, String> exportData1 = new HashMap<String, String>();
-
+		if(exportData!=null)
 		for (int i = 0; i < exportData.size(); i++) {
 
 			Object[] objArray = (Object[]) exportData.get(i);
@@ -172,12 +172,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 			EmployeeId id = (EmployeeId) objArray[0];
 			exportData1.put("dasId", id.getDasId());
 			exportData1.put("name", objArray[1].toString());
-			exportData1.put("gcmLevel", objArray[2].toString());
-			exportData1.put("domain", objArray[3].toString());
-			exportData1.put("startDate", objArray[4].toString());
-			exportData1.put("endDate", objArray[5].toString());
-			exportData1.put("status", objArray[6].toString());
-			exportData1.put("typeOfLeave", objArray[7].toString());
+			exportData1.put("mobile", objArray[2].toString());
+			exportData1.put("reportingManager", objArray[3].toString());
+			exportData1.put("gcmLevel", objArray[4].toString());
+			exportData1.put("domain", objArray[5].toString());
+			exportData1.put("startDate", objArray[6].toString());
+			exportData1.put("endDate", objArray[7].toString());
+			exportData1.put("status", objArray[8].toString());
+			exportData1.put("typeOfLeave", objArray[9].toString());
 			
 			response.add(exportData1);
 

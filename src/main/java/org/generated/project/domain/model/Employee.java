@@ -13,7 +13,7 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 @Entity
 
 @NamedQueries(value = {
-		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin From Employee where id=:dasId and password=:password and isActive = 'Yes' "),
+		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin,isActive From Employee where id=:dasId and password=:password "),
 		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager From Employee where isActive = 'Yes'"
 
 				+ " ORDER BY name ASC "),
@@ -25,14 +25,14 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		
 		@NamedQuery(name = "updateEmployee", query = "update Employee set employeeId=:employeeId,name=:name,gcmLevel =: gcmLevel,mobile=:mobile,email=:email,projectName=:projectName,domain=:domain,jobRole=:jobRole,reportingManager=:reportingManager  where id=:dasId "),
 		
-		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId "),
+		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId and isActive=:default "),
 		
 		@NamedQuery(name = "makeAdmin", query = "update Employee set isAdmin=:isAdmin where id=:dasId "),
 
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId"),
 		
-		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave From Employee emp, LeaveData ld where emp.id = ld.employee.id and emp.domain=:domain and (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) "
-				+ " ORDER BY emp.name ASC ")
+		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave From Employee emp, LeaveData ld where emp.isActive= 'Yes' and emp.id = ld.employee.id and emp.domain=:domain and (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) "
+				+ " ORDER BY emp.name, ld.startDate ASC  ")
 
 		
 
