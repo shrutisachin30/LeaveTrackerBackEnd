@@ -14,7 +14,7 @@ public class DeleteDataCronJob implements Task {
 
 	@Override
 	public void execute(SchedulingContext sc) throws Exception {
-		//leaveDataService.deleteData();
+		leaveDataService.deleteData();
 
 	}
 

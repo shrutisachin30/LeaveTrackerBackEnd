@@ -148,6 +148,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employeeDetail.put("jobRole", objArray[7].toString());
 			employeeDetail.put("reportingManager", objArray[8].toString());
 			employeeDetail.put("domain", objArray[9].toString());
+			employeeDetail.put("isActive", objArray[10].toString());
 			response.add(employeeDetail);
 
 		}
@@ -193,7 +194,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			exportData1.put("endDate", arr1[0]);
 			exportData1.put("status", objArray[8].toString());
 			exportData1.put("typeOfLeave", objArray[9].toString());
-			
+			exportData1.put("isActive", objArray[10].toString());
 			response.add(exportData1);
 
 		}

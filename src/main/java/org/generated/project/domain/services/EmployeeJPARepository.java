@@ -157,12 +157,21 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		
 			System.out.print("endD"+endD);
 			
-			Query query = entityManager.createNamedQuery("exportData");
-			query.setParameter("domain",  domain);
+			
+			if(!domain.equalsIgnoreCase("All")) {
+				String str= entityManager.createNamedQuery("exportData").toString();
+				str.concat(" and emp.domain=:domain ORDER BY emp.name, ld.startDate ASC");
+				 Query query = entityManager.createNativeQuery(str);
+				query.setParameter("domain",  domain);
+				System.out.println("toString query"+ str);
+		
+			
 		    query.setParameter("startDate",startD);
 			query.setParameter("endDate",endD );
 			
+			System.out.println("query"+ query);
 			obj = (ArrayList) query.getResultList();
+			}
 		}
 		 catch (Exception ex) {
 

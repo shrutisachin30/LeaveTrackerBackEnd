@@ -8,7 +8,7 @@ import org.seedstack.scheduler.SchedulingContext;
 import org.seedstack.scheduler.Task;
 import com.google.inject.Inject;
 
-@Scheduled("* * 7 * * ?")
+@Scheduled("0 0 12 1/1 * ? *")
 public class ChangeStatusCronJob implements Task{
 
 	@Inject
@@ -16,7 +16,7 @@ public class ChangeStatusCronJob implements Task{
 
 	@Override
 	public void execute(SchedulingContext sc) throws Exception {
-			//leaveDataService.changeStatus();
+			leaveDataService.changeStatus();
 	}
 
 }
