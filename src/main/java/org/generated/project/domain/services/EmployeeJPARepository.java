@@ -153,25 +153,22 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 
 			startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
 			endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
-			System.out.print("startD"+startD);
-		
-			System.out.print("endD"+endD);
 			
+			Query query =null;
 			
 			if(!domain.equalsIgnoreCase("All")) {
-				String str= entityManager.createNamedQuery("exportData").toString();
-				str.concat(" and emp.domain=:domain ORDER BY emp.name, ld.startDate ASC");
-				 Query query = entityManager.createNativeQuery(str);
+				query = entityManager.createNamedQuery("exportData");				
 				query.setParameter("domain",  domain);
-				System.out.println("toString query"+ str);
+			}else {
+				query = entityManager.createNamedQuery("exportDataAllDomain");	
+			}
 		
 			
 		    query.setParameter("startDate",startD);
 			query.setParameter("endDate",endD );
 			
-			System.out.println("query"+ query);
 			obj = (ArrayList) query.getResultList();
-			}
+			
 		}
 		 catch (Exception ex) {
 
