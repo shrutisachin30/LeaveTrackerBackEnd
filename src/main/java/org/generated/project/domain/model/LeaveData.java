@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedQueries(value = {
-		@NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave, ld.status , ld.updatedBy , ld.updatedOn From LeaveData ld where ld.employee.id=:dasId "
+		@NamedQuery(name = "getEmployeeLeave", query = "select ld.startDate, ld.endDate , ld.typeOfLeave, ld.status , ld.updatedBy , ld.updatedOn, ld.noOfDays From LeaveData ld where ld.employee.id=:dasId "
 				+ "order by ld.startDate ASC "),
 		@NamedQuery(name = "cancelLeave", query = "update LeaveData ld set ld.status=:status,ld.updatedBy=:updatedBy,ld.updatedOn=:updatedOn where ld.startDate=:startDate and ld.endDate=:endDate and ld.employee=:dasId"),
 		@NamedQuery(name = "checkLeaveData", query = "From LeaveData ld where ((ld.startDate=:startDate or ld.endDate=:endDate) or"
@@ -59,6 +59,8 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "local")
 	private Date updatedOn;
 
+	private String noOfDays;
+	
 	public LeaveData() {
 		super();
 	}
@@ -70,7 +72,7 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 	}
 
 	public LeaveData(Employee employee, int leaveDataId, Date startDate, Date endDate, String typeOfLeave,
-			String status, String updatedBy, Date updatedOn) {
+			String status, String updatedBy, Date updatedOn,String noOfDays) {
 
 		this.employee = employee;
 		this.leaveDataId = leaveDataId;
@@ -80,14 +82,14 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 		this.status = status;
 		this.updatedBy = updatedBy;
 		this.updatedOn = updatedOn;
-
+		this.noOfDays = noOfDays;
 	}
 
 	@Override
 	public String toString() {
 		return "Employee [dasId= " + employee + ", startDate= " + startDate + ", endDate= " + endDate
 				+ ", typeOfLeave= " + typeOfLeave + ",Status=" + status + ",updatedBy=" + updatedBy + ",updatedOn="
-				+ updatedOn + "]";
+				+ updatedOn +"noOfDays"+ noOfDays+ "]";
 	}
 
 	public Date getStartDate() {
@@ -154,6 +156,14 @@ public class LeaveData extends BaseAggregateRoot<LeaveDataId> {
 
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	public String getNoOfDays() {
+		return noOfDays;
+	}
+
+	public void setNoOfDays(String noOfDays) {
+		this.noOfDays = noOfDays;
 	}
 
 }

@@ -171,7 +171,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		for (int i = 0; i < exportData.size(); i++) {
 			
 			Object[] objArray = (Object[]) exportData.get(i);
-			//System.out.println(startDate1);
+			System.out.println(objArray.length);
 			String Date = objArray[6].toString();
 			//System.out.println(Date);
 			String[] arr = Date.split("\\s+");
@@ -195,6 +195,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			exportData1.put("status", objArray[8].toString());
 			exportData1.put("typeOfLeave", objArray[9].toString());
 			exportData1.put("isActive", objArray[10].toString());
+			exportData1.put("noOfDays", objArray[11].toString());
 			response.add(exportData1);
 
 		}
