@@ -6,6 +6,7 @@ import org.seedstack.scheduler.SchedulingContext;
 import org.seedstack.scheduler.Task;
 import com.google.inject.Inject;
 
+
 /** 
  * <h2> ChangeStatusCronJob</h2> 
  * This program implements 
@@ -17,6 +18,7 @@ import com.google.inject.Inject;
  */  
 
 //Scheduler to implement cronjob of delete data which is more than a year old everyday
+//Scheduler to implement cronjob of delete data which is more than a year old,every day
 @Scheduled("0 0 12 1/1 * ? *")
 public class DeleteDataCronJob implements Task {
 

@@ -1,5 +1,7 @@
 package org.generated.project.domain.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,11 +78,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public ArrayList<Object> loginService(LoginData data) {
 
 		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasId() + "," + data.getPassword()
+
 		+ "}");
 
-		ArrayList<Object> list = verifyEmployeeDetails(data);
-
-		return list;
+		
+			ArrayList<Object> list = verifyEmployeeDetails(data);
+		
+			return list;
 
 	}
 
@@ -137,6 +141,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employeeDetail.put("jobRole", objArray[7].toString());
 			employeeDetail.put("reportingManager", objArray[8].toString());
 			employeeDetail.put("domain", objArray[9].toString());
+			employeeDetail.put("isActive", objArray[10].toString());
 			response.add(employeeDetail);
 
 		}
@@ -154,35 +159,34 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ArrayList response = new ArrayList();
 
 		HashMap<String, String> exportData1 = new HashMap<String, String>();
-		if (exportData != null)
-			for (int i = 0; i < exportData.size(); i++) {
+		if(exportData!=null)
+		for (int i = 0; i < exportData.size(); i++) {
+			
+			Object[] objArray = (Object[]) exportData.get(i);
+			String Date = objArray[6].toString();
+			String[] arr = Date.split("\\s+");
+			String Date2 = objArray[7].toString();
+			String[] arr1 = Date.split("\\s+");
+			
+			
+			exportData1 = new HashMap<String, String>();
+			EmployeeId id = (EmployeeId) objArray[0];
+			exportData1.put("dasId", id.getDasId());
+			exportData1.put("name", objArray[1].toString());
+			exportData1.put("mobile", objArray[2].toString());
+			exportData1.put("reportingManager", objArray[3].toString());
+			exportData1.put("gcmLevel", objArray[4].toString());
+			exportData1.put("domain", objArray[5].toString());
+			exportData1.put("startDate", arr[0]);
+			exportData1.put("endDate", arr1[0]);
+			exportData1.put("status", objArray[8].toString());
+			exportData1.put("typeOfLeave", objArray[9].toString());
+			exportData1.put("isActive", objArray[10].toString());
+			exportData1.put("noOfDays", objArray[11].toString());
+			response.add(exportData1);
 
-				Object[] objArray = (Object[]) exportData.get(i);
+		}
 
-				String Date = objArray[6].toString();
-
-				String[] arr = Date.split("\\s+");
-				System.out.println(arr[0]);
-				String Date2 = objArray[7].toString();
-				String[] arr1 = Date.split("\\s+");
-				System.out.println(arr1[0]);
-
-				exportData1 = new HashMap<String, String>();
-				EmployeeId id = (EmployeeId) objArray[0];
-				exportData1.put("dasId", id.getDasId());
-				exportData1.put("name", objArray[1].toString());
-				exportData1.put("mobile", objArray[2].toString());
-				exportData1.put("reportingManager", objArray[3].toString());
-				exportData1.put("gcmLevel", objArray[4].toString());
-				exportData1.put("domain", objArray[5].toString());
-				exportData1.put("startDate", arr[0]);
-				exportData1.put("endDate", arr1[0]);
-				exportData1.put("status", objArray[8].toString());
-				exportData1.put("typeOfLeave", objArray[9].toString());
-
-				response.add(exportData1);
-
-			}
 
 		return response;
 	}

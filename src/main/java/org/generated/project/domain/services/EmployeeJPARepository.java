@@ -19,8 +19,8 @@ import com.sun.istack.logging.Logger;
 public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeId> {
 
 	private static final Logger logger = Logger.getLogger(EmployeeJPARepository.class);
-	
-	//method to get the DasId & Password while login
+
+	// method to get the DasId & Password while login
 	public ArrayList<Object> getEmployee(LoginData empObj) {
 		logger.info("Inside getEmployee" + empObj);
 		EntityManager entityManager = getEntityManager();
@@ -41,8 +41,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		return obj;
 
 	}
-	
-	//method to get the EmployeeDetails after login
+
+	// method to get the EmployeeDetails after login
 	public List<Object> getEmployeeDetails() {
 
 		EntityManager entityManager = getEntityManager();
@@ -62,8 +62,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		return obj;
 
 	}
-	
-	//method to check whether the Employee exists in database
+
+	// method to check whether the Employee exists in database
 	public ArrayList<Employee> checkIfEmployeeExist(Employee empObj) {
 		logger.info("Inside checkIfEmployeeExist" + empObj);
 		EntityManager entityManager = getEntityManager();
@@ -84,8 +84,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		return obj;
 
 	}
-	
-	//method to get the E-mailId of the employee
+
+	// method to get the E-mailId of the employee
 	public String getEmailId(String dasId) {
 		EntityManager entityManager = getEntityManager();
 		String email = " ";
@@ -101,8 +101,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		return email;
 
 	}
-	
-	//method to update the password
+
+	// method to update the password
 	public int updatePassword(Employee emp) {
 
 		EntityManager entityManager = getEntityManager();
@@ -120,8 +120,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		}
 		return row;
 	}
-	
-	//method to change the password
+
+	// method to change the password
 	public int changePassword(EmployeeParam eparam) {
 
 		EntityManager entityManager = getEntityManager();
@@ -140,12 +140,12 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		}
 		return row;
 	}
-	
-	//method to export the leaveDetails
+
+	// method to export the leaveDetails
 	public List<Object> exportData(String domain, String startDate, String endDate) {
 
 		EntityManager entityManager = getEntityManager();
-
+		// int startD = null;
 		Date startD = null;
 		Date endD = null;
 		List<Object> obj = null;
@@ -153,16 +153,21 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 
 			startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
 			endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
-			System.out.print("startD" + startD);
 
-			System.out.print("endD" + endD);
+			Query query = null;
 
-			Query query = entityManager.createNamedQuery("exportData");
-			query.setParameter("domain", domain);
+			if (!domain.equalsIgnoreCase("All")) {
+				query = entityManager.createNamedQuery("exportData");
+				query.setParameter("domain", domain);
+			} else {
+				query = entityManager.createNamedQuery("exportDataAllDomain");
+			}
+
 			query.setParameter("startDate", startD);
 			query.setParameter("endDate", endD);
 
 			obj = (ArrayList) query.getResultList();
+
 		} catch (Exception ex) {
 
 			obj = null;
@@ -179,15 +184,15 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		Query query = entityManager.createNamedQuery("exportData");
 		return null;
 	}
-	
-	//method to get the EmployeeDetails
+
+	// method to get the EmployeeDetails
 	Employee getEmpDetails(EmployeeId employeeId) {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("getEmployeeDetails");
 		return null;
 	}
 
-	//method to update the EmployeeDetails
+	// method to update the EmployeeDetails
 	public String updateEmployeeDetails(Employee emp) {
 		String result = "";
 		EntityManager entityManager = getEntityManager();
@@ -210,11 +215,12 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		}
 		return result;
 	}
-	
-	//method to activate/deactivate the Employee using DasId
+
+	// method to activate/deactivate the Employee using DasId
 	public String deactivateEmployee(EmployeeParam eparam) {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("deactivateEmployee");
+
 		query.setParameter("dasId", new EmployeeId(eparam.getDasid()));
 		query.setParameter("isActive", (eparam.getIsActive()));
 		query.setParameter("default", eparam.getDf());
@@ -222,6 +228,7 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 		int row = 0;
 
 		try {
+
 			String status = getStatus(eparam.getDasid());
 			if (!status.equals(eparam.getDf())) {
 				return "Operation already performed";
@@ -239,9 +246,10 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return "error";
 
 	}
-	
-	//method to make employee as Admin using DasId
+
+	// method to make employee as Admin using DasId
 	public String isAdmin(EmployeeId id) {
+
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("makeAdmin");
 		query.setParameter("dasId", new EmployeeId(id.getDasId()));
@@ -262,8 +270,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return "error";
 
 	}
-	
-	//method to remove Admin using DasId
+
+	// method to remove Admin using DasId
 	public String removeAdmin(EmployeeId id) {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("makeAdmin");
@@ -284,8 +292,8 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 			return "error";
 
 	}
-	
-	//method to check the status of the leave
+
+	// method to check the status of the leave
 	public String getStatus(String dasId) {
 		EntityManager entityManager = getEntityManager();
 		String status = " ";

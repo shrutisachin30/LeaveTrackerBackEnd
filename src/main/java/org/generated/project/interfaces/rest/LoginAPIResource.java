@@ -60,16 +60,20 @@ public class LoginAPIResource {
 			ArrayList<Object> employeelist = login.loginService(data);
 
 			if (employeelist != null && employeelist.size() > 0) {
-				Object[] emp = (Object[]) employeelist.get(0);
+
+				Object[] emp =  (Object[]) employeelist.get(0);
+
 				response.put("statusCode", "201");
 				response.put("statusMsg", "Login Successful");
 				response.put("isAdmin", emp[2].toString());
 				response.put("isActive", emp[3].toString());
+				response.put("name", emp[4].toString());
+
 
 			} else {
 				response.put("statusCode", "500");
 				response.put("statusMsg", "Username or Password is incorrect");
-			}
+			} 
 		}
 		return response;
 	}
@@ -78,10 +82,10 @@ public class LoginAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+
 	//service for changing the password
 	public HashMap<String, String> changePassword(@RequestParameters EmployeeParam eparam) {
-		System.out.println(eparam);
-
+		
 		String str = service.changePassword(eparam);
 
 		HashMap<String, String> response = new HashMap<String, String>();
@@ -138,7 +142,10 @@ public class LoginAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("makeAdmin")
+
 	//service for making employee as Admin
+
+
 	public HashMap<String, String> isAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
 		String str = service.isAdmin(id);
@@ -160,11 +167,18 @@ public class LoginAPIResource {
 
 	}
 
+
+
+	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("removeAdmin")
+
 	//service for removing Admin status of Employee
+
+
 	public HashMap<String, String> removeAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
 		String str = service.removeAdmin(id);
