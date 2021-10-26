@@ -1,10 +1,10 @@
 package org.generated.project.domain.services;
 
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
-import org.generated.project.application.CancelLeave;
+//import org.generated.project.application.CancelLeave;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
 import org.seedstack.business.domain.Repository;
@@ -48,26 +48,22 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 		return leaveDataObj;
 	}
-	
-	
-	
 
 	@Transactional
 	@JpaUnit("myUnit")
-	public String cancelLeave(CancelLeave leaveDataObject) {
-		
-		String str = leaveDataRepository.cancelLeave(leaveDataObject);
+	public String cancelLeave(EmployeeParam eparam) {
+
+		String str = leaveDataRepository.cancelLeave(eparam);
 
 		return str;
 	}
-	
+
 	@Transactional
 	@JpaUnit("myUnit")
 	public String changeStatus() {
 		logger.info("LeaveDataServiceImpl :: changeStatus():");
 		return leaveDataRepository.changeStatus();
 	}
-	
 
 	@Transactional
 	@JpaUnit("myUnit")
@@ -75,7 +71,4 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 		return leaveDataRepository.deleteData();
 	}
 
-
-
-	
 }

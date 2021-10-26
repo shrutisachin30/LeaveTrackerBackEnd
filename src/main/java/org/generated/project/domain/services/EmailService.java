@@ -13,55 +13,49 @@ import org.seedstack.seed.Bind;
 @Bind
 
 public class EmailService {
-public static void main(String[] args) {
-	
-	String from = "leavetracker.atos@gmail.com";
-		
+	public static void main(String[] args) {
+
 	}
 
-
+	//method to send otp via e-mail
 	public void sendmail(String subject, String message, String to, String from) {
-		
-		String host="smtp.gmail.com";
+
+		String host = "smtp.gmail.com";
 		Properties properties = System.getProperties();
-		System.out.println("PROPERTIES "+properties);
-		
+		System.out.println("PROPERTIES " + properties);
+
 		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.port","465");
-		properties.put("mail.smtp.ssl.enable","true");
-		properties.put("mail.smtp.auth","true");
-		
-		Session session=Session.getInstance(properties, new Authenticator() {
+		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {				
+			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication("leavetracker.atos@gmail.com", "Atos#123");
-			}	
+			}
 		});
-		
+
 		session.setDebug(true);
-		
+
 		MimeMessage m = new MimeMessage(session);
-		
+
 		try {
-		
-		m.setFrom(from);
-		
-		m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		
-		m.setSubject(subject);
-		m.setContent(message, "text/html");
-		Transport.send(m);
-		
-		System.out.println("Sent success...................");
-		
-		
-		}catch (Exception e) {
+
+			m.setFrom(from);
+
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			m.setSubject(subject);
+			m.setContent(message, "text/html");
+			Transport.send(m);
+
+			System.out.println("Sent success...................");
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
-	
-		
+
 	}
 
-	
 }

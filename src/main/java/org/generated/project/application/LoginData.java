@@ -1,8 +1,14 @@
 package org.generated.project.application;
-
-import javax.validation.constraints.NotEmpty;
-
-import org.seedstack.seed.validation.NotBlank;
+/** 
+ * <h2> LoginData</h2> 
+ * This program implements 
+ * to store Das Id, password
+ * and print the result  
+ * <p> 
+ *  
+ * @author Shruti Karde 
+ * @since 2021-09-01 
+ */  
 
 public class LoginData {
 
