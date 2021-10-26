@@ -1,12 +1,18 @@
 package org.generated.project.domain.model;
 
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import org.seedstack.business.domain.BaseValueObject;
 
+/** 
+ * <h2> Leave Data Id</h2> 
+ * This program implements 
+ * to store leavedataid
+ * and print the result  
+ * <p> 
+ *  
+ * @author Shruti Karde 
+ * @since 2021-09-03
+ */  
 @Embeddable
 public class LeaveDataId extends BaseValueObject {
 
@@ -14,11 +20,11 @@ public class LeaveDataId extends BaseValueObject {
 
 	public LeaveDataId() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public LeaveDataId(int id) {
-		// TODO Auto-generated constructor stub
+
 		this.leaveDataId = id;
 	}
 

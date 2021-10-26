@@ -1,28 +1,14 @@
 package org.generated.project.domain.services;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NamedQuery;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import org.generated.project.application.CancelLeave;
-import org.generated.project.domain.model.Employee;
-import org.generated.project.domain.model.EmployeeId;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.domain.model.LeaveData;
 import org.generated.project.domain.model.LeaveDataId;
-import org.jboss.logging.Param;
 import org.seedstack.jpa.BaseJpaRepository;
 import org.seedstack.seed.Bind;
-import org.seedstack.seed.transaction.Transactional;
-
 import com.sun.istack.logging.Logger;
 
 @Bind
@@ -33,6 +19,7 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 
 	private static final Logger logger = Logger.getLogger(LeaveDataRepository.class);
 
+	//method to save the leave data
 	public String saveEmployeeLeave(LeaveData leaveObj) {
 
 		logger.info("Inside saveEmployeeLeave" + leaveObj);
@@ -55,7 +42,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		}
 
 	}
-
+	
+	//method to check the leave data
 	public List<Object> checkLeaveData(LeaveData leaveObj) {
 		EntityManager entityManager = getEntityManager();
 
@@ -74,7 +62,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		return obj;
 
 	}
-
+	
+	//method to get the leave data
 	public List<Object> getLeaveData(String id) {
 		EntityManager entityManager = getEntityManager();
 
@@ -90,16 +79,17 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		return obj;
 
 	}
-
-	public String cancelLeave(CancelLeave leaveObj) {
+	
+	//method to cancel the leave 
+	public String cancelLeave(EmployeeParam eparam) {
 
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("cancelLeave");
-		query.setParameter("dasId", leaveObj.getDasid());
-		query.setParameter("startDate", leaveObj.getStartdate());
-		query.setParameter("endDate", leaveObj.getEnddate());
-		query.setParameter("updatedBy", leaveObj.getUpdatedBy());
-		query.setParameter("updatedOn", leaveObj.getUpdatedOn());
+		query.setParameter("dasId", eparam.getDasid());
+		query.setParameter("startDate", eparam.getStartdate());
+		query.setParameter("endDate", eparam.getEnddate());
+		query.setParameter("updatedBy", eparam.getUpdatedBy());
+		query.setParameter("updatedOn", eparam.getUpdatedOn());
 		query.setParameter("status", "cancelled");
 
 		int row = 0;
@@ -117,30 +107,23 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 			return "error";
 	}
 	
-	
+	//method to change the status of applied leave
 	public String changeStatus() {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("changeStatus");
 		int result = 0;
 		query.setParameter("status", "Availed");
 		result = query.executeUpdate();
-	
+
 		return result == 1 ? "Success" : "Fail";
 	}
 	
-	
+	//method to delete data more than 1 year old
 	public String deleteData() {
 		EntityManager entityManager = getEntityManager();
-		Query query =  entityManager.createNamedQuery("deleteData");
+		Query query = entityManager.createNamedQuery("deleteData");
 		query.executeUpdate();
 		return null;
-    }
-
-	
-
-	
-	
-
-
+	}
 
 }

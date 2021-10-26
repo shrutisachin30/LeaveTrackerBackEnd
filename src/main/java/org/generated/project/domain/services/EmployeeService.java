@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
-import org.generated.project.application.ChangePasswordRequest;
-import org.generated.project.application.DeactivateEmployee;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -24,18 +22,18 @@ public interface EmployeeService {
 	public ArrayList<Employee> getEmployeeDetails();
 
 	String updatePassword(Employee emp);
-	
-	String changePassword(ChangePasswordRequest cprequest);
-	
+
+	String changePassword(EmployeeParam eparam);
+
 	String updateEmployee(Employee emp);
-	
+
 	HashMap<String, String> getRandomKey(String id);
 
 	Employee getEmpDetails(EmployeeId employeeId);
-	
+
 	Employee exportDe(EmployeeId employee);
-	
-	public String deactivateEmployee(DeactivateEmployee demp);
+
+	public String deactivateEmployee(EmployeeParam eparam);
 
 	List<Object> exportData(String domain, String startDate,String endDate);
 
@@ -43,10 +41,4 @@ public interface EmployeeService {
 
 	String removeAdmin(EmployeeId id);
 	
-	
-	
-
-	
-	
-
 }

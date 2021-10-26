@@ -1,5 +1,15 @@
 package org.generated.project.application;
 
+/** 
+ * <h2> Validate Param </h2> 
+ * This program implements validation
+   
+ * <p> 
+ *  
+ * @author shruti karde
+ * @since 2021-09-01 
+ */  
+
 public class ValidateParam {
 
 	public static boolean isNull(String val) {

@@ -7,13 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-
-
-import org.generated.project.application.ChangePasswordRequest;
-import org.generated.project.application.DeactivateEmployee;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.application.LoginData;
 import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
@@ -25,7 +20,6 @@ import org.seedstack.seed.Bind;
 import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
-
 
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
@@ -39,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Logging
 	private Logger logger;
-	
+
 	@Inject
 	private EmailService emailservice;
 
@@ -84,14 +78,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public ArrayList<Object> loginService(LoginData data) {
 
 		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasId() + "," + data.getPassword()
-				+ "}");
+
+		+ "}");
 
 		
-
-		ArrayList<Object> list = verifyEmployeeDetails(data);
+			ArrayList<Object> list = verifyEmployeeDetails(data);
 		
-
-		return list;
+			return list;
 
 	}
 
@@ -155,15 +148,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return response;
 	}
-	
-	
+
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
-	public List<Object> exportData(String domain, String startDate,String endDate) {
+	public List<Object> exportData(String domain, String startDate, String endDate) {
 		logger.info("EmployeeServiceImpl :: exportData():");
-		List<Object> exportData = personRepository.exportData(domain,startDate, endDate);
-		System.out.print(" export data "+exportData);
+		List<Object> exportData = personRepository.exportData(domain, startDate, endDate);
+		System.out.print(" export data " + exportData);
 		ArrayList response = new ArrayList();
 
 		HashMap<String, String> exportData1 = new HashMap<String, String>();
@@ -171,16 +163,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		for (int i = 0; i < exportData.size(); i++) {
 			
 			Object[] objArray = (Object[]) exportData.get(i);
-			System.out.println(objArray.length);
 			String Date = objArray[6].toString();
-			//System.out.println(Date);
 			String[] arr = Date.split("\\s+");
-			System.out.println(arr[0]);
 			String Date2 = objArray[7].toString();
 			String[] arr1 = Date.split("\\s+");
-			System.out.println(arr1[0]);
 			
-			//System.out.println(endDate1);
 			
 			exportData1 = new HashMap<String, String>();
 			EmployeeId id = (EmployeeId) objArray[0];
@@ -200,6 +187,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		}
 
+
 		return response;
 	}
 
@@ -207,7 +195,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	@JpaUnit("myUnit")
 	public HashMap<String, String> getRandomKey(String id) {
-		// TODO Auto-generated method stub
+
 		int key = 0;
 		String email = "";
 
@@ -219,20 +207,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 			while (key < 10000) {
 				key = random.nextInt(99999);
 			}
-			
-			String subject=" OTP to Reset Password for Leave Tracker Application ";
+
+			String subject = " OTP to Reset Password for Leave Tracker Application ";
 			String emailContent = "<font color=darkblue><i>Greetings!</i><br><br>";
 			emailContent += " \n\n ";
 			emailContent += "<i>Here is your OTP : </i><b>" + key + "</b><br><br>";
 			emailContent += " \n\n ";
 			emailContent += " <i>Wish you a nice day!</i> </font>";
-			
-	
+
 			String to = email;
 			String from = "leavetracker.atos@gmail.com";
-			this.emailservice.sendmail(subject, emailContent, to,from);
-			
-			
+			this.emailservice.sendmail(subject, emailContent, to, from);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -275,17 +261,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
-	public String changePassword(ChangePasswordRequest cprequest) {
+	public String changePassword(EmployeeParam eparam) {
 		final String secretKey = "JH4KL6XA@ByC!$";
 
 		try {
 
-			String encryptedoldpassword = AESUtils.encrypt(cprequest.getOldpassword().toString(), secretKey);
-			String encryptednewpassword = AESUtils.encrypt(cprequest.getNewpassword().toString(), secretKey);
-			cprequest.setOldpassword(encryptedoldpassword);
-			cprequest.setNewpassword(encryptednewpassword);
+			String encryptedoldpassword = AESUtils.encrypt(eparam.getOldpassword().toString(), secretKey);
+			String encryptednewpassword = AESUtils.encrypt(eparam.getNewpassword().toString(), secretKey);
+			eparam.setOldpassword(encryptedoldpassword);
+			eparam.setNewpassword(encryptednewpassword);
 
-			int result = personRepository.changePassword(cprequest);
+			int result = personRepository.changePassword(eparam);
 
 			if (result > 0)
 				return "success";
@@ -305,15 +291,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	@JpaUnit("myUnit")
 	public String updateEmployee(Employee emp) {
-		  String result = "";
-		  try{
-			  personRepository.updateEmployeeDetails(emp);
-			  result = "Employee Updated Successfuly";
-		  }catch(Exception ex) {
-			  ex.printStackTrace();
-			  result = "Updating Employee Failed";
-		  }
-		  return result;
+		String result = "";
+		try {
+			personRepository.updateEmployeeDetails(emp);
+			result = "Employee Updated Successfuly";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			result = "Updating Employee Failed";
+		}
+		return result;
 	}
 
 	@Override
@@ -325,14 +311,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.print(object.get());
 		return object.get();
 	}
-	
-	
+
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
-	public String deactivateEmployee(DeactivateEmployee demp) {
+	public String deactivateEmployee(EmployeeParam eparam) {
 
-		String str = personRepository.deactivateEmployee(demp);
+		String str = personRepository.deactivateEmployee(eparam);
 
 		return str;
 	}
@@ -354,7 +339,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		String str = personRepository.isAdmin(id);
 		return str;
 	}
-	
+
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")

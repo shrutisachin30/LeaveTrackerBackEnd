@@ -1,17 +1,10 @@
 package org.generated.project.interfaces.rest;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,18 +12,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.generated.project.application.CancelLeave;
-import org.generated.project.application.DeactivateEmployee;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.application.ValidateParam;
 import org.generated.project.domain.model.Employee;
-import org.generated.project.domain.model.EmployeeId;
-
 import org.generated.project.domain.services.EmployeeService;
 import org.generated.project.infrastructure.AESUtils;
-
 import com.google.inject.servlet.RequestParameters;
-
 import io.swagger.annotations.Api;
 
 @Api("Registeration")
@@ -46,7 +33,7 @@ public class RegisterAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-
+	//service for registering employee
 	public HashMap<String, String> employeeservice(@Valid @RequestParameters Employee emp) {
 
 		String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
@@ -55,45 +42,45 @@ public class RegisterAPIResource {
 
 		HashMap<String, String> response = new HashMap<String, String>();
 
-		boolean flag = ValidateParam.isNull(emp.getName());
-		boolean flag1 = ValidateParam.isNull(emp.getEmail());
-		boolean flag2 = ValidateParam.isNull(emp.getPassword());
-		boolean flag3 = ValidateParam.isNull(emp.getProjectName());
-		boolean flag4 = ValidateParam.isNull(emp.getEmployeeId());
-		boolean flag5 = ValidateParam.isNull(emp.getGcmLevel());
-		boolean flag6 = ValidateParam.isNull(emp.getJobRole());
-		boolean flag7 = ValidateParam.isNull(emp.getMobile());
-		boolean flag8 = ValidateParam.isNull(emp.getReportingManager());
-		boolean flag9 = ValidateParam.isNull(emp.getDomain());
+		boolean name = ValidateParam.isNull(emp.getName());
+		boolean email = ValidateParam.isNull(emp.getEmail());
+		boolean password = ValidateParam.isNull(emp.getPassword());
+		boolean projectName = ValidateParam.isNull(emp.getProjectName());
+		boolean employeeId = ValidateParam.isNull(emp.getEmployeeId());
+		boolean gcmLevel = ValidateParam.isNull(emp.getGcmLevel());
+		boolean jobRole = ValidateParam.isNull(emp.getJobRole());
+		boolean mobile = ValidateParam.isNull(emp.getMobile());
+		boolean reportingManager = ValidateParam.isNull(emp.getReportingManager());
+		boolean domain = ValidateParam.isNull(emp.getDomain());
 
-		if (flag) {
+		if (name) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required name");
-		} else if (flag1) {
+		} else if (email) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required email");
-		} else if (flag2) {
+		} else if (password) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required password");
-		} else if (flag3) {
+		} else if (projectName) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required projectname");
-		} else if (flag4) {
+		} else if (employeeId) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required Dasid");
-		} else if (flag5) {
+		} else if (gcmLevel) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required GcmLevel");
-		} else if (flag6) {
+		} else if (jobRole) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required jobrole");
-		} else if (flag7) {
+		} else if (mobile) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required Mobile");
-		} else if (flag8) {
+		} else if (reportingManager) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required Reporting Manager");
-		} else if (flag9) {
+		} else if (domain) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required domain");
 		}
@@ -127,6 +114,7 @@ public class RegisterAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getEmployeeDetails")
+	//service for getting the employeeDetails
 	public Response getEmployeeDetails() {
 
 		HashMap<String, String> obj = new HashMap();
@@ -138,35 +126,32 @@ public class RegisterAPIResource {
 		return Response.status(200).entity(listData).build();
 
 	}
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("exportData/{domain}/{startDate}/{endDate}")
-	public Response exportData(@PathParam("domain") String domain,@PathParam("startDate") String startDate,@PathParam("endDate") String endDate) {
-		System.out.print("domain"+domain);
-		System.out.print("startDate"+startDate);
-		System.out.print("endDate"+endDate);
-		
+	/*service for exporting leave details*/
+	public Response exportData(@PathParam("domain") String domain, @PathParam("startDate") String startDate,
+			@PathParam("endDate") String endDate) {
+		System.out.print("domain" + domain);
+		System.out.print("startDate" + startDate);
+		System.out.print("endDate" + endDate);
+
 		HashMap<String, String> obj = new HashMap();
 
 		List<Object> listData;
-			
+
 		listData = service.exportData(domain, startDate, endDate);
-		
-//		obj.put("statusMsg", "success");
-//		obj.put("data", listData.toString());
-//		obj.put("statusCode", "200");
-		
+
 		return Response.status(200).entity(listData).build();
-		
-		//return obj;
 
 	}
 
 	@Path("forgotPassword/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	//service for sending OTP to registered emailId
 	public HashMap<String, String> forgotPassword(@PathParam("id") String id) {
 
 		HashMap<String, String> response = service.getRandomKey(id);
@@ -191,6 +176,10 @@ public class RegisterAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("updatePassword")
+
+	//service for updating password
+
+
 	public HashMap<String, String> updatePassword(@RequestParameters Employee emp) {
 		System.out.println(emp);
 		String str = service.updatePassword(emp);
@@ -210,14 +199,16 @@ public class RegisterAPIResource {
 
 		return response;
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("deactivateEmployee")
-	public HashMap<String, String> deactivateEmployee(@RequestParameters DeactivateEmployee demp) {
-		System.out.println(demp);
-		String str = service.deactivateEmployee(demp);
+
+	//service for activate/deactivating employee
+	public HashMap<String, String> deactivateEmployee(@RequestParameters EmployeeParam eparam) {
+		System.out.println(eparam);
+		String str = service.deactivateEmployee(eparam);
 
 		HashMap<String, String> response = new HashMap<String, String>();
 

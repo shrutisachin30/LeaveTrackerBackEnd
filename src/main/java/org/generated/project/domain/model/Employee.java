@@ -10,20 +10,42 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import org.seedstack.business.domain.BaseAggregateRoot;
 
+/** 
+ * <h2> Employee </h2> 
+ * This program implements an application 
+ * to store Das Id,Employee Id, Name,gcmLevel,mobile,reporting manager,password,email,domain,jobRole
+ * and print the result  
+ * <p> 
+ *  
+ * @author Subasri Venkatesan 
+ * @since 2021-09-01 
+ */  
+
 @Entity
 
 @NamedQueries(value = {
+
+		
 		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin,isActive,name From Employee where id=:dasId and password=:password "),
 		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager,isActive From Employee"
+
 
 				+ " ORDER BY name ASC "),
 		@NamedQuery(name = "checkIfEmployeeExist", query = " From Employee where id=:dasId or employeeId=:employeeId "),
 
 		@NamedQuery(name = "updatePassword", query = "update Employee set password=:password where id=:dasId "),
-		
+
 		@NamedQuery(name = "changePassword", query = "update Employee set password=:newpassword where id=:dasId and password =:oldpassword "),
-		
+
 		@NamedQuery(name = "updateEmployee", query = "update Employee set employeeId=:employeeId,name=:name,gcmLevel =: gcmLevel,mobile=:mobile,email=:email,projectName=:projectName,domain=:domain,jobRole=:jobRole,reportingManager=:reportingManager  where id=:dasId "),
+
+
+//		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId and isActive=:default "),
+//
+//		@NamedQuery(name = "makeAdmin", query = "update Employee set isAdmin=:isAdmin where id=:dasId "),
+//
+//		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId"),
+
 		
 		@NamedQuery(name = "deactivateEmployee", query = "update Employee set isActive=:isActive where id=:dasId and isActive=:default "),
 		
@@ -31,15 +53,22 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 
 		@NamedQuery(name = "getEmailId", query = "select email from Employee where id=:dasId"),
 		
+//		@NamedQuery(name = "getStatus", query = "select isActive from Employee where id=:dasId"),
+//		
+//		@NamedQuery(name = "exportDataAllDomain", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave,emp.isActive,ld.noOfDays From Employee emp, LeaveData ld where emp.id = ld.employee.id and "
+//				+ " (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) ORDER BY emp.name, ld.startDate ASC"),
+//		
+//		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave,emp.isActive,ld.noOfDays From Employee emp, LeaveData ld where emp.id = ld.employee.id and "
+//				+ " (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) and emp.domain=:domain ORDER BY emp.name, ld.startDate ASC")
+
+
 		@NamedQuery(name = "getStatus", query = "select isActive from Employee where id=:dasId"),
 		
 		@NamedQuery(name = "exportDataAllDomain", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave,emp.isActive,ld.noOfDays From Employee emp, LeaveData ld where emp.id = ld.employee.id and "
 				+ " (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) ORDER BY emp.name, ld.startDate ASC"),
-		
-		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave,emp.isActive,ld.noOfDays From Employee emp, LeaveData ld where emp.id = ld.employee.id and "
-				+ " (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) and emp.domain=:domain ORDER BY emp.name, ld.startDate ASC")
 
-
+		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave From Employee emp, LeaveData ld where emp.isActive= 'Yes' and emp.id = ld.employee.id and emp.domain=:domain and (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) "
+				+ " ORDER BY emp.name, ld.startDate ASC  ")
 
 })
 
@@ -58,20 +87,31 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	private String projectName;
 	private String jobRole;
 	private String domain;
+
+//	private String isActive = "Yes";
+//	private String isAdmin = "No";
+
+
 	private String isActive = "Active";
 	private String isAdmin = "No";
 	
 	
+
 	@OneToMany(mappedBy = "employee")
 	private Collection<LeaveData> leaveData = new ArrayList<>();
 
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Employee(EmployeeId id, String employeeId, String name, String gcmLevel, String mobile, String email,
-			String reportingManager, String password, String projectName, String jobRole, String domain,String isActive, String isAdmin) {
+
+			String reportingManager, String password, String projectName, String jobRole, String domain,
+			String isActive, String isAdmin) {
+
+			//String reportingManager, String password, String projectName, String jobRole, String domain,String isActive, String isAdmin) {
+
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -199,6 +239,5 @@ public class Employee extends BaseAggregateRoot<EmployeeId> {
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
-	
 
 }

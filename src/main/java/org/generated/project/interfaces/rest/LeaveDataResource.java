@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,18 +16,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.generated.project.application.CancelLeave;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.domain.model.LeaveData;
-import org.generated.project.domain.model.LeaveDataId;
 import org.generated.project.domain.services.LeaveDataService;
 import org.json.JSONObject;
-
 import com.google.inject.servlet.RequestParameters;
-
 import io.swagger.annotations.Api;
-
-import java.util.stream.Collectors;
 
 @Api("leave")
 @Path("psa")
@@ -43,7 +34,8 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("applyLeave")
-	public HashMap applyLeave(@RequestParameters LeaveData leaveDataObject) {
+	//service for applying leave
+	public HashMap<String, String> applyLeave(@RequestParameters LeaveData leaveDataObject) {
 
 		String str = leaveDataService.applyLeave(leaveDataObject);
 
@@ -74,6 +66,7 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("retrieveLeaveData/{id}")
+	//service for retrieving the leave data
 	public Response retrieveLeaveData(@PathParam("id") String id) {
 
 		ArrayList list = new ArrayList<>();
@@ -105,7 +98,7 @@ public class LeaveDataResource {
 					String output2 = outputFormatter.format(updatedOn);
 					obj.put("updatedOn", output2);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 				list.add(obj);
@@ -126,9 +119,10 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("cancelLeave")
-	public HashMap cancelLeave(@RequestParameters CancelLeave leaveDataObject) {
-		System.out.println(leaveDataObject);
-		String str = leaveDataService.cancelLeave(leaveDataObject);
+	//service for canceling the leave data
+	public HashMap<String, String> cancelLeave(@RequestParameters EmployeeParam eparam) {
+		System.out.println(eparam);
+		String str = leaveDataService.cancelLeave(eparam);
 
 		HashMap<String, String> response = new HashMap<String, String>();
 
@@ -146,5 +140,5 @@ public class LeaveDataResource {
 		return response;
 
 	}
-	
+
 }

@@ -2,7 +2,6 @@ package org.generated.project.interfaces.rest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -13,9 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.generated.project.application.ChangePasswordRequest;
-import org.generated.project.application.DeactivateEmployee;
+import org.generated.project.application.EmployeeParam;
 import org.generated.project.application.LoginData;
 import org.generated.project.application.ValidateParam;
 import org.generated.project.domain.model.Employee;
@@ -41,17 +38,18 @@ public class LoginAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	//service for validating the credentials and logging in
 	public HashMap<String, String> loginService(@Valid @RequestParameters LoginData data) {
 
 		HashMap<String, String> response = new HashMap<String, String>();
 
-		boolean flag = ValidateParam.isNull(data.getDasId());
-		boolean flag1 = ValidateParam.isNull(data.getPassword());
+		boolean dasID = ValidateParam.isNull(data.getDasId());
+		boolean password = ValidateParam.isNull(data.getPassword());
 
-		if (flag) {
+		if (dasID) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required Dasid");
-		} else if (flag1) {
+		} else if (password) {
 			response.put("statusCode", "500");
 			response.put("statusMsg", "Please enter required Password");
 
@@ -62,12 +60,15 @@ public class LoginAPIResource {
 			ArrayList<Object> employeelist = login.loginService(data);
 
 			if (employeelist != null && employeelist.size() > 0) {
+
 				Object[] emp =  (Object[]) employeelist.get(0);
+
 				response.put("statusCode", "201");
 				response.put("statusMsg", "Login Successful");
 				response.put("isAdmin", emp[2].toString());
 				response.put("isActive", emp[3].toString());
 				response.put("name", emp[4].toString());
+
 
 			} else {
 				response.put("statusCode", "500");
@@ -81,10 +82,11 @@ public class LoginAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public HashMap<String, String> changePassword(@RequestParameters ChangePasswordRequest cpRequest) {
-		System.out.println(cpRequest);
 
-		String str = service.changePassword(cpRequest);
+	//service for changing the password
+	public HashMap<String, String> changePassword(@RequestParameters EmployeeParam eparam) {
+		
+		String str = service.changePassword(eparam);
 
 		HashMap<String, String> response = new HashMap<String, String>();
 
@@ -107,9 +109,9 @@ public class LoginAPIResource {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public HashMap getEmployee(@PathParam("id") String id) {
-		// return Response.status(200).entity(service.getEmpDetails(new
-		// EmployeeId(id))).build();
+	//service for getting the employeeDetails
+	public HashMap<String, String> getEmployee(@PathParam("id") String id) {
+
 		Employee emp = service.getEmpDetails(new EmployeeId(id));
 		HashMap res = new HashMap();
 		res.put("dasId", emp.getId());
@@ -122,8 +124,7 @@ public class LoginAPIResource {
 		res.put("projectName", emp.getProjectName());
 		res.put("domain", emp.getDomain());
 		res.put("jobRole", emp.getJobRole());
-		
-		
+
 		return res;
 	}
 
@@ -131,15 +132,20 @@ public class LoginAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	//service for updating the employeeDetails
 	public Response updateEmployee(@RequestParameters Employee emp) {
-		System.out.println("Update Employee" +emp.toString());
+		System.out.println("Update Employee" + emp.toString());
 		return Response.status(200).entity(service.updateEmployee(emp)).build();
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("makeAdmin")
+
+	//service for making employee as Admin
+
+
 	public HashMap<String, String> isAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
 		String str = service.isAdmin(id);
@@ -160,11 +166,19 @@ public class LoginAPIResource {
 		return response;
 
 	}
+
+
+
 	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("removeAdmin")
+
+	//service for removing Admin status of Employee
+
+
 	public HashMap<String, String> removeAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
 		String str = service.removeAdmin(id);
