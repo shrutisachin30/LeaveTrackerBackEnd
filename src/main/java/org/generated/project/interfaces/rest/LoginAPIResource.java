@@ -67,6 +67,7 @@ public class LoginAPIResource {
 				response.put("statusMsg", "Login Successful");
 				response.put("isAdmin", emp[2].toString());
 				response.put("isActive", emp[3].toString());
+				response.put("name", emp[4].toString());
 
 			} else {
 				response.put("statusCode", "500");
@@ -80,7 +81,7 @@ public class LoginAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public HashMap changePassword(@RequestParameters ChangePasswordRequest cpRequest) {
+	public HashMap<String, String> changePassword(@RequestParameters ChangePasswordRequest cpRequest) {
 		System.out.println(cpRequest);
 
 		String str = service.changePassword(cpRequest);
@@ -139,7 +140,7 @@ public class LoginAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("makeAdmin")
-	public HashMap isAdmin(@RequestParameters EmployeeId id) {
+	public HashMap<String, String> isAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
 		String str = service.isAdmin(id);
 
@@ -164,7 +165,7 @@ public class LoginAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("removeAdmin")
-	public HashMap removeAdmin(@RequestParameters EmployeeId id) {
+	public HashMap<String, String> removeAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
 		String str = service.removeAdmin(id);
 

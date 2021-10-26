@@ -191,7 +191,7 @@ public class RegisterAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("updatePassword")
-	public HashMap updatePassword(@RequestParameters Employee emp) {
+	public HashMap<String, String> updatePassword(@RequestParameters Employee emp) {
 		System.out.println(emp);
 		String str = service.updatePassword(emp);
 
@@ -215,7 +215,7 @@ public class RegisterAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("deactivateEmployee")
-	public HashMap deactivateEmployee(@RequestParameters DeactivateEmployee demp) {
+	public HashMap<String, String> deactivateEmployee(@RequestParameters DeactivateEmployee demp) {
 		System.out.println(demp);
 		String str = service.deactivateEmployee(demp);
 

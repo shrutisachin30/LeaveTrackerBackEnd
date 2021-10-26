@@ -13,7 +13,7 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 @Entity
 
 @NamedQueries(value = {
-		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin,isActive From Employee where id=:dasId and password=:password "),
+		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin,isActive,name From Employee where id=:dasId and password=:password "),
 		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager,isActive From Employee"
 
 				+ " ORDER BY name ASC "),
