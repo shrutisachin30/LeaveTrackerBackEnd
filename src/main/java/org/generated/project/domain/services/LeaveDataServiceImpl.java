@@ -35,7 +35,8 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 				", " + leaveDataObject.getStartDate() + " ," + leaveDataObject.getEndDate() + ","
 						+ leaveDataObject.getUpdatedOn() + "," + leaveDataObject.getUpdatedBy());
 		String str = leaveDataRepository.saveEmployeeLeave(leaveDataObject);
-
+		System.out.print(leaveDataObject.getStartDate());
+		System.out.print(leaveDataObject.getEndDate());
 		logger.info("LeaveDataServiceImpl :: applyLeave()  After saving data : return object  " + str);
 		return str;
 	}
