@@ -28,8 +28,6 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 		
 		@NamedQuery(name = "getEmployee", query = "select id, password,isAdmin,isActive,name From Employee where id=:dasId and password=:password "),
 		@NamedQuery(name = "getEmployeeDetails", query = "select id,employeeId,name,mobile,email,gcmLevel,projectName,domain,jobRole,reportingManager,isActive From Employee"
-
-
 				+ " ORDER BY name ASC "),
 		@NamedQuery(name = "checkIfEmployeeExist", query = " From Employee where id=:dasId or employeeId=:employeeId "),
 

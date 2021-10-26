@@ -110,8 +110,9 @@ public class LoginAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	//service for getting the employeeDetails
-	public HashMap<String, String> getEmployee(@PathParam("id") String id) {
-
+	public HashMap getEmployee(@PathParam("id") String id) {
+		// return Response.status(200).entity(service.getEmpDetails(new
+		// EmployeeId(id))).build();
 		Employee emp = service.getEmpDetails(new EmployeeId(id));
 		HashMap res = new HashMap();
 		res.put("dasId", emp.getId());
@@ -125,9 +126,9 @@ public class LoginAPIResource {
 		res.put("domain", emp.getDomain());
 		res.put("jobRole", emp.getJobRole());
 
-		return res;
-	}
 
+		return res;
+		}
 	@Path("updateEmployee")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
