@@ -10,6 +10,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.seedstack.seed.Bind;
 
+/**
+ * <h2>EmailService</h2>
+ * <p>
+ * This program implements to send the otp to registered email
+ * </p>
+ * 
+ * @author Sourav Donkar
+ * @since 2021-10-14
+ */
+
 @Bind
 
 public class EmailService {
@@ -17,7 +27,7 @@ public class EmailService {
 
 	}
 
-	//method to send otp via e-mail
+	// method to send otp via e-mail
 	public void sendmail(String subject, String message, String to, String from) {
 
 		String host = "smtp.gmail.com";

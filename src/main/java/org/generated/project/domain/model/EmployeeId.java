@@ -4,16 +4,15 @@ import javax.persistence.Embeddable;
 
 import org.seedstack.business.domain.BaseValueObject;
 
-/** 
- * <h2> EmployeeId</h2> 
- * This program implements 
- * to store Das Id
- * and print the result  
- * <p> 
- *  
+/**
+ * <h2>EmployeeId</h2>
+ * <p>
+ * This program implements to store Das Id and print the result
+ * </p>
+ * 
  * @author Subasri Venkatesan
- * @since 2021-09-01 
- */  
+ * @since 2021-09-01
+ */
 @Embeddable
 public class EmployeeId extends BaseValueObject {
 
@@ -21,11 +20,9 @@ public class EmployeeId extends BaseValueObject {
 
 	public EmployeeId() {
 		super();
-
 	}
 
 	public EmployeeId(String id) {
-
 		this.dasId = id;
 	}
 

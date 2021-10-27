@@ -1,17 +1,17 @@
 package org.generated.project.application;
 
 import java.util.Date;
-/** 
- * <h2> Employee Param </h2> 
- * This program implements  
- * to store Das Id,Old Password,New Password,Id,is Active,df,startDate,endDate,updatedBy,updatedOn  
- * and print the result  
- * <p> 
- *  
- * @author Subasri Venkatesan 
- * @since 2021-09-01 
- */  
-   
+
+/**
+ * <h2>Employee Param</h2>
+ * <p>
+ * This program implements to store Das Id,Old Password,New Password,Id,is
+ * Active,df,startDate,endDate,updatedBy,updatedOn and print the result
+ * </p>
+ * 
+ * @author Subasri Venkatesan
+ * @since 2021-09-01
+ */
 
 public class EmployeeParam {
 	private String Id;

@@ -33,7 +33,7 @@ public class RegisterAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	//service for registering employee
+	// service for registering employee
 	public HashMap<String, String> employeeservice(@Valid @RequestParameters Employee emp) {
 
 		String encryptedString = AESUtils.encrypt(emp.getPassword().toString(), secretKey);
@@ -114,7 +114,7 @@ public class RegisterAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getEmployeeDetails")
-	//service for getting the employeeDetails
+	// service for getting the employeeDetails
 	public Response getEmployeeDetails() {
 
 		HashMap<String, String> obj = new HashMap();
@@ -131,7 +131,7 @@ public class RegisterAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("exportData/{domain}/{startDate}/{endDate}")
-	/*service for exporting leave details*/
+	/* service for exporting leave details */
 	public Response exportData(@PathParam("domain") String domain, @PathParam("startDate") String startDate,
 			@PathParam("endDate") String endDate) {
 		System.out.print("domain" + domain);
@@ -151,7 +151,7 @@ public class RegisterAPIResource {
 	@Path("forgotPassword/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	//service for sending OTP to registered emailId
+	// service for sending OTP to registered emailId
 	public HashMap<String, String> forgotPassword(@PathParam("id") String id) {
 
 		HashMap<String, String> response = service.getRandomKey(id);
@@ -177,8 +177,7 @@ public class RegisterAPIResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("updatePassword")
 
-	//service for updating password
-
+	// service for updating password
 
 	public HashMap<String, String> updatePassword(@RequestParameters Employee emp) {
 		System.out.println(emp);
@@ -205,7 +204,7 @@ public class RegisterAPIResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("deactivateEmployee")
 
-	//service for activate/deactivating employee
+	// service for activate/deactivating employee
 	public HashMap<String, String> deactivateEmployee(@RequestParameters EmployeeParam eparam) {
 		System.out.println(eparam);
 		String str = service.deactivateEmployee(eparam);
@@ -226,6 +225,5 @@ public class RegisterAPIResource {
 		return response;
 
 	}
-	
-	
+
 }

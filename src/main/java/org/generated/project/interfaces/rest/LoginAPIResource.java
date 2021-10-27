@@ -38,7 +38,7 @@ public class LoginAPIResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	//service for validating the credentials and logging in
+	// service for validating the credentials and logging in
 	public HashMap<String, String> loginService(@Valid @RequestParameters LoginData data) {
 
 		HashMap<String, String> response = new HashMap<String, String>();
@@ -61,7 +61,7 @@ public class LoginAPIResource {
 
 			if (employeelist != null && employeelist.size() > 0) {
 
-				Object[] emp =  (Object[]) employeelist.get(0);
+				Object[] emp = (Object[]) employeelist.get(0);
 
 				response.put("statusCode", "201");
 				response.put("statusMsg", "Login Successful");
@@ -69,11 +69,10 @@ public class LoginAPIResource {
 				response.put("isActive", emp[3].toString());
 				response.put("name", emp[4].toString());
 
-
 			} else {
 				response.put("statusCode", "500");
 				response.put("statusMsg", "Username or Password is incorrect");
-			} 
+			}
 		}
 		return response;
 	}
@@ -83,9 +82,9 @@ public class LoginAPIResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 
-	//service for changing the password
+	// service for changing the password
 	public HashMap<String, String> changePassword(@RequestParameters EmployeeParam eparam) {
-		
+
 		String str = service.changePassword(eparam);
 
 		HashMap<String, String> response = new HashMap<String, String>();
@@ -109,10 +108,8 @@ public class LoginAPIResource {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	//service for getting the employeeDetails
+	// service for getting the employeeDetails
 	public HashMap getEmployee(@PathParam("id") String id) {
-		// return Response.status(200).entity(service.getEmpDetails(new
-		// EmployeeId(id))).build();
 		Employee emp = service.getEmpDetails(new EmployeeId(id));
 		HashMap res = new HashMap();
 		res.put("dasId", emp.getId());
@@ -126,14 +123,14 @@ public class LoginAPIResource {
 		res.put("domain", emp.getDomain());
 		res.put("jobRole", emp.getJobRole());
 
-
 		return res;
-		}
+	}
+
 	@Path("updateEmployee")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	//service for updating the employeeDetails
+	// service for updating the employeeDetails
 	public Response updateEmployee(@RequestParameters Employee emp) {
 		System.out.println("Update Employee" + emp.toString());
 		return Response.status(200).entity(service.updateEmployee(emp)).build();
@@ -144,8 +141,7 @@ public class LoginAPIResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("makeAdmin")
 
-	//service for making employee as Admin
-
+	// service for making employee as Admin
 
 	public HashMap<String, String> isAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);
@@ -168,17 +164,12 @@ public class LoginAPIResource {
 
 	}
 
-
-
-	
-
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("removeAdmin")
 
-	//service for removing Admin status of Employee
-
+	// service for removing Admin status of Employee
 
 	public HashMap<String, String> removeAdmin(@RequestParameters EmployeeId id) {
 		System.out.println(id);

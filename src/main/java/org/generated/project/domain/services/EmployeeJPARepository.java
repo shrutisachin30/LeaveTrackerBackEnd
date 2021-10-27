@@ -145,7 +145,6 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 	public List<Object> exportData(String domain, String startDate, String endDate) {
 
 		EntityManager entityManager = getEntityManager();
-		// int startD = null;
 		Date startD = null;
 		Date endD = null;
 		List<Object> obj = null;

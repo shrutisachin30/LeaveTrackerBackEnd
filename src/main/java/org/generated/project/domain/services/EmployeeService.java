@@ -35,10 +35,10 @@ public interface EmployeeService {
 
 	public String deactivateEmployee(EmployeeParam eparam);
 
-	List<Object> exportData(String domain, String startDate,String endDate);
+	List<Object> exportData(String domain, String startDate, String endDate);
 
 	public String isAdmin(EmployeeId id);
 
 	String removeAdmin(EmployeeId id);
-	
+
 }

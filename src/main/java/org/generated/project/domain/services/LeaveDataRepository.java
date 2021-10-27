@@ -19,7 +19,7 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 
 	private static final Logger logger = Logger.getLogger(LeaveDataRepository.class);
 
-	//method to save the leave data
+	// method to save the leave data
 	public String saveEmployeeLeave(LeaveData leaveObj) {
 
 		logger.info("Inside saveEmployeeLeave" + leaveObj);
@@ -42,8 +42,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		}
 
 	}
-	
-	//method to check the leave data
+
+	// method to check the leave data
 	public List<Object> checkLeaveData(LeaveData leaveObj) {
 		EntityManager entityManager = getEntityManager();
 
@@ -62,8 +62,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		return obj;
 
 	}
-	
-	//method to get the leave data
+
+	// method to get the leave data
 	public List<Object> getLeaveData(String id) {
 		EntityManager entityManager = getEntityManager();
 
@@ -79,8 +79,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		return obj;
 
 	}
-	
-	//method to cancel the leave 
+
+	// method to cancel the leave
 	public String cancelLeave(EmployeeParam eparam) {
 
 		EntityManager entityManager = getEntityManager();
@@ -106,8 +106,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 		else
 			return "error";
 	}
-	
-	//method to change the status of applied leave
+
+	// method to change the status of applied leave
 	public String changeStatus() {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("changeStatus");
@@ -117,8 +117,8 @@ public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataI
 
 		return result == 1 ? "Success" : "Fail";
 	}
-	
-	//method to delete data more than 1 year old
+
+	// method to delete data more than 1 year old
 	public String deleteData() {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createNamedQuery("deleteData");

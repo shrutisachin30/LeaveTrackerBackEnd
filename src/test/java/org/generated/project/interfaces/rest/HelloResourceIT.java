@@ -13,16 +13,14 @@ import org.seedstack.seed.undertow.LaunchWithUndertow;
 @RunWith(SeedITRunner.class)
 @LaunchWithUndertow
 public class HelloResourceIT {
-    @Configuration("runtime.web.baseUrl")
-    private String baseUrl;
+	@Configuration("runtime.web.baseUrl")
+	private String baseUrl;
 
-    @Test
-    public void testHelloWorld() throws Exception {
-        Response response = given()
-                .auth().basic("demo", "demo")
-                .expect().statusCode(200)
-                .when().get(baseUrl + "/hello");
+	@Test
+	public void testHelloWorld() throws Exception {
+		Response response = given().auth().basic("demo", "demo").expect().statusCode(200).when()
+				.get(baseUrl + "/hello");
 
-        assertThat(response.body().asString()).isEqualTo("Hello World!");
-    }
+		assertThat(response.body().asString()).isEqualTo("Hello World!");
+	}
 }

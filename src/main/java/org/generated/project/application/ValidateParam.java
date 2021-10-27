@@ -1,14 +1,14 @@
 package org.generated.project.application;
 
-/** 
- * <h2> Validate Param </h2> 
+/**
+ * <h2>Validate Param</h2>
+ * <p>
  * This program implements validation
-   
- * <p> 
- *  
+ * </p>
+ * 
  * @author shruti karde
- * @since 2021-09-01 
- */  
+ * @since 2021-09-01
+ */
 
 public class ValidateParam {
 

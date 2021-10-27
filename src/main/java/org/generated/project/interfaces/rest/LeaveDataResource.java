@@ -34,7 +34,7 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("applyLeave")
-	//service for applying leave
+	// service for applying leave
 	public HashMap<String, String> applyLeave(@RequestParameters LeaveData leaveDataObject) {
 
 		String str = leaveDataService.applyLeave(leaveDataObject);
@@ -66,7 +66,7 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("retrieveLeaveData/{id}")
-	//service for retrieving the leave data
+	// service for retrieving the leave data
 	public Response retrieveLeaveData(@PathParam("id") String id) {
 
 		ArrayList list = new ArrayList<>();
@@ -119,7 +119,7 @@ public class LeaveDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("cancelLeave")
-	//service for canceling the leave data
+	// service for canceling the leave data
 	public HashMap<String, String> cancelLeave(@RequestParameters EmployeeParam eparam) {
 		System.out.println(eparam);
 		String str = leaveDataService.cancelLeave(eparam);
