@@ -180,7 +180,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				String Date = objArray[6].toString();
 				String[] arr = Date.split("\\s+");
 				String Date2 = objArray[7].toString();
-				String[] arr1 = Date.split("\\s+");
+				String[] arr1 = Date2.split("\\s+");
 
 				exportData1 = new HashMap<String, String>();
 				EmployeeId id = (EmployeeId) objArray[0];

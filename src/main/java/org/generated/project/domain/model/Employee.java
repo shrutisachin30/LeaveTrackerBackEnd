@@ -49,9 +49,9 @@ import org.seedstack.business.domain.BaseAggregateRoot;
 
 		@NamedQuery(name = "exportDataAllDomain", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave,emp.isActive,ld.noOfDays From Employee emp, LeaveData ld where emp.id = ld.employee.id and "
 				+ " (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) ORDER BY emp.name, ld.startDate ASC"),
-
-		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave From Employee emp, LeaveData ld where emp.isActive= 'Yes' and emp.id = ld.employee.id and emp.domain=:domain and (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) "
-				+ " ORDER BY emp.name, ld.startDate ASC  ")
+		
+		@NamedQuery(name = "exportData", query = "select emp.id,emp.name,emp.mobile,emp.reportingManager,emp.gcmLevel,emp.domain,ld.startDate,ld.endDate,ld.status,ld.typeOfLeave,emp.isActive,ld.noOfDays From Employee emp, LeaveData ld where emp.id = ld.employee.id and "
+				+ " (ld.startDate between :startDate and :endDate) and (ld.endDate between :startDate and :endDate) and emp.domain=:domain ORDER BY emp.name, ld.startDate ASC"),
 
 })
 
