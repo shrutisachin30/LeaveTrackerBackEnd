@@ -37,6 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//employeeService is used for registration api as well as it checks if the employee already exists
 	public String employeeService(Employee emp) {
 
 		logger.info("EmployeeServiceImpl  ::  employeeService() : param : { " + emp.getName(),
@@ -46,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		String status = "";
 		try {
-
+			
 			ArrayList<Employee> list = checkIfEmployeeExist(emp);
 			if (list != null && list.size() == 0) {
 
@@ -72,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Inject
 	@Jpa
 	private Repository<Employee, EmployeeId> loginRepository;
-
+	//loginService used for verifying the employee credentials and logging in
 	public ArrayList<Object> loginService(LoginData data) {
 
 		logger.info("EmployeeServiceImpl  ::  loginService() :  param: {" + data.getDasId() + "," + data.getPassword()
@@ -88,6 +89,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	@JpaUnit("myUnit")
 	@Override
+	//getService used for getting the Employeeid
 	public Optional<Employee> getservice(EmployeeId id) {
 		logger.info("EmployeeServiceImpl :: getservice():");
 		Optional<Employee> obj = loginRepository.get(id);
@@ -96,6 +98,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//verifyEmployeeDetails used for verifying the employee details
 	public ArrayList<Object> verifyEmployeeDetails(LoginData empObj) {
 		logger.info("EmployeeServiceImpl :: verifyEmployeeDetails():");
 		ArrayList<Object> login = personRepository.getEmployee(empObj);
@@ -105,6 +108,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//checkIfEmployeeExist used for checking whether the employee exists or not in the database
 	public ArrayList<Employee> checkIfEmployeeExist(Employee empObj) {
 		logger.info("EmployeeServiceImpl :: checkIfEmployeeExist():");
 		ArrayList<Employee> login = personRepository.checkIfEmployeeExist(empObj);
@@ -115,6 +119,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//getEmployeeDetails used for getting the details of Employee
 	public ArrayList<Employee> getEmployeeDetails() {
 		logger.info("EmployeeServiceImpl :: getEmployeeDetails():");
 		List<Object> employeeDetails = personRepository.getEmployeeDetails();
@@ -149,6 +154,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//exportData used for exporting the data into excel sheet
 	public List<Object> exportData(String domain, String startDate, String endDate) {
 		logger.info("EmployeeServiceImpl :: exportData():");
 		List<Object> exportData = personRepository.exportData(domain, startDate, endDate);
@@ -189,6 +195,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//getRandomKey used for generating 4 digit OTP and send it to registered email
 	public HashMap<String, String> getRandomKey(String id) {
 
 		int key = 0;
@@ -226,6 +233,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//used for updation of password and encrypt it to store in database
 	public String updatePassword(Employee emp) {
 
 		final String secretKey = "JH4KL6XA@ByC!$";
@@ -256,6 +264,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//changePassword used for changing the password
 	public String changePassword(EmployeeParam eparam) {
 		final String secretKey = "JH4KL6XA@ByC!$";
 
@@ -285,6 +294,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//updateEmployee used to update the details of the employee
 	public String updateEmployee(Employee emp) {
 		String result = "";
 		try {
@@ -300,6 +310,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//getEmpDetails used for getting the details of Employee
 	public Employee getEmpDetails(EmployeeId employeeId) {
 		System.out.print(employeeId);
 		Optional<Employee> object = personRepository.get(employeeId);
@@ -310,6 +321,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	@JpaUnit("myUnit")
+	//deactivateEmployee used for deactivating the registered employee(Only can be done by admin)
 	public String deactivateEmployee(EmployeeParam eparam) {
 
 		String str = personRepository.deactivateEmployee(eparam);

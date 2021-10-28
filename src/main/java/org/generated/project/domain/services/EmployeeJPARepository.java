@@ -303,8 +303,6 @@ public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeI
 
 		status = (String) query.getSingleResult();
 
-		System.out.println(status);
-
 		return status;
 
 	}

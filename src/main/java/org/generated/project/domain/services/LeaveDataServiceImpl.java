@@ -29,6 +29,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//applyLeave used to apply leaves
 	public String applyLeave(LeaveData leaveDataObject) {
 
 		logger.info("LeaveDataServiceImpl :: applyLeave()  param { " + leaveDataObject.getTypeOfLeave(),
@@ -43,6 +44,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//retriveLeaveData used to fetch all the leave data of employees
 	public List<Object> retriveLeaveData(String employeeId) {
 		logger.info("LeaveDataServiceImpl :: retriveLeaveData():");
 		List<Object> leaveDataObj = leaveDataRepository.getLeaveData(employeeId);
@@ -52,6 +54,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//employees can cancel their leaves using cancelLeave
 	public String cancelLeave(EmployeeParam eparam) {
 
 		String str = leaveDataRepository.cancelLeave(eparam);
@@ -61,6 +64,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//used to change the status of leave
 	public String changeStatus() {
 		logger.info("LeaveDataServiceImpl :: changeStatus():");
 		return leaveDataRepository.changeStatus();
@@ -68,6 +72,7 @@ public class LeaveDataServiceImpl implements LeaveDataService {
 
 	@Transactional
 	@JpaUnit("myUnit")
+	//used to delete Data which is more than a year old
 	public String deleteData() {
 		return leaveDataRepository.deleteData();
 	}
