@@ -23,6 +23,15 @@ import org.json.JSONObject;
 import com.google.inject.servlet.RequestParameters;
 import io.swagger.annotations.Api;
 
+/**
+ * <h2>LeaveDataResource</h2>
+ * <p>
+ * This program is  controller Service and provides api for all methods
+ * </p>
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-23
+ */
+
 @Api("leave")
 @Path("psa")
 public class LeaveDataResource {

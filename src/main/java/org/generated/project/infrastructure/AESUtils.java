@@ -8,6 +8,15 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+
+/**
+ * <h2>AESUtils</h2>
+ * <p>
+ * This program implements the encryption of password
+ * @author Sourav Donkar
+ * @since 2021-09-26
+ */
+
 public class AESUtils {
 
 	private static SecretKeySpec secretKey;

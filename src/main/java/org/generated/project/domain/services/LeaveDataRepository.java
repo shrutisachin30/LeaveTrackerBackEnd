@@ -11,6 +11,16 @@ import org.seedstack.jpa.BaseJpaRepository;
 import org.seedstack.seed.Bind;
 import com.sun.istack.logging.Logger;
 
+
+/**
+ * <h2>LeaveDataRepository</h2>
+ * <p>
+ * This program implements the method to save,check,get,cancel leave data of employee,
+ *  method to change the status of applied leave ,  method to delete data more than 1 year old
+ * </p>
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-22
+ */
 @Bind
 public class LeaveDataRepository extends BaseJpaRepository<LeaveData, LeaveDataId> {
 

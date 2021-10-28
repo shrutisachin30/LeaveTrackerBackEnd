@@ -15,6 +15,15 @@ import org.seedstack.seed.transaction.Transactional;
 
 import org.slf4j.Logger;
 
+/**
+ * <h2>LeaveDataServiceImpl</h2>
+ * <p>
+ * This program provides the implementation of services of employee leave details apply leave , retrieve leave , cancel leave,
+ * change status , delete data
+ * </p>
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-22
+ */
 @Bind
 public class LeaveDataServiceImpl implements LeaveDataService {
 

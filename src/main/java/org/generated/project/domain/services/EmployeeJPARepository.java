@@ -14,6 +14,19 @@ import org.seedstack.jpa.BaseJpaRepository;
 import org.seedstack.seed.Bind;
 import com.sun.istack.logging.Logger;
 
+/**
+ * <h2>EmployeeJPARepository</h2>
+ * <p>
+ * This program implements the method to get Employee details,checks if employee exists in database,
+ * method to get emailid from employee,method to update and change the password,export the leave details,
+ *  method to update the EmployeeDetails,method to activate and deactivate the employee,make/remove admin,
+ *  method to check status of leave
+ * </p>
+ * 
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-16
+ */
+
 @Bind
 
 public class EmployeeJPARepository extends BaseJpaRepository<Employee, EmployeeId> {

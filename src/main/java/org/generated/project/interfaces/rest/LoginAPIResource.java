@@ -23,6 +23,16 @@ import com.google.inject.servlet.RequestParameters;
 
 import io.swagger.annotations.Api;
 
+
+/**
+ * <h2>LoginAPIResource</h2>
+ * <p>
+ * This program is the  controller Service and provides api for all methods
+ * </p>
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-21
+ */
+
 @Api("Login")
 @Path("psa")
 public class LoginAPIResource {

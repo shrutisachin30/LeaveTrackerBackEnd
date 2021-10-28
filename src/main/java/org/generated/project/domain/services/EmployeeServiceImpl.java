@@ -19,6 +19,17 @@ import org.seedstack.seed.Logging;
 import org.seedstack.seed.transaction.Transactional;
 import org.slf4j.Logger;
 
+/**
+ * <h2>EmployeeService</h2>
+ * <p>
+ * This program provides the implementation of services of employee in login , register, get details , 
+ * update/ change Password, export details , activate/deactivate Employee, make / remove admin
+ * </p>
+ * 
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-18
+ */
+
 @Bind
 public class EmployeeServiceImpl implements EmployeeService {
 

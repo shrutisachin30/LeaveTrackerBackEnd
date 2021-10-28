@@ -7,6 +7,16 @@ import org.generated.project.application.EmployeeParam;
 import org.generated.project.domain.model.LeaveData;
 import org.seedstack.business.Service;
 
+/**
+ * <h2>LeaveDataService</h2>
+ * <p>
+ * This program implements the services of employee leave details as apply leave , retrieve leave , cancel leave,
+ * change status , delete data
+ * </p>
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-22
+ */
+
 @Service
 public interface LeaveDataService {
 

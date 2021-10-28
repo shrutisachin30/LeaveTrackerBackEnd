@@ -10,6 +10,17 @@ import org.generated.project.domain.model.Employee;
 import org.generated.project.domain.model.EmployeeId;
 import org.seedstack.business.Service;
 
+/**
+ * <h2>EmployeeService</h2>
+ * <p>
+ * This program implements the services of employee in login , register, get details , 
+ * update/ change Password, export details , activate/deactivate Employee, make / remove admin
+ * </p>
+ * 
+ * @author Sourav Donkar,Shruti Karde,Subasri Venkatesan
+ * @since 2021-09-18
+ */
+
 @Service
 public interface EmployeeService {
 
